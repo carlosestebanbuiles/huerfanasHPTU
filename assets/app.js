@@ -318,12 +318,12 @@
       <h1>${esc(r.titulo)}</h1>
       <p class="lead">Informe del ${esc(fecha)}. ${esc(r.nota)}</p>
       ${r.estado === "temporal" ? '<div class="aviso alerta"><span class="chip temporal">Temporal</span> Esta sección muestra los resultados ya analizados mientras se definen los indicadores. Cuando estén aprobados, se presentará cada indicador con su ficha y su tendencia.</div>' : ""}
-      <table class="tabla">
+      ${r.resultados.length ? `<table class="tabla">
         <thead><tr><th>Enfermedad</th><th>Resultado destacado</th><th>Pacientes</th></tr></thead>
         <tbody>
           ${r.resultados.map((x) => `<tr><td class="enf">${esc(x.enfermedad)}</td><td>${esc(x.resultado)}</td><td class="n">${esc(x.pacientes)}</td></tr>`).join("")}
         </tbody>
-      </table>`;
+      </table>` : '<div class="aviso info">En preparación.</div>'}`;
   }
 
   // ---------- consulta ----------

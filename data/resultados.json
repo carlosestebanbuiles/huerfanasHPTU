@@ -1,24 +1,7 @@
 {
-  "titulo": "Resultados en salud del programa: primera medición",
-  "fecha": "2026-10-27",
-  "estado": "temporal",
-  "nota": "Resultados observados en el primer ciclo de medición, con las bases clínicas existentes y fechas de corte distintas por enfermedad. Cifras agregadas; con menos de 10 pacientes se muestran conteos.",
-  "resultados": [
-    {"enfermedad": "Acromegalia", "resultado": "70 % con control bioquímico en el programa frente a 48 % en atención estándar (OR ajustado 2,6; IC95 % 1,3–5,6)", "pacientes": "146 frente a 56"},
-    {"enfermedad": "Acromegalia", "resultado": "76 % con IGF-I en rango entre los atendidos en el último año", "pacientes": "83"},
-    {"enfermedad": "Enfermedad de Cushing", "resultado": "64 % en remisión en el último control entre los atendidos en el HPTU, frente a 39 % en otros centros", "pacientes": "70"},
-    {"enfermedad": "Enfermedad de Crohn", "resultado": "97 % sin corticoide sistémico en la última consulta", "pacientes": "311"},
-    {"enfermedad": "Colitis ulcerativa", "resultado": "79 % sin corticoide sistémico en la última consulta", "pacientes": "34"},
-    {"enfermedad": "Enfermedad inflamatoria intestinal", "resultado": "Hospitalización por EII de 13,8 % en 2021 a 5,7 % en 2026, con la cohorte activa triplicada", "pacientes": "234 a 725 activos"},
-    {"enfermedad": "Atrofia muscular espinal", "resultado": "Los 10 niños con nusinersen mejoraron: +9,8 puntos promedio en la escala de Hammersmith a los 2 años", "pacientes": "10 niños"},
-    {"enfermedad": "Atrofia muscular espinal", "resultado": "Seguimiento completo en 96 % de los niños, todos libres de ventilación; en adultos, 3 de 28 con terapia modificadora", "pacientes": "23 niños y 28 adultos"},
-    {"enfermedad": "Fibrosis quística", "resultado": "+16 puntos de VEF1 % predicho a los 3 meses de iniciar el modulador de CFTR", "pacientes": "15"},
-    {"enfermedad": "Hipofosfatemia ligada al X", "resultado": "El fósforo sube de 2,57 a 3,20 mg/dL con burosumab y cae 1,55 mg/dL cuando se suspende", "pacientes": "11 y 14"},
-    {"enfermedad": "Amiloidosis cardíaca", "resultado": "94 % con clase NYHA estable o mejor y 87 % con NT-proBNP estable o en descenso", "pacientes": "31 y 23 evaluables de 46"},
-    {"enfermedad": "Pénfigo", "resultado": "61 % controlado o en remisión; 5 de 10 recibieron a tiempo el rituximab indicado", "pacientes": "23"},
-    {"enfermedad": "Epidermólisis bullosa", "resultado": "Ninguno de los 6 que requieren apósitos los recibió completos", "pacientes": "11"},
-    {"enfermedad": "Lipodistrofias", "resultado": "6 de 8 con triglicéridos por debajo de 500 mg/dL y ninguna pancreatitis", "pacientes": "8"},
-    {"enfermedad": "Falla intestinal", "resultado": "91 % de los niños y 54 % de los adultos sin nutrición parenteral", "pacientes": "66 niños y 50 adultos"},
-    {"enfermedad": "Calidad de vida", "resultado": "Índice EQ-5D-5L de 0,95 a 0,97 en EII y fibrosis quística", "pacientes": "321"}
-  ]
+  "titulo": "Resultados en salud",
+  "fecha": "2026-11-09",
+  "estado": "preparacion",
+  "nota": "El tablero de resultados se está preparando con acceso protegido por contraseña.",
+  "resultados": []
 }
