@@ -36,7 +36,7 @@ const COLUMNAS_BLOQUEADAS = [
 
 function config_() {
   const r = Sheets.Spreadsheets.Values.batchGet(CONFIG_ID, {
-    ranges: ['FILTROS!A2:C', 'LISTADO!A2:A', 'RAPIDAS!A2:F', 'AUTORIZADOS!A2:A', 'AJUSTES!A2:B']
+    ranges: ['FILTROS!A2:C', 'LISTADO!A2:A', 'RAPIDAS!A2:F', 'AUTORIZADOS!A2:A', 'AJUSTES!A2:B', 'GRUPOS!A2:C']
   }).valueRanges.map(function (v) { return v.values || []; });
   const t = function (x) { return String(x == null ? '' : x).trim(); };
 
@@ -55,9 +55,17 @@ function config_() {
   }).filter(function (p) { return p.titulo; });
   const autorizados = r[3].map(function (f) { return t(f[0]).toLowerCase(); }).filter(String);
   const aj = {}; r[4].forEach(function (f) { aj[t(f[0])] = t(f[1]); });
+  // Grupos: valores distintos que cuentan como un mismo nombre (p. ej., variantes de una enfermedad).
+  const grupos = {};
+  (r[5] || []).forEach(function (f) {
+    const filtro = t(f[0]) || 'Enfermedad huérfana', nombre = t(f[1]);
+    const pats = t(f[2]).split('|').map(normal_).filter(String);
+    if (!nombre || !pats.length) return;
+    (grupos[filtro] = grupos[filtro] || []).push({ nombre: nombre, pats: pats });
+  });
 
   return {
-    filtros: filtros, listado: listado, rapidas: rapidas, autorizados: autorizados,
+    filtros: filtros, listado: listado, rapidas: rapidas, autorizados: autorizados, grupos: grupos,
     pestana: aj.PESTANA || 'Consolidado',
     filaEnc: parseInt(aj.FILA_ENCABEZADOS, 10) || 1,
     maxListado: parseInt(aj.MAX_FILAS_LISTADO, 10) || 500,
@@ -120,13 +128,29 @@ function leerDatos_(cfg) {
   return { enc: enc, filas: filas };
 }
 
-// Para cada fila, los valores no vacíos de las columnas de un filtro.
+// Para cada fila, los valores no vacíos de las columnas de un filtro, ya agrupados y sin repetir.
 function valoresFiltro_(d, cfg, filtro) {
   const idxs = filtro.columnas.map(function (c) { return d.enc.indexOf(c); }).filter(function (j) { return j >= 0; });
+  const gr = cfg.grupos[filtro.nombre] || [];
+  const agrupar = function (v) {
+    if (!gr.length || v === '') return v;
+    const n = normal_(v);
+    for (let k = 0; k < gr.length; k++) {
+      if (gr[k].pats.some(function (p) { return n.indexOf(p) >= 0; })) return gr[k].nombre;
+    }
+    return v;
+  };
   return d.filas.map(function (f) {
-    const vs = idxs.map(function (j) { return texto_(f[j]); });
-    return filtro.columnas.length > 1 ? vs.filter(function (v) { return cfg.vacios.indexOf(v.toUpperCase()) < 0; }) : vs;
+    let vs = idxs.map(function (j) { return texto_(f[j]); });
+    if (filtro.columnas.length > 1) vs = vs.filter(function (v) { return cfg.vacios.indexOf(v.toUpperCase()) < 0; });
+    vs = vs.map(agrupar);
+    return filtro.columnas.length > 1 ? vs.filter(function (v, i) { return vs.indexOf(v) === i; }) : vs;
   });
+}
+
+// Mayúsculas y sin tildes, para comparar textos.
+function normal_(v) {
+  return String(v == null ? '' : v).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().trim();
 }
 
 // ---------------- funciones llamadas desde la página ----------------
@@ -181,8 +205,8 @@ function consultar(q) {
       const v = vals(n)[i];
       if (porNombre[n].columnas.length > 1) {
         // Filtros de varias columnas: texto parcial, sin distinguir mayúsculas ("acrom" → "Acromegalia").
-        const bus = sel.map(function (x) { return String(x).toLowerCase(); });
-        return v.some(function (x) { x = x.toLowerCase(); return bus.some(function (b) { return x.indexOf(b) >= 0; }); });
+        const bus = sel.map(normal_);
+        return v.some(function (x) { x = normal_(x); return bus.some(function (b) { return x.indexOf(b) >= 0; }); });
       }
       return sel.indexOf(v[0]) >= 0;
     });
