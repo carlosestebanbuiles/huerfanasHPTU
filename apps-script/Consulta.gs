@@ -40,6 +40,18 @@ const CONFIG = {
     'Enfermedad huérfana (cualquiera de las 4)': ['EnfermedadHuérfana #1', 'EnfermedadHuérfana #2', 'EnfermedadHuérfana #3', 'EnfermedadHuérfana #4'],
     'Diagnóstico CIE-10 (cualquiera de los 4)': ['DiagnosticoCIE10#1', 'DiagnosticoCIE10#2', 'DiagnosticoCIE10#3', 'DiagnosticoCIE10#4']
   },
+  // Filtros visibles de entrada (los demás quedan en "Más filtros").
+  PRINCIPALES: ['Enfermedad huérfana (cualquiera de las 4)', 'UNIDAD', 'ESTADO ACTUAL', 'GRUPO DE EDAD', 'Sexo'],
+  // Preguntas rápidas: un clic aplica estos filtros y esta agrupación.
+  RAPIDAS: [
+    { titulo: 'Pacientes por enfermedad', agrupar: 'Enfermedad huérfana (cualquiera de las 4)', filtros: {} },
+    { titulo: 'Pacientes por unidad', agrupar: 'UNIDAD', filtros: {} },
+    { titulo: 'Activos por unidad', agrupar: 'UNIDAD', filtros: { 'ESTADO ACTUAL': ['ACTIVO'] } },
+    { titulo: 'Adultos y niños', agrupar: 'GRUPO DE EDAD', filtros: {} },
+    { titulo: 'Ruta de ingreso', agrupar: 'Ruta de Ingreso', filtros: {} },
+    { titulo: 'Reporte a SIVIGILA', agrupar: 'REPORTADO A SIVIGILA', filtros: {} },
+    { titulo: 'Pendientes de gestión por prioridad', agrupar: 'Prioridad', filtros: { 'GESTIONADO': ['PENDIENTE'] } }
+  ],
   // Valores que no cuentan como enfermedad en los filtros múltiples.
   VACIOS: ['', 'SIN REGISTRO', 'SD', '0'],
 
@@ -77,7 +89,9 @@ function verificarAcceso_() {
 function leerDatos_() {
   // Se lee con la API de Sheets (servicio avanzado), que funciona con el permiso de solo lectura.
   const pestana = "'" + CONFIG.PESTANA.replace(/'/g, "''") + "'";
-  const r = Sheets.Spreadsheets.Values.get(CONFIG.HOJA_ID, pestana, { valueRenderOption: 'FORMATTED_VALUE' });
+  // Valores sin formato (evita "#####" en columnas angostas); las fechas como texto.
+  const r = Sheets.Spreadsheets.Values.get(CONFIG.HOJA_ID, pestana,
+    { valueRenderOption: 'UNFORMATTED_VALUE', dateTimeRenderOption: 'FORMATTED_STRING' });
   const valores = r.values || [];
   const enc = (valores[CONFIG.FILA_ENCABEZADOS - 1] || []).map(function (h) { return String(h).split('\n')[0].trim(); });
   const n = enc.length;
@@ -140,7 +154,9 @@ function opciones() {
     valoresMultiples_(d, nombre).forEach(function (lista) { lista.forEach(function (v) { vals[v] = true; }); });
     out[nombre] = Object.keys(vals).sort();
   });
-  return { filtros: out, total: d.filas.length, listado: CONFIG.LISTADO };
+  const principales = CONFIG.PRINCIPALES.filter(function (c) { return out[c]; });
+  return { filtros: out, principales: principales, multiples: Object.keys(CONFIG.FILTROS_MULTIPLES),
+           rapidas: CONFIG.RAPIDAS, total: d.filas.length, listado: CONFIG.LISTADO };
 }
 
 // Para cada fila, la lista de valores no vacíos de las columnas de un filtro múltiple.
@@ -166,7 +182,11 @@ function consultar(q) {
     const f = d.filas[i];
     return Object.keys(filtros).every(function (col) {
       const sel = filtros[col]; if (!sel || !sel.length) return true;
-      if (multi[col]) return multi[col][i].some(function (v) { return sel.indexOf(v) >= 0; });
+      if (multi[col]) {
+        // En los filtros de enfermedad se acepta texto parcial: "acrom" encuentra "Acromegalia".
+        const bus = sel.map(function (x) { return String(x).toLowerCase(); });
+        return multi[col][i].some(function (v) { v = v.toLowerCase(); return bus.some(function (b) { return v.indexOf(b) >= 0; }); });
+      }
       if (CONFIG.FILTROS.indexOf(col) < 0) return true;
       return sel.indexOf(texto_(f[idx(col)])) >= 0;
     });
