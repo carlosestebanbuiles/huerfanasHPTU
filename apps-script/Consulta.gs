@@ -22,13 +22,33 @@
  */
 
 const CONFIG = {
-  HOJA_ID: 'PEGAR_AQUI_EL_ID_DE_LA_HOJA',
-  PESTANA: 'COHORTE',
+  HOJA_ID: 'PEGAR_AQUI_EL_ID_DE_LA_HOJA',   // Debe ser una hoja de Google Sheets (no un .xlsx).
+  PESTANA: 'Consolidado',
   FILA_ENCABEZADOS: 1,
-  // Columnas disponibles como filtro y para agrupar (nombres exactos de los encabezados).
-  FILTROS: ['UNIDAD', 'ENFERMEDAD', 'GRUPO_EDAD', 'SEXO', 'ASEGURADOR', 'REGIMEN', 'ESTADO', 'DEPARTAMENTO', 'TERAPIA_ALTO_COSTO'],
-  // Columnas que aparecen en el listado. Las demás nunca salen del script.
-  LISTADO: ['ID_PROGRAMA', 'TIPO_DOC', 'DOCUMENTO', 'UNIDAD', 'ENFERMEDAD', 'GRUPO_EDAD', 'EDAD', 'ASEGURADOR', 'ESTADO', 'FECHA_ULTIMA_CONSULTA'],
+  // Los encabezados se leen hasta el primer salto de línea:
+  // "Ruta de Ingreso\nEnviado EPS Sura..." queda como "Ruta de Ingreso".
+
+  // Columnas disponibles como filtro y para agrupar.
+  FILTROS: [
+    'UNIDAD', 'UNIDAD A LA QUE PERTENECERÍA', 'ESTADO EN LA UNIDAD', 'ESTADO ACTUAL', 'MODELO DE GESTIÓN HPTU',
+    'GRUPO DE EDAD', 'Sexo', 'DepartamentoResidencia', 'Regional', 'Estado_Suspension',
+    'Ruta de Ingreso', 'Gestion SURA EH#1', 'REPORTADO A SIVIGILA', 'REPORTADO HPTU',
+    'REGISTRADO EN UNIDADES', 'CAUSA EGRESO CONSOLIDADO', 'Prioridad', 'GESTIONADO'
+  ],
+  // Filtros que buscan en varias columnas a la vez (un paciente puede tener hasta 4 enfermedades huérfanas).
+  FILTROS_MULTIPLES: {
+    'Enfermedad huérfana (cualquiera de las 4)': ['EnfermedadHuérfana #1', 'EnfermedadHuérfana #2', 'EnfermedadHuérfana #3', 'EnfermedadHuérfana #4'],
+    'Diagnóstico CIE-10 (cualquiera de los 4)': ['DiagnosticoCIE10#1', 'DiagnosticoCIE10#2', 'DiagnosticoCIE10#3', 'DiagnosticoCIE10#4']
+  },
+  // Valores que no cuentan como enfermedad en los filtros múltiples.
+  VACIOS: ['', 'SIN REGISTRO', 'SD', '0'],
+
+  // Columnas que aparecen en el listado. Las demás (nombres, teléfono, correo, historia clínica,
+  // observaciones de llamadas) nunca salen del script.
+  LISTADO: [
+    'KeyID', 'TipoDocumento', 'Documento', 'Edad', 'Sexo', 'EnfermedadHuérfana #1',
+    'UNIDAD', 'ESTADO EN LA UNIDAD', 'ESTADO ACTUAL', 'FECHA INGRESO A MODELOS', 'FECHA ULTIMA CITA CUMPLIDA HPTU'
+  ],
   // Correos autorizados. Vacío = cualquier cuenta del dominio que tenga el enlace.
   AUTORIZADOS: [],
   // Documento de Google (no hoja de cálculo) donde se registra cada consulta. Vacío = sin registro.
@@ -56,9 +76,22 @@ function verificarAcceso_() {
 
 function leerDatos_() {
   const valores = SpreadsheetApp.openById(CONFIG.HOJA_ID).getSheetByName(CONFIG.PESTANA).getDataRange().getValues();
-  const enc = valores[CONFIG.FILA_ENCABEZADOS - 1].map(function (h) { return String(h).trim(); });
-  const filas = valores.slice(CONFIG.FILA_ENCABEZADOS).filter(function (f) { return f.some(function (c) { return c !== ''; }); });
+  const enc = valores[CONFIG.FILA_ENCABEZADOS - 1].map(function (h) { return String(h).split('\n')[0].trim(); });
+  const jDoc = enc.indexOf('Documento'), jNac = enc.indexOf('Fecha_Nacimiento');
+  const hoy = new Date();
+  const filas = valores.slice(CONFIG.FILA_ENCABEZADOS)
+    .filter(function (f) { return jDoc < 0 ? f.some(function (c) { return c !== ''; }) : String(f[jDoc]).trim() !== ''; })
+    .map(function (f) { return f.concat([grupoEdad_(f[jNac], hoy)]); });
+  enc.push('GRUPO DE EDAD');
   return { enc: enc, filas: filas };
+}
+
+// Grupo de edad calculado desde la fecha de nacimiento (la columna Edad puede venir desactualizada).
+function grupoEdad_(nac, hoy) {
+  if (!(nac instanceof Date)) return 'Sin fecha de nacimiento';
+  let e = hoy.getFullYear() - nac.getFullYear();
+  if (hoy.getMonth() < nac.getMonth() || (hoy.getMonth() === nac.getMonth() && hoy.getDate() < nac.getDate())) e--;
+  return e < 18 ? 'Pediátrico (<18)' : 'Adulto (≥18)';
 }
 
 /** Opciones de cada filtro (valores distintos). */
@@ -73,7 +106,20 @@ function opciones() {
     d.filas.forEach(function (f) { vals[texto_(f[j])] = true; });
     out[col] = Object.keys(vals).sort();
   });
+  Object.keys(CONFIG.FILTROS_MULTIPLES).forEach(function (nombre) {
+    const vals = {};
+    valoresMultiples_(d, nombre).forEach(function (lista) { lista.forEach(function (v) { vals[v] = true; }); });
+    out[nombre] = Object.keys(vals).sort();
+  });
   return { filtros: out, total: d.filas.length, listado: CONFIG.LISTADO };
+}
+
+// Para cada fila, la lista de valores no vacíos de las columnas de un filtro múltiple.
+function valoresMultiples_(d, nombre) {
+  const idxs = CONFIG.FILTROS_MULTIPLES[nombre].map(function (c) { return d.enc.indexOf(c); }).filter(function (j) { return j >= 0; });
+  return d.filas.map(function (f) {
+    return idxs.map(function (j) { return texto_(f[j]); }).filter(function (v) { return CONFIG.VACIOS.indexOf(v.toUpperCase()) < 0; });
+  });
 }
 
 /**
@@ -85,18 +131,26 @@ function consultar(q) {
   const d = leerDatos_();
   const idx = function (c) { return d.enc.indexOf(c); };
   const filtros = q.filtros || {};
-  const filas = d.filas.filter(function (f) {
+  const multi = {};
+  Object.keys(CONFIG.FILTROS_MULTIPLES).forEach(function (n) { multi[n] = valoresMultiples_(d, n); });
+  const pos = d.filas.map(function (f, i) { return i; }).filter(function (i) {
+    const f = d.filas[i];
     return Object.keys(filtros).every(function (col) {
-      if (CONFIG.FILTROS.indexOf(col) < 0) return true;
       const sel = filtros[col]; if (!sel || !sel.length) return true;
+      if (multi[col]) return multi[col][i].some(function (v) { return sel.indexOf(v) >= 0; });
+      if (CONFIG.FILTROS.indexOf(col) < 0) return true;
       return sel.indexOf(texto_(f[idx(col)])) >= 0;
     });
   });
+  const filas = pos.map(function (i) { return d.filas[i]; });
 
   let grupos = null;
-  if (q.agrupar && CONFIG.FILTROS.indexOf(q.agrupar) >= 0) {
-    const j = idx(q.agrupar); const c = {};
-    filas.forEach(function (f) { const k = texto_(f[j]) || '(vacío)'; c[k] = (c[k] || 0) + 1; });
+  if (q.agrupar && (CONFIG.FILTROS.indexOf(q.agrupar) >= 0 || multi[q.agrupar])) {
+    const c = {};
+    pos.forEach(function (i) {
+      const vals = multi[q.agrupar] ? multi[q.agrupar][i] : [texto_(d.filas[i][idx(q.agrupar)])];
+      (vals.length ? vals : ['(vacío)']).forEach(function (k) { k = k || '(vacío)'; c[k] = (c[k] || 0) + 1; });
+    });
     grupos = Object.keys(c).map(function (k) { return [k, c[k]]; }).sort(function (a, b) { return b[1] - a[1]; });
   }
 
