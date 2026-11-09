@@ -13,7 +13,7 @@
  *
  * Por qué es de solo lectura:
  *  - Los usuarios no reciben permisos sobre la hoja; solo ven lo que este script devuelve.
- *  - El script abre la hoja y únicamente llama getValues(); no hay ninguna función que escriba en ella.
+ *  - El script solo lee la hoja (Sheets.Spreadsheets.Values.get); no hay ninguna función que escriba en ella.
  *  - Además, appsscript.json limita el permiso a hojas de cálculo en SOLO LECTURA
  *    (spreadsheets.readonly): aunque el código tuviera un error, Google no le permitiría escribir.
  *  - Solo las columnas de FILTROS y LISTADO salen del script; el resto nunca llega al navegador.
@@ -75,15 +75,44 @@ function verificarAcceso_() {
 }
 
 function leerDatos_() {
-  const valores = SpreadsheetApp.openById(CONFIG.HOJA_ID).getSheetByName(CONFIG.PESTANA).getDataRange().getValues();
-  const enc = valores[CONFIG.FILA_ENCABEZADOS - 1].map(function (h) { return String(h).split('\n')[0].trim(); });
-  const jDoc = enc.indexOf('Documento'), jNac = enc.indexOf('Fecha_Nacimiento');
+  // Se lee con la API de Sheets (servicio avanzado), que funciona con el permiso de solo lectura.
+  const pestana = "'" + CONFIG.PESTANA.replace(/'/g, "''") + "'";
+  const r = Sheets.Spreadsheets.Values.get(CONFIG.HOJA_ID, pestana, { valueRenderOption: 'FORMATTED_VALUE' });
+  const valores = r.values || [];
+  const enc = (valores[CONFIG.FILA_ENCABEZADOS - 1] || []).map(function (h) { return String(h).split('\n')[0].trim(); });
+  const n = enc.length;
+
+  // Fecha de nacimiento como número de serie, para calcular la edad sin depender del formato de fecha.
+  const jNac = enc.indexOf('Fecha_Nacimiento');
+  let nac = [];
+  if (jNac >= 0) {
+    const col = letra_(jNac + 1), ini = CONFIG.FILA_ENCABEZADOS + 1;
+    const rr = Sheets.Spreadsheets.Values.get(CONFIG.HOJA_ID, pestana + '!' + col + ini + ':' + col,
+      { valueRenderOption: 'UNFORMATTED_VALUE', dateTimeRenderOption: 'SERIAL_NUMBER' });
+    nac = (rr.values || []).map(function (x) { return x[0]; });
+  }
+
+  const jDoc = enc.indexOf('Documento');
   const hoy = new Date();
   const filas = valores.slice(CONFIG.FILA_ENCABEZADOS)
-    .filter(function (f) { return jDoc < 0 ? f.some(function (c) { return c !== ''; }) : String(f[jDoc]).trim() !== ''; })
-    .map(function (f) { return f.concat([grupoEdad_(f[jNac], hoy)]); });
+    .map(function (f, i) {
+      const g = f.slice(0, n); while (g.length < n) g.push('');
+      g.push(grupoEdad_(serialAFecha_(nac[i]), hoy));
+      return g;
+    })
+    .filter(function (f) { return jDoc < 0 ? f.slice(0, n).some(function (c) { return c !== ''; }) : String(f[jDoc]).trim() !== ''; });
   enc.push('GRUPO DE EDAD');
   return { enc: enc, filas: filas };
+}
+
+function serialAFecha_(v) {
+  return (typeof v === 'number' && v > 0) ? new Date(Math.round((v - 25569) * 86400000)) : null;
+}
+
+function letra_(n) {
+  let s = '';
+  while (n > 0) { const m = (n - 1) % 26; s = String.fromCharCode(65 + m) + s; n = Math.floor((n - 1) / 26); }
+  return s;
 }
 
 // Grupo de edad calculado desde la fecha de nacimiento (la columna Edad puede venir desactualizada).
