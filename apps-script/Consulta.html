@@ -36,6 +36,8 @@
   .bar { height: 10px; background: #0f6b73; border-radius: 5px; min-width: 2px; }
   td.barcol { width: 35%; }
   .error { background: #fbe9e8; border: 1px solid #f0c4c1; }
+  .aviso { background: #fcf1e1; border: 1px solid #f0d6ad; font-size: .9rem; }
+  .aviso ul { margin: 6px 0 0; padding-left: 20px; }
   .listado { overflow-x: auto; }
 </style>
 </head>
@@ -43,6 +45,7 @@
 <div class="caja">
   <h1>Consulta de la cohorte</h1>
   <div class="tenue">Solo lectura. Cada consulta queda registrada con su usuario.</div>
+  <div id="avisos"></div>
 
   <div class="panel">
     <h2>Preguntas rápidas</h2>
@@ -71,11 +74,11 @@
   let OPC = null;
 
   const fallo = e => { salida.innerHTML = '<div class="panel error">' + esc(e.message || e) + '</div>'; };
-  const nombreCorto = c => c.replace(' (cualquiera de las 4)', '').replace('Enfermedad huérfana', 'Enfermedad huérfana');
+  const nombreCorto = c => c;
 
   function control(col) {
     const id = 'f-' + btoa(unescape(encodeURIComponent(col))).replace(/=/g, '');
-    if (OPC.multiples.indexOf(col) >= 0) {
+    if (OPC.busqueda.indexOf(col) >= 0) {
       // Búsqueda con texto: escribir parte del nombre
       return `<div><label for="${id}">${esc(nombreCorto(col))}</label>
         <input type="text" id="${id}" data-col="${esc(col)}" list="${id}-l" placeholder="Escriba para buscar…">
@@ -116,7 +119,7 @@
       <div class="chips">${chips}</div></div></div>`;
     if (r.grupos) {
       const max = Math.max(1, ...r.grupos.map(g => g[1]));
-      const multi = OPC.multiples.indexOf(q.agrupar) >= 0;
+      const multi = OPC.busqueda.indexOf(q.agrupar) >= 0;
       h += `<div class="panel"><h2>Por ${esc(nombreCorto(q.agrupar))}</h2>
         ${multi ? '<p class="tenue" style="margin-top:-4px">Un paciente con varias enfermedades cuenta en cada una; los porcentajes pueden sumar más de 100 %.</p>' : ''}
         <table><thead><tr><th>${esc(nombreCorto(q.agrupar))}</th><th class="num">Pacientes</th><th class="num">%</th><th></th></tr></thead><tbody>${
@@ -131,8 +134,8 @@
 
   google.script.run.withSuccessHandler(o => {
     OPC = o;
-    const todos = Object.keys(o.filtros);
-    const otros = o.multiples.filter(c => o.principales.indexOf(c) < 0).concat(todos.filter(c => o.principales.indexOf(c) < 0 && o.multiples.indexOf(c) < 0));
+    const otros = o.orden.filter(c => o.principales.indexOf(c) < 0);
+    if (o.avisos && o.avisos.length) $('avisos').innerHTML = '<div class="panel aviso"><strong>Revisar la hoja de configuración:</strong><ul>' + o.avisos.map(a => '<li>' + esc(a) + '</li>').join('') + '</ul></div>';
     $('principales').innerHTML = o.principales.map(control).join('');
     $('otros').innerHTML = otros.map(control).join('');
     $('agrupar').innerHTML += o.principales.concat(otros).map(c => `<option value="${esc(c)}">${esc(nombreCorto(c))}</option>`).join('');
