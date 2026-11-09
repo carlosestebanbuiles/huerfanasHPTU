@@ -72,3 +72,44 @@ function limpiar_(v) {
 function respuesta_(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
 }
+
+/**
+ * Resumen público de avance (solo conteos, sin nombres ni comentarios).
+ * El sitio lo consulta con ?resumen=1 para mostrar el avance de la revisión.
+ */
+function doGet(e) {
+  if (!e || !e.parameter || !e.parameter.resumen) return respuesta_({ ok: false, error: 'Use ?resumen=1' });
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const hoja = ss.getSheetByName(PESTANA);
+  const out = { ok: true, total: 0, ultima: null, porEnfermedad: {} };
+  if (!hoja || hoja.getLastRow() < 2) return respuesta_(out);
+  const v = hoja.getRange(2, 1, hoja.getLastRow() - 1, COLUMNAS.length).getValues();
+  const c = function (n) { return COLUMNAS.indexOf(n); };
+  const envios = {};
+  const tmp = {};
+  v.forEach(function (f) {
+    const enf = String(f[c('Enfermedad')] || '').trim();
+    if (!enf || /^PRUEBA/i.test(enf)) return;
+    const envio = String(f[c('Enviado')]) + '|' + String(f[c('Revisor')]).toLowerCase();
+    envios[envio] = true;
+    const r = tmp[enf] || (tmp[enf] = { revisiones: {}, revisores: {}, indicadores: {}, decisiones: {} });
+    r.revisiones[envio] = true;
+    r.revisores[String(f[c('Revisor')]).toLowerCase()] = true;
+    if (f[c('Tipo')] === 'existente' && f[c('Indicador')]) r.indicadores[f[c('Indicador')]] = true;
+    const d = String(f[c('Decisión')] || '');
+    if (d) r.decisiones[d] = (r.decisiones[d] || 0) + 1;
+    const rec = f[c('Recibido')];
+    if (rec instanceof Date && (!out.ultima || rec > new Date(out.ultima))) out.ultima = rec.toISOString();
+  });
+  Object.keys(tmp).forEach(function (k) {
+    const r = tmp[k];
+    out.porEnfermedad[k] = {
+      revisiones: Object.keys(r.revisiones).length,
+      revisores: Object.keys(r.revisores).length,
+      indicadores: Object.keys(r.indicadores),
+      decisiones: r.decisiones
+    };
+  });
+  out.total = Object.keys(envios).length;
+  return respuesta_(out);
+}

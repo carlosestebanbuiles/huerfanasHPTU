@@ -4,6 +4,7 @@
 
   const app = document.getElementById("app");
   const CFG = window.CONFIG || {};
+  const IC = window.ICONOS || {};
   const datos = { enfermedades: null, resultados: null };
   const CAMPOS = [
     ["resultado", "Resultado en salud"],
@@ -11,6 +12,18 @@
     ["fuente", "Fuente de información"],
     ["responsable", "Responsable"]
   ];
+  // Ícono y color de cada unidad
+  const UNIDADES = {
+    "Endocrinología": ["endocrino", "c-rosa"],
+    "Amiloidosis": ["corazon", "c-rosa"],
+    "Fibrosis quística": ["pulmon", "c-azul"],
+    "Dermatología": ["piel", "c-morado"],
+    "Enfermedad inflamatoria intestinal": ["intestino", "c-verde"],
+    "Falla intestinal": ["nutricion", "c-verde"],
+    "Neurometabólicas": ["adn", "c-azul"]
+  };
+  const icUnidad = (u) => { const x = UNIDADES[u] || ["adn", "c-morado"]; return `<span class="ic ${x[1]}">${IC[x[0]] || ""}</span>`; };
+  const ESTADOS = { borrador: "Borrador", revision: "En revisión", validado: "Validado" };
 
   // ---------- utilidades ----------
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -19,6 +32,8 @@
   const guardar = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
   const leer = (k) => { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } };
   const borrar = (k) => { try { localStorage.removeItem(k); } catch (e) {} };
+  const pct = (a, b) => (b ? Math.round((100 * a) / b) : 0);
+  const fechaLarga = (iso) => new Date(iso.length === 10 ? iso + "T12:00:00" : iso).toLocaleDateString("es-CO", { day: "numeric", month: "long", year: "numeric" });
 
   async function cargar(nombre) {
     if (datos[nombre]) return datos[nombre];
@@ -28,9 +43,50 @@
     return datos[nombre];
   }
 
+  // Resumen de revisiones (solo conteos, sin nombres) desde el Apps Script de revisiones.
+  let promesaAvance = null;
+  function avance() {
+    if (!promesaAvance) {
+      promesaAvance = (async () => {
+        if (!CFG.REVISIONES_URL) return null;
+        try {
+          const ctrl = new AbortController(); const t = setTimeout(() => ctrl.abort(), 8000);
+          const r = await fetch(CFG.REVISIONES_URL + "?resumen=1", { signal: ctrl.signal });
+          clearTimeout(t);
+          const j = await r.json();
+          return j && j.ok ? j : null;
+        } catch (e) { return null; }
+      })();
+    }
+    return promesaAvance;
+  }
+  // Estado de una enfermedad: validado (manual en el JSON) > en revisión (hay revisiones) > borrador
+  function estadoDe(e, av) {
+    if (e.estado === "validado") return "validado";
+    const r = av && av.porEnfermedad && av.porEnfermedad[e.nombre];
+    return r && r.revisiones ? "revision" : "borrador";
+  }
+  function revisadosDe(e, av) {
+    const r = av && av.porEnfermedad && av.porEnfermedad[e.nombre];
+    if (!r || !r.indicadores) return 0;
+    return e.indicadores.filter((i) => r.indicadores.indexOf(i.id) >= 0).length;
+  }
+
   function marcarMenu(ruta) {
     $$(".menu a").forEach((a) => a.classList.toggle("activo", a.dataset.ruta === ruta));
   }
+
+  // ---------- tema ----------
+  const raiz = document.documentElement;
+  const botonTema = $("#tema");
+  const oscuro = () => raiz.getAttribute("data-theme") === "dark" || (!raiz.getAttribute("data-theme") && matchMedia("(prefers-color-scheme: dark)").matches);
+  const pintarTema = () => { botonTema.innerHTML = oscuro() ? IC.sol : IC.luna; botonTema.title = oscuro() ? "Tema claro" : "Tema oscuro"; };
+  botonTema.addEventListener("click", () => {
+    const nuevo = oscuro() ? "light" : "dark";
+    raiz.setAttribute("data-theme", nuevo); guardar("tema", nuevo); try { localStorage.setItem("tema", nuevo); } catch (e) {}
+    pintarTema();
+  });
+  pintarTema();
 
   // ---------- enrutador ----------
   async function enrutar() {
@@ -54,58 +110,129 @@
   // ---------- inicio ----------
   async function vistaInicio() {
     const d = await cargar("enfermedades");
-    const n = d.enfermedades.reduce((s, e) => s + e.indicadores.length, 0);
-    app.innerHTML = `
-      <h1>Indicadores y resultados en salud</h1>
-      <p class="lead">Espacio de trabajo del programa para construir los indicadores con los equipos, presentar los resultados y consultar la cohorte.</p>
-      <div class="rejilla">
-        <a class="tarjeta espacio" href="#construccion">
-          <span class="num">1 · Construcción</span>
-          <h3>Revisar y proponer indicadores</h3>
-          <p>${d.enfermedades.length} enfermedades y ${n} indicadores en borrador. Gestión valida que se puedan medir; los equipos asistenciales, que tengan sentido clínico.</p>
-        </a>
-        <a class="tarjeta espacio" href="#resultados">
-          <span class="num">2 · Resultados</span>
-          <h3>Resultados en salud</h3>
-          <p>Cifras agregadas de los análisis del programa. Por ahora, la primera medición (octubre de 2026).</p>
-        </a>
-        <a class="tarjeta espacio" href="#consulta">
-          <span class="num">3 · Consulta</span>
-          <h3>Consultar la cohorte</h3>
-          <p>Para el equipo de gestión. Solo lectura, con cuenta del hospital.</p>
-        </a>
-      </div>`;
+    const r = await cargar("resultados");
+    const nInd = d.enfermedades.reduce((s, e) => s + e.indicadores.length, 0);
+    const nVal = d.enfermedades.filter((e) => e.estado === "validado").length;
+
+    const pintar = (av) => {
+      const revisados = av ? d.enfermedades.reduce((s, e) => s + revisadosDe(e, av), 0) : null;
+      const enRev = av ? d.enfermedades.filter((e) => estadoDe(e, av) === "revision").length : null;
+      const p = revisados == null ? null : pct(revisados, nInd);
+      app.innerHTML = `
+        <section class="heroe">
+          <span class="etiqueta">Espacio de trabajo del programa</span>
+          <h1>Indicadores y resultados en salud</h1>
+          <p>Construimos con los equipos los indicadores de cada enfermedad, presentamos los resultados y consultamos la cohorte del programa.</p>
+        </section>
+
+        <section class="kpis" aria-label="Resumen">
+          <div class="kpi">
+            <div class="k-et"><span class="k-ic c-rosa">${IC.construccion}</span>Enfermedades en construcción</div>
+            <div class="k-val">${d.enfermedades.length}</div>
+            <div class="k-pie">${nVal} validadas${enRev != null ? ` · ${enRev} en revisión` : ""}</div>
+          </div>
+          <div class="kpi">
+            <div class="k-et"><span class="k-ic c-azul">${IC.lista}</span>Indicadores propuestos</div>
+            <div class="k-val">${nInd}</div>
+            <div class="k-pie">Versión ${esc(d.version)} del catálogo</div>
+          </div>
+          <div class="kpi">
+            <div class="k-et"><span class="k-ic c-morado">${IC.usuarios}</span>Revisiones recibidas</div>
+            <div class="k-val">${av ? av.total : "—"}</div>
+            <div class="k-pie">${av && av.ultima ? "Última: " + esc(fechaLarga(av.ultima)) : av ? "Aún no hay revisiones" : "Sin conexión con la hoja de revisiones"}</div>
+          </div>
+          <div class="kpi">
+            <div class="k-et"><span class="k-ic c-verde">${IC.resultados}</span>Avance de la revisión</div>
+            <div class="k-val">${p == null ? "—" : p + " %"}</div>
+            <div class="k-pie">${p == null ? "Indicadores con al menos una revisión" : `${revisados} de ${nInd} indicadores revisados`}</div>
+            <div class="barra"><span style="width:${p || 0}%"></span></div>
+          </div>
+        </section>
+
+        <h2>Espacios de trabajo</h2>
+        <div class="rejilla">
+          <a class="tarjeta espacio" href="#construccion">
+            <span class="ic c-rosa">${IC.construccion}</span>
+            <span class="num">1 · Construcción</span>
+            <h3>Revisar y proponer indicadores</h3>
+            <p>Gestión valida que se puedan medir; los equipos asistenciales, que tengan sentido clínico.</p>
+            <span class="ir">Ir a construcción →</span>
+          </a>
+          <a class="tarjeta espacio" href="#resultados">
+            <span class="ic c-azul">${IC.resultados}</span>
+            <span class="num">2 · Resultados</span>
+            <h3>Resultados en salud</h3>
+            <p>Tablero ${esc(r.version || "")} con la primera medición (corte del ${esc(fechaLarga(r.corte))}). Acceso con contraseña.</p>
+            <span class="ir">Ver resultados →</span>
+          </a>
+          <a class="tarjeta espacio" href="#consulta">
+            <span class="ic c-morado">${IC.consulta}</span>
+            <span class="num">3 · Consulta</span>
+            <h3>Consultar la cohorte</h3>
+            <p>Para el equipo de gestión. Solo lectura, con cuenta del hospital.</p>
+            <span class="ir">Abrir consulta →</span>
+          </a>
+        </div>`;
+    };
+    pintar(null);
+    const av = await avance();
+    if (av && (location.hash.replace(/^#/, "") || "inicio") === "inicio") pintar(av);
   }
 
   // ---------- construcción: listado ----------
+  let filtroUnidad = "", filtroEstado = "";
   async function vistaConstruccion() {
     const d = await cargar("enfermedades");
-    const unidades = {};
-    d.enfermedades.forEach((e) => (unidades[e.unidad] = unidades[e.unidad] || []).push(e));
-    const bloques = Object.keys(unidades).map((u) => `
-      <section class="unidad">
-        <h2>${esc(u)}</h2>
-        <div class="rejilla">
-          ${unidades[u].map((e) => {
-            const borrador = leer("rev:" + e.id);
-            return `<a class="tarjeta" href="#e-${esc(e.id)}">
-              <h3>${esc(e.nombre)}</h3>
-              <p>${e.indicadores.length} indicador${e.indicadores.length === 1 ? "" : "es"} · ${esc(e.poblacion)}</p>
-              ${borrador ? '<p><span class="chip temporal">Revisión sin enviar</span></p>' : ""}
-            </a>`;
-          }).join("")}
-        </div>
-      </section>`).join("");
+    const unidadesTodas = [...new Set(d.enfermedades.map((e) => e.unidad))];
 
-    app.innerHTML = `
-      <h1>Construcción de indicadores</h1>
-      <p class="lead">Elija una enfermedad, revise cada indicador y marque si está de acuerdo, si hay que ajustarlo o si debe eliminarse. Puede editar los campos directamente y proponer indicadores nuevos.</p>
-      <div class="aviso info">
-        <strong>Equipo de gestión:</strong> revise que la definición, la fuente y el responsable permitan medir el indicador con lo que hoy se registra.<br>
-        <strong>Equipos asistenciales:</strong> revise la pertinencia clínica, el umbral y proponga lo que falte.
-      </div>
-      <p class="resumen-envio">Versión ${esc(d.version)} · ${esc(d.fuente)}</p>
-      ${bloques}`;
+    const pintar = (av) => {
+      const lista = d.enfermedades.filter((e) => (!filtroUnidad || e.unidad === filtroUnidad) && (!filtroEstado || estadoDe(e, av) === filtroEstado));
+      const unidades = {};
+      lista.forEach((e) => (unidades[e.unidad] = unidades[e.unidad] || []).push(e));
+      const cuenta = (est) => d.enfermedades.filter((e) => estadoDe(e, av) === est).length;
+      const bloques = Object.keys(unidades).map((u) => `
+        <section class="unidad">
+          <h2 class="unidad-tit">${icUnidad(u)}${esc(u)}</h2>
+          <div class="rejilla">
+            ${unidades[u].map((e) => {
+              const est = estadoDe(e, av), rev = revisadosDe(e, av), n = e.indicadores.length;
+              const pendiente = leer("rev:" + e.id);
+              return `<a class="tarjeta enf" href="#e-${esc(e.id)}">
+                <div class="fila"><h3>${esc(e.nombre)}</h3><span class="chip ${est}">${ESTADOS[est]}</span></div>
+                <span class="meta">${n} indicador${n === 1 ? "" : "es"} · ${esc(e.poblacion)}</span>
+                ${av ? `<div class="barra" title="${rev} de ${n} indicadores revisados"><span style="width:${pct(rev, n)}%"></span></div><span class="meta">${rev} de ${n} revisados</span>` : ""}
+                ${pendiente ? '<span class="chip temporal">Tiene una revisión sin enviar</span>' : ""}
+              </a>`;
+            }).join("")}
+          </div>
+        </section>`).join("");
+
+      app.innerHTML = `
+        <h1>Construcción de indicadores</h1>
+        <p class="lead">Elija una enfermedad, revise cada indicador y marque si está de acuerdo, si hay que ajustarlo o si debe eliminarse. Puede editar los campos directamente y proponer indicadores nuevos.</p>
+        <div class="aviso info">
+          <strong>Equipo de gestión:</strong> revise que la definición, la fuente y el responsable permitan medir el indicador con lo que hoy se registra.<br>
+          <strong>Equipos asistenciales:</strong> revise la pertinencia clínica, el umbral y proponga lo que falte.
+        </div>
+        <div class="filtros" role="group" aria-label="Filtrar por unidad">
+          <span class="rotulo">Unidad</span>
+          <button type="button" class="filtro" data-u="" aria-pressed="${!filtroUnidad}">Todas</button>
+          ${unidadesTodas.map((u) => `<button type="button" class="filtro" data-u="${esc(u)}" aria-pressed="${filtroUnidad === u}">${esc(u)}</button>`).join("")}
+        </div>
+        <div class="filtros" role="group" aria-label="Filtrar por estado">
+          <span class="rotulo">Estado</span>
+          <button type="button" class="filtro" data-s="" aria-pressed="${!filtroEstado}">Todos</button>
+          ${Object.keys(ESTADOS).map((s) => `<button type="button" class="filtro" data-s="${s}" aria-pressed="${filtroEstado === s}">${ESTADOS[s]} · ${cuenta(s)}</button>`).join("")}
+        </div>
+        ${bloques || '<p class="tenue" style="margin-top:24px">No hay enfermedades con esos filtros.</p>'}
+        <p class="resumen-envio" style="margin-top:28px">Catálogo versión ${esc(d.version)} · ${esc(d.fuente)}</p>`;
+
+      $$(".filtro[data-u]").forEach((b) => b.addEventListener("click", () => { filtroUnidad = b.dataset.u; pintar(av); }));
+      $$(".filtro[data-s]").forEach((b) => b.addEventListener("click", () => { filtroEstado = b.dataset.s; pintar(av); }));
+    };
+    pintar(null);
+    const av = await avance();
+    if (av && location.hash.replace(/^#/, "") === "construccion") pintar(av);
   }
 
   // ---------- construcción: ficha ----------
@@ -121,6 +248,7 @@
     app.innerHTML = `
       <div class="migas"><a href="#construccion">← Todas las enfermedades</a></div>
       <div class="ficha-cabecera">
+        ${icUnidad(enf.unidad)}
         <div>
           <span class="etiqueta">${esc(enf.unidad)}</span>
           <h1>${esc(enf.nombre)}</h1>
@@ -128,7 +256,7 @@
           <p class="resumen-envio" style="margin:4px 0 0">${esc(enf.poblacion)}</p>
         </div>
       </div>
-      ${enf.guias && enf.guias.length ? `<ul class="guias">${enf.guias.map((g) => `<li><a href="${esc(g.url)}" target="_blank" rel="noopener">📄 ${esc(g.titulo)}</a></li>`).join("")}</ul>` : ""}
+      ${enf.guias && enf.guias.length ? `<ul class="guias">${enf.guias.map((g) => `<li><a href="${esc(g.url)}" target="_blank" rel="noopener">${esc(g.titulo)}</a></li>`).join("")}</ul>` : ""}
 
       <h2>Quién revisa</h2>
       <div class="tarjeta revisor">
@@ -175,6 +303,9 @@
 
     function actualizar() {
       $$(".indicador[data-original]", lista).forEach((card) => {
+        const dec = $("input[type=radio]:checked", card);
+        card.classList.remove("d-acuerdo", "d-ajustar", "d-eliminar");
+        if (dec) card.classList.add("d-" + dec.value);
         const orig = enf.indicadores.find((x) => x.id === card.dataset.id);
         CAMPOS.forEach(([k]) => {
           const el = $(`[data-campo=${k}]`, card);
@@ -318,13 +449,13 @@
       <h1>${esc(r.titulo)}</h1>
       <p class="lead">${esc(r.nota)}</p>
       <div class="tarjeta" style="max-width:640px">
-        <span class="etiqueta">Tablero ${esc(r.version)} · corte del ${esc(corte)}</span>
+        <span class="etiqueta"><span class="ic c-azul" style="width:28px;height:28px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center">${IC.resultados}</span>Tablero ${esc(r.version)} · corte del ${esc(corte)}</span>
         <h3 style="margin-top:6px">Tablero de resultados en salud</h3>
         <p>Elija la enfermedad y el resultado que quiere ver: indicadores clave, gráficos y tablas, con búsqueda y descarga de cada tabla en CSV.</p>
         <p style="margin-top:14px"><a class="boton" href="${esc(r.tablero)}" target="_blank" rel="noopener">Abrir el tablero →</a></p>
       </div>
       <div class="aviso info" style="margin-top:18px">
-        <strong>Acceso con contraseña.</strong> El tablero es un documento confidencial del programa. Solicite la contraseña al coordinador del programa; no la comparta junto con el enlace.
+        ${IC.candado} <strong>Acceso con contraseña.</strong> El tablero es un documento confidencial del programa. Solicite la contraseña al coordinador del programa; no la comparta junto con el enlace.
       </div>`;
   }
 
@@ -350,5 +481,6 @@
   }
 
   window.addEventListener("hashchange", enrutar);
+  cargar("enfermedades").then((d) => { $("#version").textContent = "Catálogo de indicadores v" + d.version; }).catch(() => {});
   enrutar();
 })();

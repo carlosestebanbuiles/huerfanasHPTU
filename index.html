@@ -4,23 +4,31 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#B8127B">
 <title>Programa de Enfermedades Huérfanas · Indicadores</title>
+<script>try{var t=localStorage.getItem("tema");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/estilos.css">
 </head>
 <body>
+<a class="saltar" href="#app">Ir al contenido</a>
 <header class="cabecera">
+  <div class="franja" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
   <div class="contenedor cabecera-fila">
     <a href="#inicio" class="marca">
-      <span class="marca-titulo">Programa de Enfermedades Huérfanas</span>
-      <span class="marca-sub">Indicadores y resultados en salud</span>
+      <span class="marca-icono" aria-hidden="true"></span>
+      <span>
+        <span class="marca-titulo">Programa de Enfermedades Huérfanas</span>
+        <span class="marca-sub">Hospital Pablo Tobón Uribe · Indicadores y resultados en salud</span>
+      </span>
     </a>
     <nav class="menu" aria-label="Secciones">
       <a href="#inicio" data-ruta="inicio">Inicio</a>
       <a href="#construccion" data-ruta="construccion">Construcción</a>
       <a href="#resultados" data-ruta="resultados">Resultados</a>
       <a href="#consulta" data-ruta="consulta">Consulta</a>
+      <button type="button" id="tema" class="tema" aria-label="Cambiar entre tema claro y oscuro"></button>
     </nav>
   </div>
 </header>
@@ -30,12 +38,20 @@
 </main>
 
 <footer class="pie">
-  <div class="contenedor">
-    Espacio de trabajo del programa. Uso institucional; no contiene datos que identifiquen pacientes.
+  <div class="contenedor pie-fila">
+    <div>
+      <strong>Programa de Enfermedades Huérfanas</strong> · Hospital Pablo Tobón Uribe, Medellín<br>
+      Contacto: <a href="mailto:enfermedadeshuerfana@hptu.org.co">enfermedadeshuerfana@hptu.org.co</a>
+    </div>
+    <div class="pie-nota">
+      Espacio de trabajo del programa. Uso institucional; no contiene datos que identifiquen pacientes.<br>
+      <span id="version"></span>
+    </div>
   </div>
 </footer>
 
 <script src="assets/config.js"></script>
+<script src="assets/iconos.js"></script>
 <script src="assets/app.js"></script>
 </body>
 </html>
