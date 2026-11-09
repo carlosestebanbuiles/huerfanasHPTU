@@ -1,7 +1,7 @@
 {
   "titulo": "Resultados en salud",
-  "fecha": "2026-11-09",
-  "estado": "preparacion",
-  "nota": "El tablero de resultados se está preparando con acceso protegido por contraseña.",
-  "resultados": []
+  "version": "1.0",
+  "corte": "2026-10-27",
+  "tablero": "resultados/",
+  "nota": "Primera medición de resultados en salud del programa, con cifras agregadas por enfermedad."
 }

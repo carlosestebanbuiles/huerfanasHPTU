@@ -313,17 +313,19 @@
   // ---------- resultados ----------
   async function vistaResultados() {
     const r = await cargar("resultados");
-    const fecha = new Date(r.fecha + "T12:00:00").toLocaleDateString("es-CO", { day: "numeric", month: "long", year: "numeric" });
+    const corte = new Date(r.corte + "T12:00:00").toLocaleDateString("es-CO", { day: "numeric", month: "long", year: "numeric" });
     app.innerHTML = `
       <h1>${esc(r.titulo)}</h1>
-      <p class="lead">Informe del ${esc(fecha)}. ${esc(r.nota)}</p>
-      ${r.estado === "temporal" ? '<div class="aviso alerta"><span class="chip temporal">Temporal</span> Esta sección muestra los resultados ya analizados mientras se definen los indicadores. Cuando estén aprobados, se presentará cada indicador con su ficha y su tendencia.</div>' : ""}
-      ${r.resultados.length ? `<table class="tabla">
-        <thead><tr><th>Enfermedad</th><th>Resultado destacado</th><th>Pacientes</th></tr></thead>
-        <tbody>
-          ${r.resultados.map((x) => `<tr><td class="enf">${esc(x.enfermedad)}</td><td>${esc(x.resultado)}</td><td class="n">${esc(x.pacientes)}</td></tr>`).join("")}
-        </tbody>
-      </table>` : '<div class="aviso info">En preparación.</div>'}`;
+      <p class="lead">${esc(r.nota)}</p>
+      <div class="tarjeta" style="max-width:640px">
+        <span class="etiqueta">Tablero ${esc(r.version)} · corte del ${esc(corte)}</span>
+        <h3 style="margin-top:6px">Tablero de resultados en salud</h3>
+        <p>Indicadores clave, gráficos y las tablas del informe por enfermedad, con búsqueda y descarga de cada tabla en CSV.</p>
+        <p style="margin-top:14px"><a class="boton" href="${esc(r.tablero)}" target="_blank" rel="noopener">Abrir el tablero →</a></p>
+      </div>
+      <div class="aviso info" style="margin-top:18px">
+        <strong>Acceso con contraseña.</strong> El tablero es un documento confidencial del programa. Solicite la contraseña al coordinador del programa; no la comparta junto con el enlace.
+      </div>`;
   }
 
   // ---------- consulta ----------
