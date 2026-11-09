@@ -139,7 +139,7 @@
           <div class="kpi">
             <div class="k-et"><span class="k-ic c-morado">${IC.usuarios}</span>Revisiones recibidas</div>
             <div class="k-val">${av ? av.total : "—"}</div>
-            <div class="k-pie">${av && av.ultima ? "Última: " + esc(fechaLarga(av.ultima)) : av ? "Aún no hay revisiones" : "Sin conexión con la hoja de revisiones"}</div>
+            <div class="k-pie">${av && av.ultima ? "Última: " + esc(fechaLarga(av.ultima)) : av ? "Aún no hay revisiones" : "Resumen pendiente de activar"}</div>
           </div>
           <div class="kpi">
             <div class="k-et"><span class="k-ic c-verde">${IC.resultados}</span>Avance de la revisión</div>
