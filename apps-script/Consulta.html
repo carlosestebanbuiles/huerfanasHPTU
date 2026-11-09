@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base target="_top">
+<style>
+  body { font-family: system-ui, sans-serif; color: #1d2a33; background: #f6f8f9; margin: 0; padding: 24px; font-size: 16px; }
+  .caja { max-width: 1000px; margin: 0 auto; }
+  h1 { font-size: 1.5rem; margin: 0 0 4px; }
+  .tenue { color: #5b6b76; font-size: .92rem; }
+  .panel { background: #fff; border: 1px solid #dfe5e9; border-radius: 10px; padding: 16px; margin-top: 16px; }
+  .filtros { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+  label { display: block; font-weight: 600; font-size: .85rem; margin-bottom: 4px; }
+  select { width: 100%; font: inherit; font-size: .92rem; border: 1px solid #c9d3d9; border-radius: 6px; padding: 6px; }
+  select[multiple] { height: 120px; }
+  button { font: inherit; font-weight: 600; border-radius: 8px; padding: 8px 16px; border: 1px solid #0f6b73; background: #0f6b73; color: #fff; cursor: pointer; }
+  button.sec { background: #fff; color: #0f6b73; }
+  .n { font-size: 2rem; font-weight: 700; color: #0f6b73; }
+  table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+  th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid #eef1f3; }
+  th { background: #f6f8f9; font-size: .8rem; text-transform: uppercase; color: #5b6b76; }
+  .error { background: #fbe9e8; border: 1px solid #f0c4c1; padding: 10px 14px; border-radius: 8px; }
+  .fila { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 14px; }
+</style>
+</head>
+<body>
+<div class="caja">
+  <h1>Consulta de la cohorte</h1>
+  <div class="tenue">Solo lectura. Cada consulta queda registrada con su usuario. Use Ctrl/Cmd + clic para elegir varios valores.</div>
+
+  <div class="panel">
+    <div class="filtros" id="filtros">Cargando…</div>
+    <div class="fila">
+      <label style="margin:0">Agrupar por</label>
+      <select id="agrupar" style="width:auto"><option value="">(ninguno)</option></select>
+      <label style="margin:0"><input type="checkbox" id="listado"> Incluir listado</label>
+      <button id="btn">Consultar</button>
+      <button class="sec" id="limpiar">Limpiar filtros</button>
+    </div>
+  </div>
+
+  <div id="salida"></div>
+</div>
+
+<script>
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const fallo = e => { document.getElementById('salida').innerHTML = '<div class="panel error">' + esc(e.message || e) + '</div>'; };
+
+  google.script.run.withSuccessHandler(o => {
+    const f = document.getElementById('filtros'), a = document.getElementById('agrupar');
+    f.innerHTML = Object.keys(o.filtros).map(col => `
+      <div><label>${esc(col)}</label>
+      <select multiple data-col="${esc(col)}">${o.filtros[col].map(v => `<option>${esc(v)}</option>`).join('')}</select></div>`).join('');
+    a.innerHTML += Object.keys(o.filtros).map(c => `<option>${esc(c)}</option>`).join('');
+    document.getElementById('salida').innerHTML = `<div class="panel"><div class="tenue">Registros en la base</div><div class="n">${o.total}</div></div>`;
+  }).withFailureHandler(fallo).opciones();
+
+  document.getElementById('limpiar').onclick = () => document.querySelectorAll('select[multiple] option').forEach(o => o.selected = false);
+
+  document.getElementById('btn').onclick = () => {
+    const filtros = {};
+    document.querySelectorAll('select[multiple]').forEach(s => {
+      const v = Array.from(s.selectedOptions).map(o => o.value);
+      if (v.length) filtros[s.dataset.col] = v;
+    });
+    const q = { filtros, agrupar: document.getElementById('agrupar').value, listado: document.getElementById('listado').checked };
+    document.getElementById('salida').innerHTML = '<div class="panel tenue">Consultando…</div>';
+    google.script.run.withSuccessHandler(r => {
+      let h = `<div class="panel"><div class="tenue">Pacientes que cumplen los filtros</div><div class="n">${r.n}</div></div>`;
+      if (r.grupos) h += `<div class="panel"><table><thead><tr><th>${esc(q.agrupar)}</th><th>Pacientes</th><th>%</th></tr></thead><tbody>${
+        r.grupos.map(g => `<tr><td>${esc(g[0])}</td><td>${g[1]}</td><td>${r.n ? (100*g[1]/r.n).toFixed(1) : 0}</td></tr>`).join('')}</tbody></table></div>`;
+      if (r.listado) h += `<div class="panel"><table><thead><tr>${r.listado.columnas.map(c => `<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${
+        r.listado.filas.map(f => `<tr>${f.map(c => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table>${r.listado.recortado ? '<p class="tenue">Se muestran las primeras filas; afine los filtros.</p>' : ''}</div>`;
+      document.getElementById('salida').innerHTML = h;
+    }).withFailureHandler(fallo).consultar(q);
+  };
+</script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+{
+  "version": "0.1",
+  "fecha": "2026-11-09",
+  "fuente": "Hoja «Indicadores» del libro INDICADORES DE ENFERMEDADES HUÉRFANAS (borrador de medicina interna)",
+  "enfermedades": [
+    {
+      "id": "acromegalia", "nombre": "Acromegalia", "unidad": "Endocrinología", "poblacion": "Adultos",
+      "guias": [{"titulo": "Endocrinología", "url": "https://drive.google.com/file/d/1_10XINxvY9VjskWdjCRxRP69aSavEOoK/view"}],
+      "indicadores": [
+        {"id": "acromegalia-1", "resultado": "Remisión", "definicion": "IGF-1 < 1 × LSN", "fuente": "", "responsable": "Especialidades médicas"},
+        {"id": "acromegalia-2", "resultado": "Control aceptable", "definicion": "IGF-1 < 1,3 × LSN", "fuente": "", "responsable": "Especialidades médicas"}
+      ]
+    },
+    {
+      "id": "cushing", "nombre": "Enfermedad de Cushing", "unidad": "Endocrinología", "poblacion": "Adultos",
+      "guias": [{"titulo": "Endocrinología", "url": "https://drive.google.com/file/d/1_10XINxvY9VjskWdjCRxRP69aSavEOoK/view"}],
+      "indicadores": [
+        {"id": "cushing-1", "resultado": "Remisión", "definicion": "Cortisol libre urinario o cortisol salival nocturno", "fuente": "", "responsable": "Especialidades médicas"}
+      ]
+    },
+    {
+      "id": "lipodistrofia", "nombre": "Lipodistrofias", "unidad": "Endocrinología", "poblacion": "Adultos y niños",
+      "guias": [{"titulo": "Endocrinología", "url": "https://drive.google.com/file/d/1_10XINxvY9VjskWdjCRxRP69aSavEOoK/view"}],
+      "indicadores": [
+        {"id": "lipodistrofia-1", "resultado": "Control metabólico", "definicion": "HbA1c y triglicéridos", "fuente": "", "responsable": "Especialidades médicas"},
+        {"id": "lipodistrofia-2", "resultado": "Calidad de vida", "definicion": "Instrumento", "fuente": "EQ-5D", "responsable": "Especialidades médicas"}
+      ]
+    },
+    {
+      "id": "raquitismo", "nombre": "Raquitismo hipofosfatémico (XLH)", "unidad": "Endocrinología", "poblacion": "Adultos y niños",
+      "guias": [{"titulo": "Endocrinología", "url": "https://drive.google.com/file/d/1_10XINxvY9VjskWdjCRxRP69aSavEOoK/view"}],
+      "indicadores": [
+        {"id": "raquitismo-1", "resultado": "Control metabólico", "definicion": "Fósforo sérico en rango (según LSN)", "fuente": "", "responsable": "Especialidades médicas"},
+        {"id": "raquitismo-2", "resultado": "Capacidad física", "definicion": "Caminata de 6 minutos", "fuente": "", "responsable": "Especialidades médicas"},
+        {"id": "raquitismo-3", "resultado": "Calidad de vida", "definicion": "Instrumento", "fuente": "EQ-5D", "responsable": "Especialidades médicas"}
+      ]
+    },
+    {
+      "id": "dislipidemias", "nombre": "Dislipidemias familiares", "detalle": "Hipercolesterolemia familiar, hiperquilomicronemia, lipoproteinemia tipo 1", "unidad": "Endocrinología", "poblacion": "Adultos y niños",
+      "guias": [{"titulo": "Endocrinología", "url": "https://drive.google.com/file/d/1_10XINxvY9VjskWdjCRxRP69aSavEOoK/view"}],
+      "indicadores": [
+        {"id": "dislipidemias-1", "resultado": "Control metabólico", "definicion": "Colesterol LDL", "fuente": "", "responsable": "Especialidades médicas"},
+        {"id": "dislipidemias-2", "resultado": "Eventos agudos", "definicion": "IAM, ACV, AIT, angina", "fuente": "", "responsable": "Especialidades médicas"}
+      ]
+    },
+    {
+      "id": "amiloidosis", "nombre": "Amiloidosis", "unidad": "Amiloidosis", "poblacion": "Adultos",
+      "guias": [{"titulo": "Modelo de atención: amiloidosis cardíaca", "url": "https://drive.google.com/file/d/1g-RRbfFBViwAaHPzjO7y8VvRYuUq6VT6/view"}],
+      "indicadores": [
+        {"id": "amiloidosis-1", "resultado": "Reducción de hospitalizaciones por insuficiencia cardíaca", "definicion": "", "fuente": "CMBD egresos de hospitalización, diagnóstico principal de egreso insuficiencia cardíaca", "responsable": "Especialidades médicas"},
+        {"id": "amiloidosis-2", "resultado": "Supervivencia global", "definicion": "", "fuente": "Fallecidos", "responsable": "Especialidades médicas"},
+        {"id": "amiloidosis-3", "resultado": "Estabilidad en la clase funcional (NYHA)", "definicion": "", "fuente": "Campo de texto no estructurado, notas de cardiología", "responsable": "Especialidades médicas"},
+        {"id": "amiloidosis-4", "resultado": "Reducción o estabilización de NT-proBNP", "definicion": "", "fuente": "Campo de texto no estructurado, notas de cardiología", "responsable": "Especialidades médicas"},
+        {"id": "amiloidosis-5", "resultado": "Calidad de vida", "definicion": "", "fuente": "EQ-5D", "responsable": "Especialidades médicas"}
+      ]
+    },
+    {
+      "id": "fibrosis-quistica", "nombre": "Fibrosis quística", "unidad": "Fibrosis quística", "poblacion": "Adultos y niños",
+      "guias": [{"titulo": "Fibrosis quística", "url": "https://drive.google.com/file/d/1VdzOWKXLeVkfG8FYoo4sc0nqjvKlx6c5/view"}],
+      "indicadores": [
+        {"id": "fq-1", "resultado": "Función pulmonar", "definicion": "VEF1 en espirometría", "fuente": "Software de espirometrías (biomédica)", "responsable": "Pediatría"},
+        {"id": "fq-2", "resultado": "Exacerbaciones", "definicion": "Tasa de exacerbaciones pulmonares agudas en pacientes con FQ en tratamiento con elexacaftor/tezacaftor/ivacaftor", "fuente": "CMBD egresos de hospitalización, diagnóstico principal o relacionado", "responsable": "Pediatría"},
+        {"id": "fq-3", "resultado": "Calidad de vida", "definicion": "Instrumento", "fuente": "EQ-5D", "responsable": "Pediatría"}
+      ]
+    },
+    {
+      "id": "epidermolisis", "nombre": "Epidermólisis bullosa", "unidad": "Dermatología", "poblacion": "Adultos y niños",
+      "guias": [{"titulo": "Dermatología", "url": "https://drive.google.com/file/d/1pzmE_gjkLqctoFFR-ewC5meo3pQKIhLt/view"}],
+      "indicadores": [
+        {"id": "eb-1", "resultado": "Reducción de la superficie corporal afectada (BSA)", "definicion": "", "fuente": "", "responsable": "Especialidades médicas"},
+        {"id": "eb-2", "resultado": "Control de infecciones (sepsis)", "definicion": "", "fuente": "", "responsable": "Especialidades médicas"},
+        {"id": "eb-3", "resultado": "Calidad de vida: dolor y prurito", "definicion": "", "fuente": "", "responsable": "Especialidades médicas"},
+        {"id": "eb-4", "resultado": "Objetivos nutricionales y hematológicos", "definicion": "", "fuente": "", "responsable": "Especialidades médicas"}
+      ]
+    },
+    {
+      "id": "ictiosis", "nombre": "Ictiosis", "unidad": "Dermatología", "poblacion": "Adultos y niños",
+      "guias": [{"titulo": "Dermatología", "url": "https://drive.google.com/file/d/1pzmE_gjkLqctoFFR-ewC5meo3pQKIhLt/view"}],
+      "indicadores": [
+        {"id": "ictiosis-1", "resultado": "Reducción del grosor de las escamas y del enrojecimiento", "definicion": "", "fuente": "", "responsable": "Especialidades médicas"},
+        {"id": "ictiosis-2", "resultado": "Prevención del ectropión", "definicion": "", "fuente": "", "responsable": "Especialidades médicas"}
+      ]
+    },
+    {
+      "id": "crohn", "nombre": "Enfermedad de Crohn", "unidad": "Enfermedad inflamatoria intestinal", "poblacion": "Adultos y niños",
+      "guias": [
+        {"titulo": "Crohn", "url": "https://drive.google.com/file/d/1wsiuTuwmQ7MKymsqxJd_xr0Yvim44nn3/view"},
+        {"titulo": "Modelo de atención integral, Crohn adultos", "url": "https://drive.google.com/file/d/1-Jzgrp_gHbuCYHsuggJQV_E-8rc5kb_e/view"}
+      ],
+      "indicadores": [
+        {"id": "crohn-1", "resultado": "Cirugías programadas frente a emergentes", "definicion": "Probabilidad en el tiempo, en función del tiempo en el programa", "fuente": "", "responsable": "Especialidades médicas"},
+        {"id": "crohn-2", "resultado": "Remisión endoscópica", "definicion": "Ausencia de úlceras (SES-CD)", "fuente": "Reporte de ayudas diagnósticas", "responsable": "Especialidades médicas"},
+        {"id": "crohn-3", "resultado": "Remisión clínica", "definicion": "PRO2 (desenlaces reportados por el paciente: diarrea y dolor abdominal)", "fuente": "", "responsable": "Especialidades médicas"},
+        {"id": "crohn-4", "resultado": "Remisión bioquímica", "definicion": "Calprotectina (valor por definir)", "fuente": "", "responsable": "Especialidades médicas"},
+        {"id": "crohn-5", "resultado": "Remisión clínica libre de esteroides", "definicion": "Órdenes de prednisolona: ciclos y tiempo", "fuente": "", "responsable": "Especialidades médicas"},
+        {"id": "crohn-6", "resultado": "Proporción de pacientes con terapia biológica", "definicion": "", "fuente": "Base de datos en Drive (Original Mx)", "responsable": "Especialidades médicas"}
+      ]
+    },
+    {
+      "id": "falla-intestinal", "nombre": "Falla intestinal (intestino corto)", "unidad": "Falla intestinal", "poblacion": "Adultos y niños",
+      "guias": [{"titulo": "Falla intestinal", "url": "https://drive.google.com/file/d/1LJcNMErHnDhPMEqNhUqCz6-AWzXb5mdy/view"}],
+      "indicadores": [
+        {"id": "fi-1", "resultado": "Rehabilitación nutricional", "definicion": "El paciente no depende de soporte nutricional: IMC > 20, albúmina > 3,5, transferrina 180, sin alteraciones electrolíticas", "fuente": "Clínicos y paraclínicos", "responsable": "Especialidades médicas"},
+        {"id": "fi-2", "resultado": "Cierre de fístulas", "definicion": "Cierre quirúrgico o con manejo médico en los pacientes con fístulas", "fuente": "Revisión de historia clínica anual o semestral", "responsable": "Especialidades médicas"},
+        {"id": "fi-3", "resultado": "Desmonte de la nutrición parenteral total o parcial", "definicion": "Sin NPT o NPT parcial en el tiempo", "fuente": "Historia clínica: duración en días de la NPT", "responsable": "Especialidades médicas"}
+      ]
+    },
+    {
+      "id": "ame", "nombre": "Atrofia muscular espinal", "unidad": "Neurometabólicas", "poblacion": "Adultos y niños",
+      "guias": [
+        {"titulo": "Guía de atención: AME", "url": "https://docs.google.com/document/d/1nX-_frjaFdiLdVhQbhkZPKkSwSf8tUq-_2DuAdw2oSk/edit"},
+        {"titulo": "Neurometabólicas 2024", "url": "https://drive.google.com/file/d/16hOTLk7Rlgp6JtAg1i45aXX-NxzAc7Pi/view"}
+      ],
+      "indicadores": [
+        {"id": "ame-1", "resultado": "Estabilización o ganancia en escalas motoras", "definicion": "Puntaje de escalas motoras en pacientes con nusinersen del modelo de neurometabólicas", "fuente": "Tarea específica para el neurólogo", "responsable": "Pediatría"},
+        {"id": "ame-2", "resultado": "Hospitalización por cuadros respiratorios", "definicion": "", "fuente": "", "responsable": "Especialidades médicas"},
+        {"id": "ame-3", "resultado": "Calidad de vida", "definicion": "Instrumento", "fuente": "", "responsable": "Pediatría"},
+        {"id": "ame-4", "resultado": "Traqueostomía y gastrostomía", "definicion": "Si las requiere", "fuente": "", "responsable": "Pediatría"}
+      ]
+    },
+    {
+      "id": "duchenne", "nombre": "Distrofia muscular de Duchenne", "unidad": "Neurometabólicas", "poblacion": "Adultos y niños",
+      "guias": [{"titulo": "Neurometabólicas 2024", "url": "https://drive.google.com/file/d/16hOTLk7Rlgp6JtAg1i45aXX-NxzAc7Pi/view"}],
+      "indicadores": [
+        {"id": "duchenne-1", "resultado": "Estabilización en escalas motoras", "definicion": "", "fuente": "", "responsable": "Pediatría"},
+        {"id": "duchenne-2", "resultado": "Hospitalización por cuadros respiratorios", "definicion": "", "fuente": "", "responsable": "Pediatría"},
+        {"id": "duchenne-3", "resultado": "Calidad de vida", "definicion": "Instrumento", "fuente": "", "responsable": "Pediatría"},
+        {"id": "duchenne-4", "resultado": "Adherencia y vigencia de la formulación de esteroides", "definicion": "", "fuente": "", "responsable": "Pediatría"}
+      ]
+    },
+    {
+      "id": "mucopolisacaridosis", "nombre": "Mucopolisacaridosis (Morquio, tipos 1 a 4)", "unidad": "Neurometabólicas", "poblacion": "Adultos y niños",
+      "guias": [{"titulo": "Neurometabólicas 2024", "url": "https://drive.google.com/file/d/16hOTLk7Rlgp6JtAg1i45aXX-NxzAc7Pi/view"}],
+      "indicadores": [
+        {"id": "mps-1", "resultado": "Estabilización o ganancia en el test de caminata", "definicion": "", "fuente": "Test de caminata de 6 minutos", "responsable": "Pediatría"},
+        {"id": "mps-2", "resultado": "Hospitalización por cuadros respiratorios", "definicion": "", "fuente": "CMBD egresos de hospitalización, diagnóstico principal o relacionado", "responsable": "Pediatría"},
+        {"id": "mps-3", "resultado": "Calidad de vida", "definicion": "", "fuente": "EQ-5D", "responsable": "Pediatría"}
+      ]
+    },
+    {
+      "id": "metabolismo-intermediario", "nombre": "Errores del metabolismo intermediario", "detalle": "Hiperglicinemia no cetósica, fenilcetonuria, homocistinuria clásica", "unidad": "Neurometabólicas", "poblacion": "Adultos y niños",
+      "guias": [
+        {"titulo": "Guía de atención: homocistinuria", "url": "https://docs.google.com/document/d/1FBNeRkNBBMag10UFMf3FmlZoIkz1MaWOg4smIlrjfyg/edit"},
+        {"titulo": "Guía de atención: hiperglicinemia no cetósica", "url": "https://docs.google.com/document/d/1zgS6Ouj-DroGoQDidVXsuX7e8z7Z87bUY5LfoJQE9DU/edit"},
+        {"titulo": "Neurometabólicas 2024", "url": "https://drive.google.com/file/d/16hOTLk7Rlgp6JtAg1i45aXX-NxzAc7Pi/view"}
+      ],
+      "indicadores": [
+        {"id": "emi-1", "resultado": "Adherencia a la dieta (fórmulas especiales)", "definicion": "", "fuente": "", "responsable": "Pediatría"},
+        {"id": "emi-2", "resultado": "Control bioquímico", "definicion": "Aminoácidos", "fuente": "", "responsable": "Pediatría"},
+        {"id": "emi-3", "resultado": "Complicaciones asociadas a la enfermedad", "definicion": "Fenilcetonuria: epilepsia, autismo, discapacidad. Homocistinuria: trombosis cerebral, luxación del cristalino. Hiperglicinemia: control de crisis", "fuente": "", "responsable": "Pediatría"},
+        {"id": "emi-4", "resultado": "Calidad de vida", "definicion": "", "fuente": "EQ-5D", "responsable": "Pediatría"}
+      ]
+    },
+    {
+      "id": "neurofibromatosis", "nombre": "Neurofibromatosis", "detalle": "Tipo 1, tipo 2 y no clasificada", "unidad": "Neurometabólicas", "poblacion": "Adultos y niños",
+      "guias": [{"titulo": "Neurometabólicas 2024", "url": "https://drive.google.com/file/d/16hOTLk7Rlgp6JtAg1i45aXX-NxzAc7Pi/view"}],
+      "indicadores": [
+        {"id": "nf-1", "resultado": "Reducción o estabilización del volumen tumoral", "definicion": "", "fuente": "", "responsable": "Pediatría"},
+        {"id": "nf-2", "resultado": "Supervivencia libre de malignidad o detección temprana de malignidad", "definicion": "", "fuente": "", "responsable": "Pediatría"},
+        {"id": "nf-3", "resultado": "Calidad de vida", "definicion": "", "fuente": "EQ-5D", "responsable": "Pediatría"}
+      ]
+    }
+  ]
+}
