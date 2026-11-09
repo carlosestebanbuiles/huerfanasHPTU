@@ -61,6 +61,8 @@ function config_() {
     pestana: aj.PESTANA || 'Consolidado',
     filaEnc: parseInt(aj.FILA_ENCABEZADOS, 10) || 1,
     maxListado: parseInt(aj.MAX_FILAS_LISTADO, 10) || 500,
+    maxDescarga: parseInt(aj.MAX_FILAS_DESCARGA, 10) || 10000,
+    permitirDescarga: !/^n/i.test(aj.PERMITIR_DESCARGA || 'Sí'),
     vacios: [''].concat((aj.VALORES_VACIOS || '').split('|').map(function (v) { return t(v).toUpperCase(); }))
   };
 }
@@ -156,7 +158,7 @@ function opciones() {
     principales: cfg.filtros.filter(function (f) { return f.principal && out[f.nombre]; }).map(function (f) { return f.nombre; }),
     busqueda: cfg.filtros.filter(function (f) { return f.columnas.length > 1; }).map(function (f) { return f.nombre; }),
     rapidas: cfg.rapidas.filter(function (p) { return out[p.agrupar] || !p.agrupar; }),
-    listado: listado, total: d.filas.length, avisos: avisos
+    listado: listado, total: d.filas.length, avisos: avisos, permitirDescarga: cfg.permitirDescarga
   };
 }
 
@@ -197,16 +199,19 @@ function consultar(q) {
   }
 
   let listado = null;
-  if (q.listado) {
+  const descarga = !!q.descarga;
+  if (descarga && !cfg.permitirDescarga) throw new Error('La descarga del listado está desactivada en la configuración.');
+  if (q.listado || descarga) {
     const cols = listadoPermitido_(cfg, d, []);
+    const max = descarga ? cfg.maxDescarga : cfg.maxListado;
     listado = {
       columnas: cols,
-      filas: pos.slice(0, cfg.maxListado).map(function (i) { return cols.map(function (c) { return texto_(d.filas[i][d.enc.indexOf(c)]); }); }),
-      recortado: pos.length > cfg.maxListado
+      filas: pos.slice(0, max).map(function (i) { return cols.map(function (c) { return texto_(d.filas[i][d.enc.indexOf(c)]); }); }),
+      recortado: pos.length > max
     };
   }
 
-  registrar_(correo, q, pos.length);
+  registrar_(correo, q, pos.length, descarga);
   return { n: pos.length, grupos: grupos, listado: listado };
 }
 
@@ -220,13 +225,13 @@ function listadoPermitido_(cfg, d, avisos) {
 
 // ---------------- utilidades ----------------
 
-function registrar_(correo, q, n) {
+function registrar_(correo, q, n, descarga) {
   if (!REGISTRO_DOC_ID || REGISTRO_DOC_ID.indexOf('PEGAR') === 0) return;
   try {
     const cuerpo = DocumentApp.openById(REGISTRO_DOC_ID).getBody();
     const fecha = Utilities.formatDate(new Date(), 'America/Bogota', 'yyyy-MM-dd HH:mm:ss');
     cuerpo.appendParagraph([fecha, correo, JSON.stringify(q.filtros || {}), 'agrupar=' + (q.agrupar || '-'),
-      'listado=' + (q.listado ? 'sí' : 'no'), 'n=' + n].join(' | '));
+      'listado=' + (q.listado ? 'sí' : 'no'), descarga ? 'DESCARGA CSV' : '', 'n=' + n].join(' | '));
   } catch (e) { /* el registro no debe impedir la consulta */ }
 }
 

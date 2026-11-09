@@ -74,6 +74,10 @@
   .aviso { background: var(--ambar-suave); font-size: .92rem; }
   .aviso ul { margin: 6px 0 0; padding-left: 20px; }
   .listado { overflow-x: auto; }
+  .listado-cab { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+  .listado-cab h2 { margin: 0; }
+  .listado-acc { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .listado-acc button { padding: 7px 14px; font-size: .9rem; }
   @media (max-width: 640px) { .marca-sub { display: none; } h1 { font-size: 1.5rem; } }
 </style>
 </head>
@@ -159,8 +163,10 @@
     marcar();
   }
 
+  let ULTIMA = null;
   function consultar() {
     const q = { filtros: leerFiltros(), agrupar: $('agrupar').value, listado: $('listado').checked };
+    ULTIMA = q;
     salida.innerHTML = '<div class="panel tenue">Consultando…</div>';
     google.script.run.withSuccessHandler(r => pintar(r, q)).withFailureHandler(fallo).consultar(q);
   }
@@ -178,10 +184,45 @@
         r.grupos.map(g => `<tr><td>${esc(g[0])}</td><td class="num">${g[1]}</td><td class="num">${r.n ? (100 * g[1] / r.n).toFixed(1) : 0}</td>
           <td class="barcol"><div class="bar" style="width:${(100 * g[1] / max).toFixed(1)}%"></div></td></tr>`).join('')}</tbody></table></div>`;
     }
-    if (r.listado) h += `<div class="panel listado"><h2>Listado</h2><table><thead><tr>${r.listado.columnas.map(c => `<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${
+    if (r.listado) h += `<div class="panel listado"><div class="listado-cab"><h2>Listado</h2>${OPC.permitirDescarga ? '<div class="listado-acc"><button type="button" class="sec" id="descargar">Descargar CSV</button><button type="button" class="sec" id="copiar">Copiar</button><span class="tenue" id="desc-estado"></span></div>' : ''}</div><table><thead><tr>${r.listado.columnas.map(c => `<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${
       r.listado.filas.map(f => `<tr>${f.map(c => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table>${r.listado.recortado ? '<p class="tenue">Se muestran las primeras filas; afine los filtros.</p>' : ''}</div>`;
     salida.innerHTML = h;
+    if (r.listado && OPC.permitirDescarga) {
+      $('descargar').onclick = () => exportar('descargar');
+      $('copiar').onclick = () => exportar('copiar');
+    }
     salida.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // Descarga o copia TODAS las filas del listado (no solo las que se ven). Queda registrada.
+  function exportar(modo) {
+    const est = $('desc-estado'); est.textContent = 'Preparando…';
+    const q = Object.assign({}, ULTIMA, { listado: true, descarga: true });
+    google.script.run.withSuccessHandler(r => {
+      const L = r.listado; if (!L) { est.textContent = ''; return; }
+      const sep = modo === 'copiar' ? '\t' : ';';
+      const celda = v => { v = String(v == null ? '' : v); return modo === 'copiar' ? v.replace(/[\t\n]/g, ' ') : (/[;"\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v); };
+      const texto = [L.columnas].concat(L.filas).map(f => f.map(celda).join(sep)).join('\r\n');
+      const nota = L.recortado ? ' (se alcanzó el máximo de filas configurado)' : '';
+      if (modo === 'copiar') {
+        const ok = () => { est.textContent = L.filas.length + ' filas copiadas; péguelas en Excel' + nota + '.'; };
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(texto).then(ok, () => respaldo(texto, ok));
+        else respaldo(texto, ok);
+        return;
+      }
+      try {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(new Blob(['\ufeff' + texto], { type: 'text/csv;charset=utf-8' }));
+        a.download = 'listado-cohorte-' + new Date().toISOString().slice(0, 10) + '.csv';
+        document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+        est.textContent = L.filas.length + ' filas descargadas' + nota + '. Si no se descargó, use «Copiar».';
+      } catch (e) { est.textContent = 'El navegador bloqueó la descarga; use «Copiar».'; }
+    }).withFailureHandler(e => { est.textContent = ''; fallo(e); }).consultar(q);
+  }
+  function respaldo(texto, ok) {
+    const t = document.createElement('textarea'); t.value = texto; document.body.appendChild(t); t.select();
+    try { document.execCommand('copy'); ok(); } catch (e) { $('desc-estado').textContent = 'No se pudo copiar.'; }
+    t.remove();
   }
 
   google.script.run.withSuccessHandler(o => {
