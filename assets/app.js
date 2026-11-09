@@ -320,7 +320,7 @@
       <div class="tarjeta" style="max-width:640px">
         <span class="etiqueta">Tablero ${esc(r.version)} · corte del ${esc(corte)}</span>
         <h3 style="margin-top:6px">Tablero de resultados en salud</h3>
-        <p>Indicadores clave, gráficos y las tablas del informe por enfermedad, con búsqueda y descarga de cada tabla en CSV.</p>
+        <p>Elija la enfermedad y el resultado que quiere ver: indicadores clave, gráficos y tablas, con búsqueda y descarga de cada tabla en CSV.</p>
         <p style="margin-top:14px"><a class="boton" href="${esc(r.tablero)}" target="_blank" rel="noopener">Abrir el tablero →</a></p>
       </div>
       <div class="aviso info" style="margin-top:18px">
