@@ -19,12 +19,12 @@
 
 const CONFIG = {
   HOJA_ID: 'PEGAR_AQUI_EL_ID_DE_LA_HOJA',
-  PESTANA: 'BD POBLACIÓN',
+  PESTANA: 'COHORTE',
   FILA_ENCABEZADOS: 1,
   // Columnas disponibles como filtro y para agrupar (nombres exactos de los encabezados).
-  FILTROS: ['UNIDAD', 'DIAGNOSTICO', 'TIPO PACIENTE', 'SEXO', 'ASEGURADOR'],
+  FILTROS: ['UNIDAD', 'ENFERMEDAD', 'GRUPO_EDAD', 'SEXO', 'ASEGURADOR', 'REGIMEN', 'ESTADO', 'DEPARTAMENTO', 'TERAPIA_ALTO_COSTO'],
   // Columnas que aparecen en el listado. Las demás nunca salen del script.
-  LISTADO: ['DOCUMENTO', 'UNIDAD', 'DIAGNOSTICO', 'TIPO PACIENTE', 'SEXO', 'EDAD'],
+  LISTADO: ['ID_PROGRAMA', 'TIPO_DOC', 'DOCUMENTO', 'UNIDAD', 'ENFERMEDAD', 'GRUPO_EDAD', 'EDAD', 'ASEGURADOR', 'ESTADO', 'FECHA_ULTIMA_CONSULTA'],
   // Correos autorizados. Vacío = cualquier cuenta del dominio que tenga el enlace.
   AUTORIZADOS: [],
   // Hoja de registro de consultas (otra hoja de cálculo). Vacío = sin registro.
