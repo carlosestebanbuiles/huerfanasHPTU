@@ -465,19 +465,25 @@
     app.innerHTML = `
       <h1>Consulta de la cohorte</h1>
       <p class="lead">Para responder preguntas sobre la cohorte con la información del programa, sin modificarla.</p>
-      <div class="aviso info">
-        La consulta se abre en una aplicación del Google Workspace del hospital. Solo entran cuentas <strong>@hptu.org.co</strong> autorizadas, la información es de solo lectura y cada consulta queda registrada. Este sitio no guarda ni muestra datos de pacientes.
+      <div class="tarjeta" style="max-width:640px">
+        <span class="etiqueta"><span class="ic c-morado" style="width:28px;height:28px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center">${IC.consulta}</span>Solo lectura · cuentas @hptu.org.co</span>
+        <h3 style="margin-top:6px">Consulta de la cohorte</h3>
+        <p>Preguntas rápidas, filtros por unidad, enfermedad, estado y grupo de edad, y resultados con conteos y porcentajes.</p>
+        <p style="margin-top:14px">${conectado
+          ? `<a class="boton" href="${esc(CFG.CONSULTA_URL)}" target="_blank" rel="noopener">Abrir la consulta →</a>`
+          : '<span class="chip temporal">Aún no está conectada</span>'}</p>
       </div>
-      ${conectado
-        ? `<a class="boton" href="${esc(CFG.CONSULTA_URL)}" target="_blank" rel="noopener">Abrir la consulta →</a>`
-        : '<div class="aviso alerta">La consulta aún no está conectada.</div>'}
+      <div class="aviso info" style="margin-top:18px;max-width:780px">
+        ${IC.candado} La consulta se abre en una aplicación del Google Workspace del hospital. Solo entran cuentas autorizadas, la información es de solo lectura y cada consulta queda registrada. Este sitio no guarda ni muestra datos de pacientes.
+      </div>
       <h2>Cómo funciona</h2>
       <ol class="pasos">
         <li>Inicie sesión con su cuenta del hospital.</li>
-        <li>Filtre por unidad, enfermedad, grupo de edad u otras variables.</li>
+        <li>Use una pregunta rápida o filtre por unidad, enfermedad, grupo de edad u otras variables.</li>
         <li>La consulta muestra el número de pacientes, la distribución por la variable que elija y, si lo necesita, el listado.</li>
         <li>No hay forma de editar la hoja original desde la consulta.</li>
-      </ol>`;
+      </ol>
+      <div class="aviso alerta" style="max-width:780px"><strong>Si aparece «Sorry, unable to open the file at this time»:</strong> el navegador tiene varias cuentas de Google abiertas. Abra la consulta en una ventana de incógnito o cierre las otras sesiones y entre solo con la cuenta del hospital.</div>`;
   }
 
   window.addEventListener("hashchange", enrutar);
