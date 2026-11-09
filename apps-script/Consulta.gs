@@ -2,7 +2,8 @@
  * Consulta de la cohorte (solo lectura).
  *
  * Instalación (cuenta institucional de Carlos, cbuiles@hptu.org.co):
- *  1. script.google.com → Proyecto nuevo "Consulta cohorte". Pegar este archivo y Consulta.html.
+ *  1. script.google.com → Proyecto nuevo "Consulta cohorte". Pegar este archivo, Consulta.html y appsscript.json
+ *     (Configuración del proyecto → Mostrar el archivo de manifiesto "appsscript.json").
  *  2. Completar CONFIG abajo: ID de la hoja con la información, nombre de la pestaña,
  *     columnas que se pueden usar como filtro y columnas que se muestran en el listado.
  *  3. Implementar → Nueva implementación → Aplicación web.
@@ -13,8 +14,11 @@
  * Por qué es de solo lectura:
  *  - Los usuarios no reciben permisos sobre la hoja; solo ven lo que este script devuelve.
  *  - El script abre la hoja y únicamente llama getValues(); no hay ninguna función que escriba en ella.
+ *  - Además, appsscript.json limita el permiso a hojas de cálculo en SOLO LECTURA
+ *    (spreadsheets.readonly): aunque el código tuviera un error, Google no le permitiría escribir.
+ *  - Solo las columnas de FILTROS y LISTADO salen del script; el resto nunca llega al navegador.
  *  - AUTORIZADOS limita quién puede consultar aunque tenga cuenta del hospital.
- *  - Cada consulta se registra (quién, cuándo, qué filtros) en una hoja de registro aparte.
+ *  - Cada consulta se registra (quién, cuándo, qué filtros) en un documento de Google aparte.
  */
 
 const CONFIG = {
@@ -27,8 +31,8 @@ const CONFIG = {
   LISTADO: ['ID_PROGRAMA', 'TIPO_DOC', 'DOCUMENTO', 'UNIDAD', 'ENFERMEDAD', 'GRUPO_EDAD', 'EDAD', 'ASEGURADOR', 'ESTADO', 'FECHA_ULTIMA_CONSULTA'],
   // Correos autorizados. Vacío = cualquier cuenta del dominio que tenga el enlace.
   AUTORIZADOS: [],
-  // Hoja de registro de consultas (otra hoja de cálculo). Vacío = sin registro.
-  REGISTRO_ID: '',
+  // Documento de Google (no hoja de cálculo) donde se registra cada consulta. Vacío = sin registro.
+  REGISTRO_DOC_ID: '',
   MAX_FILAS_LISTADO: 500
 };
 
@@ -107,12 +111,11 @@ function consultar(q) {
 }
 
 function registrar_(correo, q, n) {
-  if (!CONFIG.REGISTRO_ID) return;
+  if (!CONFIG.REGISTRO_DOC_ID) return;
   try {
-    const ss = SpreadsheetApp.openById(CONFIG.REGISTRO_ID);
-    const h = ss.getSheetByName('Registro') || ss.insertSheet('Registro');
-    if (h.getLastRow() === 0) h.appendRow(['Fecha', 'Usuario', 'Filtros', 'Agrupar', 'Listado', 'Resultado (n)']);
-    h.appendRow([new Date(), correo, JSON.stringify(q.filtros || {}), q.agrupar || '', q.listado ? 'sí' : 'no', n]);
+    const cuerpo = DocumentApp.openById(CONFIG.REGISTRO_DOC_ID).getBody();
+    const fecha = Utilities.formatDate(new Date(), 'America/Bogota', 'yyyy-MM-dd HH:mm:ss');
+    cuerpo.appendParagraph([fecha, correo, JSON.stringify(q.filtros || {}), 'agrupar=' + (q.agrupar || '-'), 'listado=' + (q.listado ? 'sí' : 'no'), 'n=' + n].join(' | '));
   } catch (e) { /* el registro no debe impedir la consulta */ }
 }
 
