@@ -18,7 +18,9 @@ const COLUMNAS = [
   'Recibido', 'Enviado', 'Revisor', 'Equipo', 'Cargo',
   'Enfermedad', 'Versión', 'Indicador', 'Tipo', 'Decisión',
   'Resultado en salud', 'Definición', 'Fuente', 'Responsable',
-  'Campos cambiados', 'Comentario', 'Comentario general'
+  'Campos cambiados', 'Comentario', 'Comentario general',
+  'Código', 'Tipo de indicador', 'Numerador', 'Denominador', 'Exclusiones', 'Población',
+  'Periodicidad', 'Meta', 'Base (guía o referencia)'
 ];
 const MAX_TEXTO = 3000;
 
@@ -32,10 +34,11 @@ function doPost(e) {
     const base = [new Date(), p.enviado, r.nombre, r.equipo, r.cargo, p.enfermedad_nombre || p.enfermedad, p.version];
     const items = Array.isArray(p.items) ? p.items.slice(0, 50) : [];
     const filas = items.map(function (i) {
-      return base.concat([i.id, i.tipo, i.decision, i.resultado, i.definicion, i.fuente, i.responsable, i.cambios, i.comentario, p.comentario_general]);
+      return base.concat([i.id, i.clase || i.tipo, i.decision, i.resultado, i.definicion, i.fuente, i.responsable, i.cambios, i.comentario, p.comentario_general,
+        i.codigo, i.clase ? i.tipo : '', i.numerador, i.denominador, i.exclusiones, i.poblacion, i.periodicidad, i.meta, i.base]);
     });
     if (!filas.length && p.comentario_general) {
-      filas.push(base.concat(['', 'general', '', '', '', '', '', '', '', p.comentario_general]));
+      filas.push(base.concat(['', 'general', '', '', '', '', '', '', '', p.comentario_general, '', '', '', '', '', '', '', '', '']));
     }
     if (filas.length) {
       const limpias = filas.map(function (f) { return f.map(limpiar_); });
@@ -53,10 +56,10 @@ function obtenerHoja_() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   let hoja = ss.getSheetByName(PESTANA);
   if (!hoja) hoja = ss.insertSheet(PESTANA);
-  if (hoja.getLastRow() === 0) {
-    hoja.appendRow(COLUMNAS);
+  if (hoja.getLastRow() === 0 || hoja.getLastColumn() < COLUMNAS.length) {
+    // Crea o completa la fila de títulos (versiones anteriores tenían menos columnas).
+    hoja.getRange(1, 1, 1, COLUMNAS.length).setValues([COLUMNAS]).setFontWeight('bold');
     hoja.setFrozenRows(1);
-    hoja.getRange(1, 1, 1, COLUMNAS.length).setFontWeight('bold');
   }
   return hoja;
 }

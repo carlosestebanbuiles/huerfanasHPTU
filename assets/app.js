@@ -7,11 +7,22 @@
   const IC = window.ICONOS || {};
   const datos = { enfermedades: null, resultados: null };
   const CAMPOS = [
-    ["resultado", "Resultado en salud"],
+    ["resultado", "Indicador"],
     ["definicion", "Definición operativa"],
+    ["tipo", "Tipo"],
+    ["numerador", "Numerador"],
+    ["denominador", "Denominador"],
+    ["exclusiones", "Exclusiones"],
+    ["poblacion", "Población"],
+    ["periodicidad", "Periodicidad"],
     ["fuente", "Fuente de información"],
-    ["responsable", "Responsable"]
+    ["meta", "Meta propuesta"],
+    ["responsable", "Responsable"],
+    ["base", "Base (guía o referencia)"]
   ];
+  const PRINCIPALES = ["resultado", "definicion"];
+  const TIPOS = { adherencia: "Adherencia a la guía", "desempeño": "Desempeño" };
+  const ORIGENES = { guia: "Desde la guía institucional", "guia-int": "Desde guía internacional", referencia: "Referencia internacional", programa: "Propuesta del programa", borrador: "Borrador del programa" };
   // Ícono y color de cada unidad
   const UNIDADES = {
     "Endocrinología": ["endocrino", "c-rosa"],
@@ -20,7 +31,8 @@
     "Dermatología": ["piel", "c-morado"],
     "Enfermedad inflamatoria intestinal": ["intestino", "c-verde"],
     "Falla intestinal": ["nutricion", "c-verde"],
-    "Neurometabólicas": ["adn", "c-azul"]
+    "Neurometabólicas": ["adn", "c-azul"],
+    "Transversal": ["usuarios", "c-morado"]
   };
   const icUnidad = (u) => { const x = UNIDADES[u] || ["adn", "c-morado"]; return `<span class="ic ${x[1]}">${IC[x[0]] || ""}</span>`; };
   const ESTADOS = { borrador: "Borrador", revision: "En revisión", validado: "Validado" };
@@ -60,6 +72,8 @@
     }
     return promesaAvance;
   }
+  const todas = (d) => (d.transversales ? [d.transversales] : []).concat(d.enfermedades);
+
   // Estado de una enfermedad: validado (manual en el JSON) > en revisión (hay revisiones) > borrador
   function estadoDe(e, av) {
     if (e.estado === "validado") return "validado";
@@ -111,11 +125,11 @@
   async function vistaInicio() {
     const d = await cargar("enfermedades");
     const r = await cargar("resultados");
-    const nInd = d.enfermedades.reduce((s, e) => s + e.indicadores.length, 0);
+    const nInd = todas(d).reduce((s, e) => s + e.indicadores.length, 0);
     const nVal = d.enfermedades.filter((e) => e.estado === "validado").length;
 
     const pintar = (av) => {
-      const revisados = av ? d.enfermedades.reduce((s, e) => s + revisadosDe(e, av), 0) : null;
+      const revisados = av ? todas(d).reduce((s, e) => s + revisadosDe(e, av), 0) : null;
       const enRev = av ? d.enfermedades.filter((e) => estadoDe(e, av) === "revision").length : null;
       const p = revisados == null ? null : pct(revisados, nInd);
       app.innerHTML = `
@@ -183,13 +197,13 @@
   let filtroUnidad = "", filtroEstado = "";
   async function vistaConstruccion() {
     const d = await cargar("enfermedades");
-    const unidadesTodas = [...new Set(d.enfermedades.map((e) => e.unidad))];
+    const unidadesTodas = [...new Set(todas(d).map((e) => e.unidad))];
 
     const pintar = (av) => {
-      const lista = d.enfermedades.filter((e) => (!filtroUnidad || e.unidad === filtroUnidad) && (!filtroEstado || estadoDe(e, av) === filtroEstado));
+      const lista = todas(d).filter((e) => (!filtroUnidad || e.unidad === filtroUnidad) && (!filtroEstado || estadoDe(e, av) === filtroEstado));
       const unidades = {};
       lista.forEach((e) => (unidades[e.unidad] = unidades[e.unidad] || []).push(e));
-      const cuenta = (est) => d.enfermedades.filter((e) => estadoDe(e, av) === est).length;
+      const cuenta = (est) => todas(d).filter((e) => estadoDe(e, av) === est).length;
       const bloques = Object.keys(unidades).map((u) => `
         <section class="unidad">
           <h2 class="unidad-tit">${icUnidad(u)}${esc(u)}</h2>
@@ -199,7 +213,8 @@
               const pendiente = leer("rev:" + e.id);
               return `<a class="tarjeta enf" href="#e-${esc(e.id)}">
                 <div class="fila"><h3>${esc(e.nombre)}</h3><span class="chip ${est}">${ESTADOS[est]}</span></div>
-                <span class="meta">${n} indicador${n === 1 ? "" : "es"} · ${esc(e.poblacion)}</span>
+                ${e.piloto ? '<span class="chip guia">Piloto: fichas técnicas</span>' : ""}
+                <span class="meta">${n} indicador${n === 1 ? "" : "es"}${(() => { const a = e.indicadores.filter((i) => i.tipo === "adherencia").length; return a ? ` · ${a} de adherencia` : ""; })()} · ${esc(e.poblacion)}</span>
                 ${av ? `<div class="barra" title="${rev} de ${n} indicadores revisados"><span style="width:${pct(rev, n)}%"></span></div><span class="meta">${rev} de ${n} revisados</span>` : ""}
                 ${pendiente ? '<span class="chip temporal">Tiene una revisión sin enviar</span>' : ""}
               </a>`;
@@ -238,7 +253,7 @@
   // ---------- construcción: ficha ----------
   async function vistaFicha(id) {
     const d = await cargar("enfermedades");
-    const enf = d.enfermedades.find((e) => e.id === id);
+    const enf = todas(d).find((e) => e.id === id);
     if (!enf) throw new Error("No se encontró la enfermedad.");
     const clave = "rev:" + enf.id;
     const borrador = leer(clave) || {};
@@ -257,6 +272,8 @@
         </div>
       </div>
       ${enf.guias && enf.guias.length ? `<ul class="guias">${enf.guias.map((g) => `<li><a href="${esc(g.url)}" target="_blank" rel="noopener">${esc(g.titulo)}</a></li>`).join("")}</ul>` : ""}
+      ${enf.nota_guia ? `<div class="aviso info" style="margin-top:16px">${esc(enf.nota_guia)}</div>` : ""}
+      ${enf.reemplaza && enf.reemplaza.length ? `<details class="reemplaza"><summary>Reemplaza ${enf.reemplaza.length} indicadores que estaban repetidos en cada enfermedad</summary><ul>${enf.reemplaza.map((r) => `<li>${esc(r)}</li>`).join("")}</ul></details>` : ""}
 
       <h2>Quién revisa</h2>
       <div class="tarjeta revisor">
@@ -320,13 +337,13 @@
     }
 
     function leerTarjeta(card) {
-      const it = { id: card.dataset.id, tipo: card.classList.contains("nuevo") ? "nuevo" : "existente" };
+      const it = { id: card.dataset.id, codigo: card.dataset.codigo || "", clase: card.classList.contains("nuevo") ? "nuevo" : "existente" };
       CAMPOS.forEach(([k]) => (it[k] = $(`[data-campo=${k}]`, card).value.trim()));
       const dec = $("input[type=radio]:checked", card);
-      it.decision = dec ? dec.value : (it.tipo === "nuevo" ? "nuevo" : "");
+      it.decision = dec ? dec.value : (it.clase === "nuevo" ? "nuevo" : "");
       it.comentario = $("[data-campo=comentario]", card).value.trim();
       it.cambios = [];
-      if (it.tipo === "existente") {
+      if (it.clase === "existente") {
         const orig = enf.indicadores.find((x) => x.id === it.id);
         CAMPOS.forEach(([k]) => { if (it[k] !== (orig[k] || "").trim()) it.cambios.push(k); });
       }
@@ -343,6 +360,7 @@
     });
     $("#btn-nuevo").addEventListener("click", () => {
       lista.insertAdjacentHTML("beforeend", tarjetaNuevo({ id: enf.id + "-nuevo-" + Date.now().toString(36) }));
+      const tarjetaN = lista.lastElementChild; const det = $("details", tarjetaN); if (det) det.open = true;
       const ult = lista.lastElementChild; $("[data-campo=resultado]", ult).focus();
     });
     $("#btn-limpiar").addEventListener("click", (ev) => {
@@ -358,9 +376,11 @@
     const g = guardado || {};
     const val = (k) => (g[k] != null ? g[k] : ind[k] || "");
     return `
-      <div class="tarjeta indicador" data-id="${esc(ind.id)}" data-original="1">
+      <div class="tarjeta indicador" data-id="${esc(ind.id)}" data-codigo="${esc(ind.codigo || "")}" data-original="1">
         <div class="indicador-cabecera">
-          <span class="codigo">Indicador ${n}</span>
+          <span class="codigo">${esc(ind.codigo || "Indicador " + n)}
+            ${ind.tipo ? `<span class="chip tipo-${ind.tipo === "adherencia" ? "adh" : "des"}">${esc(TIPOS[ind.tipo] || ind.tipo)}</span>` : ""}
+            ${ORIGENES[ind.origen] ? `<span class="chip ${ind.origen === "borrador" ? "" : "guia"}">${ORIGENES[ind.origen]}</span>` : ""}</span>
           <div class="decision" role="radiogroup" aria-label="Decisión">
             ${[["acuerdo", "De acuerdo"], ["ajustar", "Ajustar"], ["eliminar", "Eliminar"]].map(([v, t]) => `
               <input type="radio" name="dec-${esc(ind.id)}" id="dec-${esc(ind.id)}-${v}" value="${v}" ${g.decision === v ? "checked" : ""}>
@@ -384,12 +404,27 @@
   }
 
   function campos(id, val) {
-    return `<div class="campos">
-      ${CAMPOS.map(([k, t], i) => `
-        <div class="${i < 2 ? "ancho" : ""}">
+    const campo = (k, t, ancho) => {
+      const v = val(k);
+      if (k === "tipo") {
+        return `<div><label for="${esc(id)}-tipo">${t}</label>
+          <select id="${esc(id)}-tipo" data-campo="tipo"><option value="">Seleccione…</option>
+          ${Object.keys(TIPOS).map((x) => `<option value="${x}" ${v === x ? "selected" : ""}>${TIPOS[x]}</option>`).join("")}</select></div>`;
+      }
+      const largo = ["definicion", "numerador", "denominador", "base"].indexOf(k) >= 0;
+      return `<div class="${ancho || largo ? "ancho" : ""}">
           <label for="${esc(id)}-${k}">${t}</label>
-          <textarea id="${esc(id)}-${k}" data-campo="${k}" rows="${k === "definicion" ? 2 : 1}" placeholder="${k === "definicion" || k === "fuente" ? "Por definir" : ""}">${esc(val(k))}</textarea>
-        </div>`).join("")}
+          <textarea id="${esc(id)}-${k}" data-campo="${k}" rows="${largo ? 2 : 1}" placeholder="Por definir">${esc(v)}</textarea>
+        </div>`;
+    };
+    const ficha = CAMPOS.filter(([k]) => PRINCIPALES.indexOf(k) < 0);
+    const llenos = ficha.filter(([k]) => val(k)).length;
+    return `<div class="campos">
+      ${CAMPOS.filter(([k]) => PRINCIPALES.indexOf(k) >= 0).map(([k, t]) => campo(k, t, true)).join("")}
+      <details class="ancho ficha-tec" ${llenos > 3 ? "open" : ""}>
+        <summary>Ficha técnica <span class="tenue">(${llenos} de ${ficha.length} campos)</span></summary>
+        <div class="campos">${ficha.map(([k, t]) => campo(k, t)).join("")}</div>
+      </details>
       <div class="ancho">
         <label for="${esc(id)}-comentario">Comentario o justificación</label>
         <textarea id="${esc(id)}-comentario" data-campo="comentario" rows="2">${esc(val("comentario"))}</textarea>

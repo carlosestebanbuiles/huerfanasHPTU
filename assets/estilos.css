@@ -201,3 +201,15 @@ button:disabled { opacity: .5; cursor: not-allowed; }
 .pie-fila { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
 .pie-nota { font-size: .84rem; }
 @media (max-width: 720px) { .pie-nota { text-align: left; } }
+
+/* ---------- fichas técnicas ---------- */
+.chip.guia { background: var(--azul-suave); border-color: transparent; color: var(--azul); }
+.chip.tipo-adh { background: var(--morado-suave); border-color: transparent; color: var(--morado); }
+.chip.tipo-des { background: var(--verde-suave); border-color: transparent; color: var(--verde); }
+.indicador-cabecera .codigo { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.ficha-tec { border: 1px solid var(--linea); border-radius: 10px; padding: 10px 14px; background: var(--fondo); }
+.ficha-tec > summary { cursor: pointer; font-weight: 700; font-size: .92rem; color: var(--acento); }
+.ficha-tec > .campos { margin-top: 12px; }
+.reemplaza { margin: 0 0 16px; font-size: .92rem; color: var(--tenue); }
+.reemplaza summary { cursor: pointer; font-weight: 600; }
+.enf .chip.guia { align-self: flex-start; }
