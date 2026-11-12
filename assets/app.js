@@ -21,7 +21,7 @@
     ["base", "Base (guía o referencia)"]
   ];
   const PRINCIPALES = ["resultado", "definicion"];
-  const TIPOS = { adherencia: "Adherencia a la guía", "desempeño": "Desempeño" };
+  const TIPOS = { adherencia: "Adherencia a la guía", "desempeño": "Desempeño del seguimiento", resultado: "Resultado en salud" };
   const ORIGENES = { guia: "Desde la guía institucional", "guia-int": "Desde guía internacional", referencia: "Referencia internacional", programa: "Propuesta del programa", borrador: "Borrador del programa" };
   // Ícono y color de cada unidad
   const UNIDADES = {
@@ -214,7 +214,7 @@
               return `<a class="tarjeta enf" href="#e-${esc(e.id)}">
                 <div class="fila"><h3>${esc(e.nombre)}</h3><span class="chip ${est}">${ESTADOS[est]}</span></div>
                 ${e.piloto ? '<span class="chip guia">Piloto: fichas técnicas</span>' : ""}
-                <span class="meta">${n} indicador${n === 1 ? "" : "es"}${(() => { const a = e.indicadores.filter((i) => i.tipo === "adherencia").length; return a ? ` · ${a} de adherencia` : ""; })()} · ${esc(e.poblacion)}</span>
+                <span class="meta">${n} indicador${n === 1 ? "" : "es"}${(() => { const c = (t) => e.indicadores.filter((i) => i.tipo === t).length; const a = c("adherencia"), ds = c("desempeño"); return a || ds ? ` · ${a} adherencia, ${ds} desempeño` : ""; })()} · ${esc(e.poblacion)}</span>
                 ${av ? `<div class="barra" title="${rev} de ${n} indicadores revisados"><span style="width:${pct(rev, n)}%"></span></div><span class="meta">${rev} de ${n} revisados</span>` : ""}
                 ${pendiente ? '<span class="chip temporal">Tiene una revisión sin enviar</span>' : ""}
               </a>`;
@@ -379,7 +379,7 @@
       <div class="tarjeta indicador" data-id="${esc(ind.id)}" data-codigo="${esc(ind.codigo || "")}" data-original="1">
         <div class="indicador-cabecera">
           <span class="codigo">${esc(ind.codigo || "Indicador " + n)}
-            ${ind.tipo ? `<span class="chip tipo-${ind.tipo === "adherencia" ? "adh" : "des"}">${esc(TIPOS[ind.tipo] || ind.tipo)}</span>` : ""}
+            ${ind.tipo ? `<span class="chip tipo-${ind.tipo === "adherencia" ? "adh" : ind.tipo === "resultado" ? "res" : "des"}">${esc(TIPOS[ind.tipo] || ind.tipo)}</span>` : ""}
             ${ORIGENES[ind.origen] ? `<span class="chip ${ind.origen === "borrador" ? "" : "guia"}">${ORIGENES[ind.origen]}</span>` : ""}</span>
           <div class="decision" role="radiogroup" aria-label="Decisión">
             ${[["acuerdo", "De acuerdo"], ["ajustar", "Ajustar"], ["eliminar", "Eliminar"]].map(([v, t]) => `

@@ -205,7 +205,8 @@ button:disabled { opacity: .5; cursor: not-allowed; }
 /* ---------- fichas técnicas ---------- */
 .chip.guia { background: var(--azul-suave); border-color: transparent; color: var(--azul); }
 .chip.tipo-adh { background: var(--morado-suave); border-color: transparent; color: var(--morado); }
-.chip.tipo-des { background: var(--verde-suave); border-color: transparent; color: var(--verde); }
+.chip.tipo-des { background: var(--ambar-suave); border-color: transparent; color: var(--ambar); }
+.chip.tipo-res { background: var(--verde-suave); border-color: transparent; color: var(--verde); }
 .indicador-cabecera .codigo { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 .ficha-tec { border: 1px solid var(--linea); border-radius: 10px; padding: 10px 14px; background: var(--fondo); }
 .ficha-tec > summary { cursor: pointer; font-weight: 700; font-size: .92rem; color: var(--acento); }

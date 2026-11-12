@@ -1,5 +1,5 @@
 {
-  "version": "0.3",
+  "version": "0.4",
   "fecha": "2026-11-09",
   "fuente": "Hoja «Indicadores» del libro INDICADORES DE ENFERMEDADES HUÉRFANAS (borrador de medicina interna)",
   "enfermedades": [
@@ -10,7 +10,11 @@
       "poblacion": "Adultos",
       "guias": [
         {
-          "titulo": "Endocrine Society 2014: guía de acromegalia",
+          "titulo": "Manual modelo de atención acromegalia y Cushing (2021)",
+          "url": "https://drive.google.com/file/d/1Qs0Vq0Utca8I9fZQ1YJBoIRhIfHHt8cb/view"
+        },
+        {
+          "titulo": "Endocrine Society 2014",
           "url": "https://doi.org/10.1210/jc.2014-2700"
         },
         {
@@ -23,75 +27,41 @@
           "id": "acr-adh-01",
           "codigo": "ACR-ADH-01",
           "tipo": "adherencia",
-          "origen": "guia-int",
-          "resultado": "IGF-1 y GH posoperatorias a las 12 semanas",
-          "definicion": "Medición de IGF-1 y GH aleatoria entre 12 y 16 semanas después de la cirugía transesfenoidal.",
-          "numerador": "Pacientes operados en el periodo con IGF-1 y GH medidas entre las semanas 12 y 16 posoperatorias",
-          "denominador": "Pacientes con cirugía transesfenoidal en el periodo",
-          "exclusiones": "Fallecidos antes de la semana 12; cirugía en otra institución sin seguimiento posoperatorio en el programa",
+          "origen": "guia",
+          "resultado": "Plan terapéutico documentado",
+          "definicion": "Pacientes en tratamiento médico con objetivos terapéuticos, plan de seguimiento y criterios de escalonamiento, cambio o suspensión documentados.",
+          "numerador": "Pacientes en tratamiento médico con los tres elementos del plan documentados",
+          "denominador": "Pacientes activos en tratamiento médico",
+          "exclusiones": "—",
           "poblacion": "Adultos",
-          "periodicidad": "Semestral",
-          "fuente": "Historia clínica: descripción quirúrgica y laboratorio",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica: nota de endocrinología o acta de junta",
           "meta": "≥ 90 %",
           "responsable": "Endocrinología",
-          "base": "Endocrine Society 2014 (Katznelson et al., JCEM 2014;99:3933–51), recomendación 4.6"
+          "base": "Manual del modelo de atención de acromegalia y Cushing, HPTU (2021), sección 4"
         },
         {
           "id": "acr-adh-02",
           "codigo": "ACR-ADH-02",
           "tipo": "adherencia",
-          "origen": "guia-int",
-          "resultado": "Resonancia posoperatoria de silla turca",
-          "definicion": "Resonancia magnética de silla turca realizada al menos 12 semanas después de la cirugía (hasta 6 meses).",
-          "numerador": "Pacientes operados con resonancia de silla turca entre 12 semanas y 6 meses después de la cirugía",
-          "denominador": "Pacientes con cirugía transesfenoidal en el periodo",
-          "exclusiones": "Contraindicación para resonancia (se acepta TAC)",
+          "origen": "guia",
+          "resultado": "Escalonamiento discutido en junta",
+          "definicion": "Pacientes con enfermedad no controlada cuyo cambio o escalonamiento de tratamiento fue discutido en la junta de neuroendocrinología en los 3 meses siguientes.",
+          "numerador": "Pacientes no controlados con discusión en junta en ≤ 3 meses",
+          "denominador": "Pacientes con IGF-1 > 1,3 × LSN en dos controles consecutivos en el periodo",
+          "exclusiones": "Decisión documentada de mantener conducta por causa transitoria",
           "poblacion": "Adultos",
           "periodicidad": "Semestral",
-          "fuente": "Historia clínica: imágenes",
-          "meta": "≥ 90 %",
+          "fuente": "Actas de la junta de neuroendocrinología; historia clínica",
+          "meta": "≥ 90 % (umbral y plazo por validar)",
           "responsable": "Endocrinología / Neurocirugía",
-          "base": "Endocrine Society 2014 (Katznelson et al., JCEM 2014;99:3933–51), recomendación 4.7"
+          "base": "Manual del modelo de atención de acromegalia y Cushing, HPTU (2021), sección 4"
         },
         {
           "id": "acr-adh-03",
           "codigo": "ACR-ADH-03",
           "tipo": "adherencia",
-          "origen": "guia-int",
-          "resultado": "Tratamiento médico en enfermedad persistente",
-          "definicion": "Inicio o ajuste de tratamiento médico en los 3 meses siguientes a confirmar enfermedad persistente después de la cirugía.",
-          "numerador": "Pacientes con enfermedad persistente que inician o ajustan tratamiento médico en ≤ 3 meses",
-          "denominador": "Pacientes con IGF-1 elevada a las 12 semanas o más tras la cirugía en el periodo",
-          "exclusiones": "Decisión documentada de reintervención o radioterapia como siguiente paso",
-          "poblacion": "Adultos",
-          "periodicidad": "Semestral",
-          "fuente": "Historia clínica: laboratorio y formulación",
-          "meta": "≥ 85 % (plazo de 3 meses por validar)",
-          "responsable": "Endocrinología",
-          "base": "Endocrine Society 2014 (Katznelson et al., JCEM 2014;99:3933–51), recomendación 5.1"
-        },
-        {
-          "id": "acr-adh-04",
-          "codigo": "ACR-ADH-04",
-          "tipo": "adherencia",
-          "origen": "guia-int",
-          "resultado": "Colonoscopia al diagnóstico",
-          "definicion": "Colonoscopia realizada o documentada dentro de los 12 meses siguientes al diagnóstico o al ingreso al programa.",
-          "numerador": "Pacientes con diagnóstico nuevo o ingreso al programa con colonoscopia en ≤ 12 meses",
-          "denominador": "Pacientes con diagnóstico nuevo o ingreso al programa en el periodo",
-          "exclusiones": "Colonoscopia previa documentada en los últimos 5 años; contraindicación",
-          "poblacion": "Adultos",
-          "periodicidad": "Anual",
-          "fuente": "Historia clínica: procedimientos",
-          "meta": "≥ 80 %",
-          "responsable": "Endocrinología",
-          "base": "Endocrine Society 2014 (Katznelson et al., JCEM 2014;99:3933–51), recomendación 2.3"
-        },
-        {
-          "id": "acr-adh-05",
-          "codigo": "ACR-ADH-05",
-          "tipo": "adherencia",
-          "origen": "guia-int",
+          "origen": "guia",
           "resultado": "Tamizaje anual de comorbilidades",
           "definicion": "En los últimos 12 meses: presión arterial, HbA1c o glucemia y perfil lipídico registrados; y evaluación de apnea del sueño documentada al menos una vez.",
           "numerador": "Pacientes activos con los cuatro componentes documentados",
@@ -102,12 +72,80 @@
           "fuente": "Historia clínica: signos vitales, laboratorio, notas",
           "meta": "≥ 80 %",
           "responsable": "Endocrinología",
-          "base": "Endocrine Society 2014 (Katznelson et al., JCEM 2014;99:3933–51), recomendaciones 2.1–2.2; Consenso de comorbilidades en acromegalia (Giustina et al., JCEM 2020;105:e937–46)"
+          "base": "Manual del modelo de atención de acromegalia y Cushing, HPTU (2021), objetivo 2.1 (comorbilidades); Endocrine Society 2014 (Katznelson et al., JCEM 2014;99:3933–51), recomendaciones 2.1–2.2; Consenso de comorbilidades (Giustina et al., JCEM 2020;105:e937–46)"
+        },
+        {
+          "id": "acr-adh-04",
+          "codigo": "ACR-ADH-04",
+          "tipo": "adherencia",
+          "origen": "guia-int",
+          "resultado": "Colonoscopia documentada",
+          "definicion": "Al menos una colonoscopia documentada desde el diagnóstico; repetición según hallazgos.",
+          "numerador": "Pacientes activos con colonoscopia documentada",
+          "denominador": "Pacientes activos",
+          "exclusiones": "Contraindicación documentada",
+          "poblacion": "Adultos",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica: procedimientos",
+          "meta": "≥ 80 %",
+          "responsable": "Endocrinología",
+          "base": "Endocrine Society 2014 (Katznelson et al., JCEM 2014;99:3933–51), recomendación 2.3"
+        },
+        {
+          "id": "acr-des-01",
+          "codigo": "ACR-DES-01",
+          "tipo": "desempeño",
+          "origen": "guia",
+          "resultado": "Control bioquímico periódico",
+          "definicion": "IGF-1 medida dentro del intervalo que corresponde al estado del paciente: en tratamiento médico o enfermedad activa, cada 6 meses; en remisión, cada 12 meses (intervalos por confirmar con la ruta del manual).",
+          "numerador": "Pacientes con IGF-1 medida dentro del intervalo que les corresponde",
+          "denominador": "Pacientes activos",
+          "exclusiones": "Ingreso al programa en el periodo",
+          "poblacion": "Adultos",
+          "periodicidad": "Semestral",
+          "fuente": "Laboratorio",
+          "meta": "≥ 90 %",
+          "responsable": "Endocrinología / Gestión",
+          "base": "Manual del modelo de atención de acromegalia y Cushing, HPTU (2021), sección 5.1 (rutas de atención)"
+        },
+        {
+          "id": "acr-des-02",
+          "codigo": "ACR-DES-02",
+          "tipo": "desempeño",
+          "origen": "guia",
+          "resultado": "Resonancia de seguimiento",
+          "definicion": "Resonancia de silla turca dentro del intervalo que corresponde al estado del paciente: tumor residual o tratamiento médico, cada 12 meses; remisión estable, según la ruta del manual (intervalos por confirmar).",
+          "numerador": "Pacientes con resonancia dentro del intervalo que les corresponde",
+          "denominador": "Pacientes activos",
+          "exclusiones": "Contraindicación para resonancia; decisión documentada de no repetir",
+          "poblacion": "Adultos",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica: imágenes",
+          "meta": "≥ 85 %",
+          "responsable": "Endocrinología / Neurocirugía",
+          "base": "Manual del modelo de atención de acromegalia y Cushing, HPTU (2021), sección 5.1 (rutas de atención)"
+        },
+        {
+          "id": "acr-des-03",
+          "codigo": "ACR-DES-03",
+          "tipo": "desempeño",
+          "origen": "guia-int",
+          "resultado": "IGF-1 con el mismo ensayo",
+          "definicion": "Controles de IGF-1 del periodo procesados en el laboratorio de referencia del programa, para que sean comparables en el tiempo.",
+          "numerador": "Controles de IGF-1 hechos en el laboratorio de referencia",
+          "denominador": "Controles de IGF-1 del periodo",
+          "exclusiones": "—",
+          "poblacion": "Adultos",
+          "periodicidad": "Anual",
+          "fuente": "Laboratorio",
+          "meta": "≥ 90 %",
+          "responsable": "Gestión del programa",
+          "base": "Endocrine Society 2014 (Katznelson et al., JCEM 2014;99:3933–51), recomendación 3.3"
         },
         {
           "id": "acromegalia-1",
-          "codigo": "ACR-DES-01",
-          "tipo": "desempeño",
+          "codigo": "ACR-RES-01",
+          "tipo": "resultado",
           "origen": "borrador",
           "resultado": "Control bioquímico (remisión)",
           "definicion": "IGF-1 ≤ 1,0 × límite superior normal para edad y sexo en el último control.",
@@ -123,8 +161,8 @@
         },
         {
           "id": "acromegalia-2",
-          "codigo": "ACR-DES-02",
-          "tipo": "desempeño",
+          "codigo": "ACR-RES-02",
+          "tipo": "resultado",
           "origen": "borrador",
           "resultado": "Control aceptable",
           "definicion": "IGF-1 < 1,3 × límite superior normal en el último control.",
@@ -137,27 +175,10 @@
           "meta": "Por definir",
           "responsable": "Endocrinología",
           "base": "Borrador del programa"
-        },
-        {
-          "id": "acr-des-03",
-          "codigo": "ACR-DES-03",
-          "tipo": "desempeño",
-          "origen": "guia-int",
-          "resultado": "Remisión quirúrgica temprana",
-          "definicion": "IGF-1 normal entre 12 y 16 semanas después de la primera cirugía transesfenoidal.",
-          "numerador": "Pacientes con IGF-1 normal a las 12–16 semanas de la primera cirugía",
-          "denominador": "Pacientes con primera cirugía en el periodo y IGF-1 posoperatoria medida",
-          "exclusiones": "Tratamiento médico preoperatorio que persista después de la cirugía",
-          "poblacion": "Adultos",
-          "periodicidad": "Anual",
-          "fuente": "Historia clínica y laboratorio",
-          "meta": "Por definir",
-          "responsable": "Endocrinología / Neurocirugía",
-          "base": "Endocrine Society 2014 (Katznelson et al., JCEM 2014;99:3933–51), recomendación 4.6"
         }
       ],
       "estado": "borrador",
-      "nota_guia": "No hay guía institucional de acromegalia en la carpeta (el documento de endocrinología es el modelo pediátrico). Las fichas de adherencia se basan en guías internacionales; si existe una guía del hospital, se ajustan a ella.",
+      "nota_guia": "Base: manual institucional del modelo de atención de acromegalia y Cushing (2021) y Endocrine Society 2014. La cohorte está madura y casi sin cirugías, por eso los indicadores miden el seguimiento periódico y no el posoperatorio. Los intervalos de IGF-1 y resonancia están pendientes de confirmar con las rutas de atención del manual (sección 5.1).",
       "piloto": true
     },
     {
@@ -177,7 +198,8 @@
           "resultado": "Remisión",
           "definicion": "Cortisol libre urinario o cortisol salival nocturno",
           "fuente": "",
-          "responsable": "Especialidades médicas"
+          "responsable": "Especialidades médicas",
+          "tipo": "resultado"
         }
       ],
       "estado": "borrador"
@@ -199,7 +221,8 @@
           "resultado": "Control metabólico",
           "definicion": "HbA1c y triglicéridos",
           "fuente": "",
-          "responsable": "Especialidades médicas"
+          "responsable": "Especialidades médicas",
+          "tipo": "resultado"
         }
       ],
       "estado": "borrador"
@@ -221,14 +244,16 @@
           "resultado": "Control metabólico",
           "definicion": "Fósforo sérico en rango (según LSN)",
           "fuente": "",
-          "responsable": "Especialidades médicas"
+          "responsable": "Especialidades médicas",
+          "tipo": "resultado"
         },
         {
           "id": "raquitismo-2",
           "resultado": "Capacidad física",
           "definicion": "Caminata de 6 minutos",
           "fuente": "",
-          "responsable": "Especialidades médicas"
+          "responsable": "Especialidades médicas",
+          "tipo": "resultado"
         }
       ],
       "estado": "borrador"
@@ -251,14 +276,16 @@
           "resultado": "Control metabólico",
           "definicion": "Colesterol LDL",
           "fuente": "",
-          "responsable": "Especialidades médicas"
+          "responsable": "Especialidades médicas",
+          "tipo": "resultado"
         },
         {
           "id": "dislipidemias-2",
           "resultado": "Eventos agudos",
           "definicion": "IAM, ACV, AIT, angina",
           "fuente": "",
-          "responsable": "Especialidades médicas"
+          "responsable": "Especialidades médicas",
+          "tipo": "resultado"
         }
       ],
       "estado": "borrador"
@@ -280,21 +307,24 @@
           "resultado": "Supervivencia global",
           "definicion": "",
           "fuente": "Fallecidos",
-          "responsable": "Especialidades médicas"
+          "responsable": "Especialidades médicas",
+          "tipo": "resultado"
         },
         {
           "id": "amiloidosis-3",
           "resultado": "Estabilidad en la clase funcional (NYHA)",
           "definicion": "",
           "fuente": "Campo de texto no estructurado, notas de cardiología",
-          "responsable": "Especialidades médicas"
+          "responsable": "Especialidades médicas",
+          "tipo": "resultado"
         },
         {
           "id": "amiloidosis-4",
           "resultado": "Reducción o estabilización de NT-proBNP",
           "definicion": "",
           "fuente": "Campo de texto no estructurado, notas de cardiología",
-          "responsable": "Especialidades médicas"
+          "responsable": "Especialidades médicas",
+          "tipo": "resultado"
         }
       ],
       "estado": "borrador"
@@ -316,14 +346,16 @@
           "resultado": "Función pulmonar",
           "definicion": "VEF1 en espirometría",
           "fuente": "Software de espirometrías (biomédica)",
-          "responsable": "Pediatría"
+          "responsable": "Pediatría",
+          "tipo": "resultado"
         },
         {
           "id": "fq-2",
           "resultado": "Exacerbaciones",
           "definicion": "Tasa de exacerbaciones pulmonares agudas en pacientes con FQ en tratamiento con elexacaftor/tezacaftor/ivacaftor",
           "fuente": "CMBD egresos de hospitalización, diagnóstico principal o relacionado",
-          "responsable": "Pediatría"
+          "responsable": "Pediatría",
+          "tipo": "resultado"
         }
       ],
       "estado": "borrador"
@@ -345,28 +377,32 @@
           "resultado": "Reducción de la superficie corporal afectada (BSA)",
           "definicion": "",
           "fuente": "",
-          "responsable": "Especialidades médicas"
+          "responsable": "Especialidades médicas",
+          "tipo": "resultado"
         },
         {
           "id": "eb-2",
           "resultado": "Control de infecciones (sepsis)",
           "definicion": "",
           "fuente": "",
-          "responsable": "Especialidades médicas"
+          "responsable": "Especialidades médicas",
+          "tipo": "resultado"
         },
         {
           "id": "eb-3",
           "resultado": "Calidad de vida: dolor y prurito",
           "definicion": "",
           "fuente": "",
-          "responsable": "Especialidades médicas"
+          "responsable": "Especialidades médicas",
+          "tipo": "resultado"
         },
         {
           "id": "eb-4",
           "resultado": "Objetivos nutricionales y hematológicos",
           "definicion": "",
           "fuente": "",
-          "responsable": "Especialidades médicas"
+          "responsable": "Especialidades médicas",
+          "tipo": "resultado"
         }
       ],
       "estado": "borrador"
@@ -388,14 +424,16 @@
           "resultado": "Reducción del grosor de las escamas y del enrojecimiento",
           "definicion": "",
           "fuente": "",
-          "responsable": "Especialidades médicas"
+          "responsable": "Especialidades médicas",
+          "tipo": "resultado"
         },
         {
           "id": "ictiosis-2",
           "resultado": "Prevención del ectropión",
           "definicion": "",
           "fuente": "",
-          "responsable": "Especialidades médicas"
+          "responsable": "Especialidades médicas",
+          "tipo": "resultado"
         }
       ],
       "estado": "borrador"
@@ -421,42 +459,48 @@
           "resultado": "Cirugías programadas frente a emergentes",
           "definicion": "Probabilidad en el tiempo, en función del tiempo en el programa",
           "fuente": "",
-          "responsable": "Especialidades médicas"
+          "responsable": "Especialidades médicas",
+          "tipo": "resultado"
         },
         {
           "id": "crohn-2",
           "resultado": "Remisión endoscópica",
           "definicion": "Ausencia de úlceras (SES-CD)",
           "fuente": "Reporte de ayudas diagnósticas",
-          "responsable": "Especialidades médicas"
+          "responsable": "Especialidades médicas",
+          "tipo": "resultado"
         },
         {
           "id": "crohn-3",
           "resultado": "Remisión clínica",
           "definicion": "PRO2 (desenlaces reportados por el paciente: diarrea y dolor abdominal)",
           "fuente": "",
-          "responsable": "Especialidades médicas"
+          "responsable": "Especialidades médicas",
+          "tipo": "resultado"
         },
         {
           "id": "crohn-4",
           "resultado": "Remisión bioquímica",
           "definicion": "Calprotectina (valor por definir)",
           "fuente": "",
-          "responsable": "Especialidades médicas"
+          "responsable": "Especialidades médicas",
+          "tipo": "resultado"
         },
         {
           "id": "crohn-5",
           "resultado": "Remisión clínica libre de esteroides",
           "definicion": "Órdenes de prednisolona: ciclos y tiempo",
           "fuente": "",
-          "responsable": "Especialidades médicas"
+          "responsable": "Especialidades médicas",
+          "tipo": "resultado"
         },
         {
           "id": "crohn-6",
           "resultado": "Proporción de pacientes con terapia biológica",
           "definicion": "",
           "fuente": "Base de datos en Drive (Original Mx)",
-          "responsable": "Especialidades médicas"
+          "responsable": "Especialidades médicas",
+          "tipo": "resultado"
         }
       ],
       "estado": "borrador"
@@ -478,21 +522,24 @@
           "resultado": "Rehabilitación nutricional",
           "definicion": "El paciente no depende de soporte nutricional: IMC > 20, albúmina > 3,5, transferrina 180, sin alteraciones electrolíticas",
           "fuente": "Clínicos y paraclínicos",
-          "responsable": "Especialidades médicas"
+          "responsable": "Especialidades médicas",
+          "tipo": "resultado"
         },
         {
           "id": "fi-2",
           "resultado": "Cierre de fístulas",
           "definicion": "Cierre quirúrgico o con manejo médico en los pacientes con fístulas",
           "fuente": "Revisión de historia clínica anual o semestral",
-          "responsable": "Especialidades médicas"
+          "responsable": "Especialidades médicas",
+          "tipo": "resultado"
         },
         {
           "id": "fi-3",
           "resultado": "Desmonte de la nutrición parenteral total o parcial",
           "definicion": "Sin NPT o NPT parcial en el tiempo",
           "fuente": "Historia clínica: duración en días de la NPT",
-          "responsable": "Especialidades médicas"
+          "responsable": "Especialidades médicas",
+          "tipo": "resultado"
         }
       ],
       "estado": "borrador"
@@ -548,59 +595,8 @@
           "base": "Guía institucional GA-DPE-145 v3 (2021), Atención a pacientes con atrofia muscular espinal, sección 5.4.1.1"
         },
         {
-          "id": "ame-adh-03",
-          "codigo": "AME-ADH-03",
-          "tipo": "adherencia",
-          "origen": "guia",
-          "resultado": "Aplicación oportuna de nusinersen",
-          "definicion": "Dosis de mantenimiento aplicada cada 4 meses, dentro de una ventana de tolerancia sobre la fecha prevista.",
-          "numerador": "Dosis de mantenimiento aplicadas dentro de la ventana (fecha prevista ± 14 días, por validar)",
-          "denominador": "Dosis de mantenimiento previstas en el periodo",
-          "exclusiones": "Suspensión por decisión clínica documentada",
-          "poblacion": "Pacientes con nusinersen",
-          "periodicidad": "Semestral",
-          "fuente": "Notas de aplicación y registro de dispensación",
-          "meta": "≥ 90 %",
-          "responsable": "Neuropediatría / Gestión",
-          "base": "Guía institucional GA-DPE-145 v3 (2021), Atención a pacientes con atrofia muscular espinal, sección 5.4.1.1"
-        },
-        {
-          "id": "ame-adh-04",
-          "codigo": "AME-ADH-04",
-          "tipo": "adherencia",
-          "origen": "guia",
-          "resultado": "Escala motora según cronograma",
-          "definicion": "Escala motora estandarizada según tipo y edad (HINE-2, CHOP-INTEND o HFMSE) registrada en cada aplicación o al menos cada 4 meses, con evaluación de respuesta anual.",
-          "numerador": "Pacientes con escala motora registrada en cada periodo de 4 meses",
-          "denominador": "Pacientes en terapia modificadora",
-          "exclusiones": "—",
-          "poblacion": "Niños y adultos en terapia modificadora",
-          "periodicidad": "Semestral",
-          "fuente": "Base de AME del programa; notas de neurología y fisiatría",
-          "meta": "≥ 90 %",
-          "responsable": "Neuropediatría / Fisiatría",
-          "base": "Guía institucional GA-DPE-145 v3 (2021), Atención a pacientes con atrofia muscular espinal, sección 5.4.1 y anexos 5.5"
-        },
-        {
-          "id": "ame-adh-05",
-          "codigo": "AME-ADH-05",
-          "tipo": "adherencia",
-          "origen": "guia",
-          "resultado": "Monitoreo respiratorio en AME tipos 1 y 2",
-          "definicion": "Oximetría y capnografía nocturnas (EtCO₂ o transcutánea) o polisomnografía en los últimos 12 meses.",
-          "numerador": "Pacientes tipo 1 o 2 con monitoreo respiratorio nocturno en los últimos 12 meses",
-          "denominador": "Pacientes activos con AME tipo 1 o 2",
-          "exclusiones": "—",
-          "poblacion": "Niños y adultos tipos 1 y 2",
-          "periodicidad": "Anual",
-          "fuente": "Historia clínica: neumología y laboratorio de sueño",
-          "meta": "≥ 80 %",
-          "responsable": "Neumología pediátrica",
-          "base": "Guía institucional GA-DPE-145 v3 (2021), Atención a pacientes con atrofia muscular espinal, sección 5.4.3.1"
-        },
-        {
           "id": "ame-adh-06",
-          "codigo": "AME-ADH-06",
+          "codigo": "AME-ADH-03",
           "tipo": "adherencia",
           "origen": "guia",
           "resultado": "Esquema de vacunación completo",
@@ -616,9 +612,60 @@
           "base": "Guía institucional GA-DPE-145 v3 (2021), Atención a pacientes con atrofia muscular espinal, sección 5.4"
         },
         {
-          "id": "ame-1",
+          "id": "ame-adh-03",
           "codigo": "AME-DES-01",
           "tipo": "desempeño",
+          "origen": "guia",
+          "resultado": "Aplicación oportuna de nusinersen",
+          "definicion": "Dosis de mantenimiento aplicada cada 4 meses, dentro de una ventana de tolerancia sobre la fecha prevista.",
+          "numerador": "Dosis de mantenimiento aplicadas dentro de la ventana (fecha prevista ± 14 días, por validar)",
+          "denominador": "Dosis de mantenimiento previstas en el periodo",
+          "exclusiones": "Suspensión por decisión clínica documentada",
+          "poblacion": "Pacientes con nusinersen",
+          "periodicidad": "Semestral",
+          "fuente": "Notas de aplicación y registro de dispensación",
+          "meta": "≥ 90 %",
+          "responsable": "Neuropediatría / Gestión",
+          "base": "Guía institucional GA-DPE-145 v3 (2021), Atención a pacientes con atrofia muscular espinal, sección 5.4.1.1"
+        },
+        {
+          "id": "ame-adh-04",
+          "codigo": "AME-DES-02",
+          "tipo": "desempeño",
+          "origen": "guia",
+          "resultado": "Escala motora según cronograma",
+          "definicion": "Escala motora estandarizada según tipo y edad (HINE-2, CHOP-INTEND o HFMSE) registrada en cada aplicación o al menos cada 4 meses, con evaluación de respuesta anual.",
+          "numerador": "Pacientes con escala motora registrada en cada periodo de 4 meses",
+          "denominador": "Pacientes en terapia modificadora",
+          "exclusiones": "—",
+          "poblacion": "Niños y adultos en terapia modificadora",
+          "periodicidad": "Semestral",
+          "fuente": "Base de AME del programa; notas de neurología y fisiatría",
+          "meta": "≥ 90 %",
+          "responsable": "Neuropediatría / Fisiatría",
+          "base": "Guía institucional GA-DPE-145 v3 (2021), Atención a pacientes con atrofia muscular espinal, sección 5.4.1 y anexos 5.5"
+        },
+        {
+          "id": "ame-adh-05",
+          "codigo": "AME-DES-03",
+          "tipo": "desempeño",
+          "origen": "guia",
+          "resultado": "Monitoreo respiratorio en AME tipos 1 y 2",
+          "definicion": "Oximetría y capnografía nocturnas (EtCO₂ o transcutánea) o polisomnografía en los últimos 12 meses.",
+          "numerador": "Pacientes tipo 1 o 2 con monitoreo respiratorio nocturno en los últimos 12 meses",
+          "denominador": "Pacientes activos con AME tipo 1 o 2",
+          "exclusiones": "—",
+          "poblacion": "Niños y adultos tipos 1 y 2",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica: neumología y laboratorio de sueño",
+          "meta": "≥ 80 %",
+          "responsable": "Neumología pediátrica",
+          "base": "Guía institucional GA-DPE-145 v3 (2021), Atención a pacientes con atrofia muscular espinal, sección 5.4.3.1"
+        },
+        {
+          "id": "ame-1",
+          "codigo": "AME-RES-01",
+          "tipo": "resultado",
           "origen": "borrador",
           "resultado": "Estabilización o ganancia motora",
           "definicion": "A 12 meses: HFMSE ≥ +3 puntos (tipos 2 y 3), CHOP-INTEND ≥ +4 puntos o ganancia de hitos en HINE-2 (tipo 1); o pérdida ≤ 2 puntos en adultos (estabilización).",
@@ -634,8 +681,8 @@
         },
         {
           "id": "ame-des-02",
-          "codigo": "AME-DES-02",
-          "tipo": "desempeño",
+          "codigo": "AME-RES-02",
+          "tipo": "resultado",
           "origen": "referencia",
           "resultado": "Libre de ventilación permanente",
           "definicion": "Sin traqueostomía ni ventilación ≥ 16 horas al día por más de 21 días seguidos.",
@@ -651,8 +698,8 @@
         },
         {
           "id": "ame-4",
-          "codigo": "AME-DES-03",
-          "tipo": "desempeño",
+          "codigo": "AME-RES-03",
+          "tipo": "resultado",
           "origen": "borrador",
           "resultado": "Necesidad nueva de traqueostomía o gastrostomía",
           "definicion": "Pacientes que requieren por primera vez traqueostomía o gastrostomía en el periodo.",
@@ -688,14 +735,16 @@
           "resultado": "Estabilización en escalas motoras",
           "definicion": "",
           "fuente": "",
-          "responsable": "Pediatría"
+          "responsable": "Pediatría",
+          "tipo": "resultado"
         },
         {
           "id": "duchenne-4",
           "resultado": "Adherencia y vigencia de la formulación de esteroides",
           "definicion": "",
           "fuente": "",
-          "responsable": "Pediatría"
+          "responsable": "Pediatría",
+          "tipo": "resultado"
         }
       ],
       "estado": "borrador"
@@ -717,7 +766,8 @@
           "resultado": "Estabilización o ganancia en el test de caminata",
           "definicion": "",
           "fuente": "Test de caminata de 6 minutos",
-          "responsable": "Pediatría"
+          "responsable": "Pediatría",
+          "tipo": "resultado"
         }
       ],
       "estado": "borrador"
@@ -748,21 +798,24 @@
           "resultado": "Adherencia a la dieta (fórmulas especiales)",
           "definicion": "",
           "fuente": "",
-          "responsable": "Pediatría"
+          "responsable": "Pediatría",
+          "tipo": "resultado"
         },
         {
           "id": "emi-2",
           "resultado": "Control bioquímico",
           "definicion": "Aminoácidos",
           "fuente": "",
-          "responsable": "Pediatría"
+          "responsable": "Pediatría",
+          "tipo": "resultado"
         },
         {
           "id": "emi-3",
           "resultado": "Complicaciones asociadas a la enfermedad",
           "definicion": "Fenilcetonuria: epilepsia, autismo, discapacidad. Homocistinuria: trombosis cerebral, luxación del cristalino. Hiperglicinemia: control de crisis",
           "fuente": "",
-          "responsable": "Pediatría"
+          "responsable": "Pediatría",
+          "tipo": "resultado"
         }
       ],
       "estado": "borrador"
@@ -785,14 +838,16 @@
           "resultado": "Reducción o estabilización del volumen tumoral",
           "definicion": "",
           "fuente": "",
-          "responsable": "Pediatría"
+          "responsable": "Pediatría",
+          "tipo": "resultado"
         },
         {
           "id": "nf-2",
           "resultado": "Supervivencia libre de malignidad o detección temprana de malignidad",
           "definicion": "",
           "fuente": "",
-          "responsable": "Pediatría"
+          "responsable": "Pediatría",
+          "tipo": "resultado"
         }
       ],
       "estado": "borrador"
@@ -825,7 +880,7 @@
       {
         "id": "tra-01",
         "codigo": "TRA-01",
-        "tipo": "adherencia",
+        "tipo": "desempeño",
         "origen": "programa",
         "resultado": "Medición anual de calidad de vida",
         "definicion": "EQ-5D-5L (con informante en menores o con discapacidad) aplicado en los últimos 12 meses.",
@@ -842,7 +897,7 @@
       {
         "id": "tra-02",
         "codigo": "TRA-02",
-        "tipo": "desempeño",
+        "tipo": "resultado",
         "origen": "programa",
         "resultado": "Cambio en calidad de vida",
         "definicion": "Cambio del índice EQ-5D y del EQ VAS a 12 meses, desagregado por enfermedad.",
@@ -859,7 +914,7 @@
       {
         "id": "tra-03",
         "codigo": "TRA-03",
-        "tipo": "desempeño",
+        "tipo": "resultado",
         "origen": "programa",
         "resultado": "Hospitalización por causa relacionada",
         "definicion": "Hospitalizaciones con diagnóstico principal o relacionado atribuible a la enfermedad huérfana o a sus complicaciones (p. ej., insuficiencia cardíaca en amiloidosis, cuadros respiratorios en AME, Duchenne y mucopolisacaridosis).",
@@ -876,7 +931,7 @@
       {
         "id": "tra-04",
         "codigo": "TRA-04",
-        "tipo": "desempeño",
+        "tipo": "resultado",
         "origen": "programa",
         "resultado": "Consultas a urgencias por causa relacionada",
         "definicion": "Consultas a urgencias atribuibles a la enfermedad huérfana o a sus complicaciones.",
