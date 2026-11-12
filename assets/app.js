@@ -21,7 +21,7 @@
     ["base", "Base (guía o referencia)"]
   ];
   const PRINCIPALES = ["resultado", "definicion"];
-  const TIPOS = { adherencia: "Adherencia a la guía", "desempeño": "Desempeño del seguimiento", resultado: "Resultado en salud" };
+  const TIPOS = { adherencia: "Adherencia al modelo", "desempeño": "Desempeño del seguimiento", resultado: "Resultado en salud" };
   const ORIGENES = { manual: "Desde el manual institucional", guia: "Desde la guía institucional", "guia-int": "Desde guía internacional", referencia: "Referencia internacional", programa: "Propuesta del programa", borrador: "Borrador del programa" };
   // Ícono y color de cada unidad
   const UNIDADES = {
