@@ -7,18 +7,20 @@
 <style>
   :root {
     color-scheme: light;
-    --tinta: #1F1A3A; --tenue: #5C5873; --linea: #E4E1EC; --fondo: #F7F6FA; --superficie: #FFFFFF;
-    --acento: #B8127B; --acento-suave: #FCE8F3; --azul: #00708F; --azul-suave: #E2F5FA;
-    --morado: #6B3FA0; --morado-suave: #EFE8F8; --ambar-suave: #FDF1DD; --rojo-suave: #FBE9E8; --boton-txt: #FFFFFF;
+    --tinta: #2A2640; --tenue: #625E78; --linea: #E6E3EE; --fondo: #F8F7FB; --superficie: #FFFFFF;
+    --acento: #A8287A; --acento-suave: #FBEAF4; --azul: #1A7590; --azul-suave: #E6F4F8;
+    --morado: #6E4A9E; --morado-suave: #F0EBF7; --ambar-suave: #FBF1E0; --rojo-suave: #FAEBEA; --boton-txt: #FFFFFF;
     --sombra: 0 1px 2px rgba(31,26,58,.04), 0 4px 16px rgba(31,26,58,.06);
   }
   @media (prefers-color-scheme: dark) {
     :root {
       color-scheme: dark;
-      --tinta: #EDEAF5; --tenue: #A9A4BD; --linea: #2E2A42; --fondo: #12101C; --superficie: #1B1828;
-      --acento: #F36DBD; --acento-suave: #3A1530; --azul: #4CCBEA; --azul-suave: #0F2E38;
-      --morado: #B999EC; --morado-suave: #2A2040; --ambar-suave: #33270F; --rojo-suave: #3A1A18; --boton-txt: #1B1828;
-      --sombra: 0 1px 2px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25);
+      --tinta: #DCD8E8; --tenue: #A29DB5; --linea: #34304A; --fondo: #1C1A28; --superficie: #24212F;
+      --acento: #E28BC0; --acento-suave: #3E2537; --azul: #7EC6DA; --azul-suave: #1E3540;
+      --morado: #B9A3E0; --morado-suave: #302A45; --ambar-suave: #3A3020; --rojo-suave: #3D2426; --boton-txt: #24212F;
+      --sombra: 0 1px 2px rgba(0,0,0,.25), 0 4px 14px rgba(0,0,0,.18);
+    }
+    .franja, .marca-icono { filter: saturate(.75) brightness(.9);
     }
   }
   * { box-sizing: border-box; }
@@ -36,7 +38,10 @@
   .marca-icono::after { content: ""; position: absolute; inset: 9px; border-radius: 50%; background: var(--superficie); }
   .marca-titulo { display: block; font-weight: 800; font-size: 1.05rem; line-height: 1.2; }
   .marca-sub { display: block; color: var(--tenue); font-size: .86rem; }
-  .volver { text-decoration: none; font-weight: 700; font-size: .95rem; padding: 7px 13px; border-radius: 999px; background: var(--acento-suave); }
+  .menu { display: flex; gap: 4px; flex-wrap: wrap; }
+  .menu a { text-decoration: none; color: var(--tenue); font-weight: 600; font-size: .95rem; padding: 7px 13px; border-radius: 999px; }
+  .menu a:hover { background: var(--fondo); color: var(--tinta); }
+  .menu a.activo { background: var(--acento-suave); color: var(--acento); }
   .caja { max-width: 1080px; margin: 0 auto; padding: 26px 20px 48px; }
   .heroe { display: flex; gap: 14px; align-items: center; }
   .heroe .ic { width: 48px; height: 48px; border-radius: 14px; background: var(--morado-suave); color: var(--morado); display: inline-flex; align-items: center; justify-content: center; flex: none; }
@@ -78,19 +83,24 @@
   .listado-cab h2 { margin: 0; }
   .listado-acc { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
   .listado-acc button { padding: 7px 14px; font-size: .9rem; }
-  @media (max-width: 640px) { .marca-sub { display: none; } h1 { font-size: 1.5rem; } }
+  @media (max-width: 640px) { .marca-sub { display: none; } h1 { font-size: 1.5rem; } .menu { width: 100%; overflow-x: auto; flex-wrap: nowrap; } .menu a { white-space: nowrap; } }
 </style>
 </head>
 <body>
 <header class="cabecera">
   <div class="franja" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
   <div class="cab-fila">
-    <div class="marca">
+    <a class="marca" href="https://carlosestebanbuiles.github.io/huerfanasHPTU/#inicio" style="text-decoration:none;color:inherit">
       <span class="marca-icono" aria-hidden="true"></span>
       <span><span class="marca-titulo">Programa de Enfermedades Huérfanas</span>
       <span class="marca-sub">Hospital Pablo Tobón Uribe · Consulta de la cohorte</span></span>
-    </div>
-    <a class="volver" href="https://carlosestebanbuiles.github.io/huerfanasHPTU/">← Volver al portal</a>
+    </a>
+    <nav class="menu" aria-label="Portal del programa">
+      <a href="https://carlosestebanbuiles.github.io/huerfanasHPTU/#inicio">Inicio</a>
+      <a href="https://carlosestebanbuiles.github.io/huerfanasHPTU/#construccion">Construcción</a>
+      <a href="https://carlosestebanbuiles.github.io/huerfanasHPTU/resultados/">Resultados</a>
+      <a href="https://carlosestebanbuiles.github.io/huerfanasHPTU/#consulta" class="activo" aria-current="page">Consulta</a>
+    </nav>
   </div>
 </header>
 <div class="caja">
