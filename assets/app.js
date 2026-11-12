@@ -213,7 +213,7 @@
               const pendiente = leer("rev:" + e.id);
               return `<a class="tarjeta enf" href="#e-${esc(e.id)}">
                 <div class="fila"><h3>${esc(e.nombre)}</h3><span class="chip ${est}">${ESTADOS[est]}</span></div>
-                ${e.piloto ? '<span class="chip guia">Fichas desde el manual</span>' : ""}
+                ${e.piloto ? '<span class="chip guia">Fichas institucionales</span>' : ""}
                 <span class="meta">${n} indicador${n === 1 ? "" : "es"}${(() => { const c = (t) => e.indicadores.filter((i) => i.tipo === t).length; const a = c("adherencia"), ds = c("desempeño"); return a || ds ? ` · ${a} adherencia, ${ds} desempeño` : ""; })()} · ${esc(e.poblacion)}</span>
                 ${av ? `<div class="barra" title="${rev} de ${n} indicadores revisados"><span style="width:${pct(rev, n)}%"></span></div><span class="meta">${rev} de ${n} revisados</span>` : ""}
                 ${pendiente ? '<span class="chip temporal">Tiene una revisión sin enviar</span>' : ""}
@@ -287,13 +287,19 @@
       </div>
 
       <h2>Indicadores</h2>
+      <div class="aviso guia-revision">
+        <p><strong>Cómo revisar.</strong> En cada indicador marque <em>De acuerdo</em>, <em>Ajustar</em> o <em>Eliminar</em>; si ajusta, edite el texto o la ficha técnica y explique en el comentario.</p>
+        <p><strong>¿Falta un indicador?</strong> Propóngalo con su ficha técnica completa: queda registrado como propuesta y el equipo lo revisa igual que los demás. El comentario general es para observaciones sobre el conjunto.</p>
+        <button type="button" class="secundario" id="btn-nuevo-arriba">+ Proponer indicador nuevo</button>
+      </div>
       <div id="lista">
         ${enf.indicadores.map((ind, i) => tarjetaIndicador(ind, i + 1, borrador.items && borrador.items[ind.id])).join("")}
         ${nuevos.map((n) => tarjetaNuevo(n)).join("")}
       </div>
 
-      <div class="acciones">
-        <button type="button" class="secundario" id="btn-nuevo">+ Proponer indicador nuevo</button>
+      <div class="tarjeta proponer">
+        <div><strong>¿Falta un indicador de adherencia, desempeño o resultado?</strong><br><span class="tenue">Agregue una propuesta con su ficha técnica. Puede agregar varias.</span></div>
+        <button type="button" id="btn-nuevo">+ Proponer indicador nuevo</button>
       </div>
 
       <h2>Comentario general</h2>
@@ -358,11 +364,14 @@
     lista.addEventListener("click", (ev) => {
       if (ev.target.matches("button.quitar")) { ev.target.closest(".indicador").remove(); actualizar(); }
     });
-    $("#btn-nuevo").addEventListener("click", () => {
+    const proponer = () => {
       lista.insertAdjacentHTML("beforeend", tarjetaNuevo({ id: enf.id + "-nuevo-" + Date.now().toString(36) }));
-      const tarjetaN = lista.lastElementChild; const det = $("details", tarjetaN); if (det) det.open = true;
-      const ult = lista.lastElementChild; $("[data-campo=resultado]", ult).focus();
-    });
+      const ult = lista.lastElementChild; const det = $("details", ult); if (det) det.open = true;
+      ult.scrollIntoView({ behavior: "smooth", block: "start" });
+      $("[data-campo=resultado]", ult).focus({ preventScroll: true });
+    };
+    $("#btn-nuevo").addEventListener("click", proponer);
+    $("#btn-nuevo-arriba").addEventListener("click", proponer);
     $("#btn-limpiar").addEventListener("click", (ev) => {
       const b = ev.currentTarget;
       if (!b.dataset.confirmar) { b.dataset.confirmar = "1"; b.textContent = "¿Seguro? Clic de nuevo para descartar"; return; }
@@ -421,7 +430,7 @@
     const llenos = ficha.filter(([k]) => val(k)).length;
     return `<div class="campos">
       ${CAMPOS.filter(([k]) => PRINCIPALES.indexOf(k) >= 0).map(([k, t]) => campo(k, t, true)).join("")}
-      <details class="ancho ficha-tec" ${llenos > 3 ? "open" : ""}>
+      <details class="ancho ficha-tec">
         <summary>Ficha técnica <span class="tenue">(${llenos} de ${ficha.length} campos)</span></summary>
         <div class="campos">${ficha.map(([k, t]) => campo(k, t)).join("")}</div>
       </details>

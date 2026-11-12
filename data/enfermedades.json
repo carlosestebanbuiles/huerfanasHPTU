@@ -1,5 +1,5 @@
 {
-  "version": "0.5",
+  "version": "0.6",
   "fecha": "2026-11-09",
   "fuente": "Hoja «Indicadores» del libro INDICADORES DE ENFERMEDADES HUÉRFANAS (borrador de medicina interna)",
   "enfermedades": [
@@ -50,38 +50,89 @@
           "base": "Manual del modelo de atención de acromegalia y Cushing, HPTU (2021), sección 4"
         },
         {
+          "id": "acr-adh-03",
+          "codigo": "ACR-ADH-03",
+          "tipo": "adherencia",
+          "origen": "manual",
+          "resultado": "Evaluación inicial completa",
+          "definicion": "Pacientes nuevos con la primera evaluación de la ruta completa: eje somatotropo (IGF-1, GH, RM de silla turca, supresión con glucosa) y panel de comorbilidades (función hipofisaria, curva de glucosa, perfil lipídico, ecocardiografía, colonoscopia, ecografía de tiroides y campos visuales).",
+          "numerador": "Pacientes nuevos con todos los componentes documentados antes de la junta",
+          "denominador": "Pacientes que ingresan al programa en el periodo",
+          "exclusiones": "Polisomnografía (individualizada); estudios vigentes de otra institución",
+          "poblacion": "Adultos",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica: laboratorio, imágenes y procedimientos",
+          "meta": "≥ 90 %",
+          "responsable": "Endocrinología",
+          "base": "Manual del modelo de atención de acromegalia y Cushing, HPTU (2021), sección 5.1 (primera evaluación)"
+        },
+        {
+          "id": "acr-adh-04",
+          "codigo": "ACR-ADH-04",
+          "tipo": "adherencia",
+          "origen": "manual",
+          "resultado": "Paso oportuno a segunda línea",
+          "definicion": "Pacientes sin control con análogos de somatostatina de primera generación a dosis máxima (octreotide LAR 40 mg o lanreotide 120 mg cada 28 días por 3 meses) cuya terapia de segunda línea se decidió en junta.",
+          "numerador": "Pacientes sin control a dosis máxima con decisión de segunda línea en junta en ≤ 3 meses",
+          "denominador": "Pacientes con IGF-1 elevada o GH > 2,5 ng/mL tras 3 meses a dosis máxima de primera generación",
+          "exclusiones": "Decisión documentada de no escalar (comorbilidad, preferencia)",
+          "poblacion": "Adultos",
+          "periodicidad": "Semestral",
+          "fuente": "Historia clínica; actas de la junta de neuroendocrinología",
+          "meta": "≥ 90 %",
+          "responsable": "Endocrinología",
+          "base": "Manual del modelo de atención de acromegalia y Cushing, HPTU (2021), sección 5.1 (terapia de primera y segunda línea)"
+        },
+        {
           "id": "acr-des-01",
           "codigo": "ACR-DES-01",
           "tipo": "desempeño",
           "origen": "manual",
           "resultado": "Control bioquímico periódico",
-          "definicion": "IGF-1 medida dentro del intervalo que corresponde al estado del paciente: en tratamiento médico o enfermedad activa, cada 6 meses; en remisión, cada 12 meses (intervalos por confirmar con la ruta del manual).",
-          "numerador": "Pacientes con IGF-1 medida dentro del intervalo que les corresponde",
+          "definicion": "IGF-1 y GH medidas en el intervalo que fija la ruta: cada 3 meses mientras se escalona la dosis del análogo de somatostatina; en tratamiento estable o en remisión, en el intervalo que defina el equipo (el manual no lo fija).",
+          "numerador": "Pacientes con control bioquímico dentro del intervalo que les corresponde",
           "denominador": "Pacientes activos",
           "exclusiones": "Ingreso al programa en el periodo",
           "poblacion": "Adultos",
           "periodicidad": "Semestral",
           "fuente": "Laboratorio",
-          "meta": "≥ 90 %",
+          "meta": "≥ 90 % (intervalo en fase estable por definir con el equipo)",
           "responsable": "Endocrinología / Gestión",
-          "base": "Manual del modelo de atención de acromegalia y Cushing, HPTU (2021), sección 5.1 (rutas de atención)"
+          "base": "Manual del modelo de atención de acromegalia y Cushing, HPTU (2021), sección 5.1 (escalonamiento cada 3 meses); intervalo en fase estable: propuesta del equipo de gestión"
         },
         {
           "id": "acr-des-02",
           "codigo": "ACR-DES-02",
           "tipo": "desempeño",
-          "origen": "manual",
+          "origen": "programa",
           "resultado": "Resonancia de seguimiento",
-          "definicion": "Resonancia de silla turca dentro del intervalo que corresponde al estado del paciente: tumor residual o tratamiento médico, cada 12 meses; remisión estable, según la ruta del manual (intervalos por confirmar).",
+          "definicion": "Resonancia de silla turca en el intervalo que defina el equipo según el estado del paciente (tumor residual, tratamiento médico o remisión). El manual solo la fija en el primer año: a los 3 meses de la cirugía y al establecer el estado de la enfermedad.",
           "numerador": "Pacientes con resonancia dentro del intervalo que les corresponde",
           "denominador": "Pacientes activos",
           "exclusiones": "Contraindicación para resonancia; decisión documentada de no repetir",
           "poblacion": "Adultos",
           "periodicidad": "Anual",
           "fuente": "Historia clínica: imágenes",
-          "meta": "≥ 85 %",
+          "meta": "Por definir con el equipo",
           "responsable": "Endocrinología / Neurocirugía",
-          "base": "Manual del modelo de atención de acromegalia y Cushing, HPTU (2021), sección 5.1 (rutas de atención)"
+          "base": "Propuesta del equipo de gestión; Manual del modelo de atención de acromegalia y Cushing, HPTU (2021), sección 5.1 (resonancia en el primer año)"
+        },
+        {
+          "id": "acr-des-03",
+          "codigo": "ACR-DES-03",
+          "tipo": "desempeño",
+          "origen": "manual",
+          "resultado": "Evaluación posquirúrgica a los 3 meses",
+          "definicion": "Pacientes operados con IGF-1, GH, resonancia de silla turca y supresión con glucosa a los 3 meses de la cirugía, y estado de la enfermedad establecido 6 meses después.",
+          "numerador": "Pacientes operados con la evaluación completa entre 2 y 4 meses después de la cirugía",
+          "denominador": "Pacientes con cirugía hipofisaria en el periodo",
+          "exclusiones": "—",
+          "poblacion": "Adultos",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica: laboratorio e imágenes",
+          "meta": "≥ 90 % (pocos casos por año)",
+          "responsable": "Endocrinología / Neurocirugía",
+          "base": "Manual del modelo de atención de acromegalia y Cushing, HPTU (2021), sección 5.1 (evaluación posquirúrgica)"
         },
         {
           "id": "acromegalia-1",
@@ -119,7 +170,7 @@
         }
       ],
       "estado": "borrador",
-      "nota_guia": "Indicadores tomados del manual institucional del modelo de atención de acromegalia y Cushing (2021) y del borrador del programa. Los intervalos de IGF-1 y resonancia están pendientes de confirmar con las rutas de atención del manual (sección 5.1).",
+      "nota_guia": "Fichas tomadas del manual institucional del modelo de atención de acromegalia y Cushing (2021), incluidas sus rutas de atención, y del borrador del programa. El manual fija los controles del primer año y del escalonamiento; los intervalos de seguimiento en fase estable los define el equipo.",
       "piloto": true
     },
     {
@@ -129,21 +180,117 @@
       "poblacion": "Adultos",
       "guias": [
         {
-          "titulo": "Endocrinología",
-          "url": "https://drive.google.com/file/d/1_10XINxvY9VjskWdjCRxRP69aSavEOoK/view"
+          "titulo": "Manual modelo de atención acromegalia y Cushing (2021)",
+          "url": "https://drive.google.com/file/d/1Qs0Vq0Utca8I9fZQ1YJBoIRhIfHHt8cb/view"
         }
       ],
       "indicadores": [
         {
+          "id": "cus-adh-01",
+          "codigo": "CUS-ADH-01",
+          "tipo": "adherencia",
+          "origen": "manual",
+          "resultado": "Plan terapéutico documentado",
+          "definicion": "Pacientes en tratamiento médico con objetivos terapéuticos, plan de seguimiento y criterios de escalonamiento, cambio o suspensión documentados.",
+          "numerador": "Pacientes en tratamiento médico con los tres elementos del plan documentados",
+          "denominador": "Pacientes activos en tratamiento médico",
+          "exclusiones": "—",
+          "poblacion": "Adultos",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica: nota de endocrinología o acta de junta",
+          "meta": "≥ 90 %",
+          "responsable": "Endocrinología",
+          "base": "Manual del modelo de atención de acromegalia y Cushing, HPTU (2021), sección 4"
+        },
+        {
+          "id": "cus-adh-02",
+          "codigo": "CUS-ADH-02",
+          "tipo": "adherencia",
+          "origen": "manual",
+          "resultado": "Persistencia discutida en junta",
+          "definicion": "Pacientes sin remisión tras la cirugía cuyo tratamiento siguiente (médico, segunda cirugía u otra intervención) se definió en la junta de neuroendocrinología con objetivos y criterios de escalonamiento.",
+          "numerador": "Pacientes con persistencia discutidos en junta en ≤ 3 meses",
+          "denominador": "Pacientes con persistencia o recurrencia documentada en el periodo",
+          "exclusiones": "—",
+          "poblacion": "Adultos",
+          "periodicidad": "Anual",
+          "fuente": "Actas de la junta de neuroendocrinología; historia clínica",
+          "meta": "≥ 90 %",
+          "responsable": "Endocrinología / Neurocirugía",
+          "base": "Manual del modelo de atención de acromegalia y Cushing, HPTU (2021), sección 5.2 (ruta del paciente que no logra la remisión)"
+        },
+        {
+          "id": "cus-adh-03",
+          "codigo": "CUS-ADH-03",
+          "tipo": "adherencia",
+          "origen": "manual",
+          "resultado": "Evaluación inicial completa",
+          "definicion": "Pacientes nuevos con confirmación diagnóstica según la ruta (supresión con dexametasona, cortisol en orina de 24 horas o salival, ACTH, RM de silla turca) y panel de comorbilidades, incluidos densitometría ósea y evaluación por psiquiatría.",
+          "numerador": "Pacientes nuevos con todos los componentes documentados antes de la junta",
+          "denominador": "Pacientes que ingresan al programa en el periodo",
+          "exclusiones": "Cateterismo de senos petrosos y PET (según indicación); estudios vigentes de otra institución",
+          "poblacion": "Adultos",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica: laboratorio, imágenes e interconsultas",
+          "meta": "≥ 90 %",
+          "responsable": "Endocrinología",
+          "base": "Manual del modelo de atención de acromegalia y Cushing, HPTU (2021), sección 5.2 (primera evaluación)"
+        },
+        {
+          "id": "cus-des-01",
+          "codigo": "CUS-DES-01",
+          "tipo": "desempeño",
+          "origen": "manual",
+          "resultado": "Evaluación posquirúrgica a los 3 meses",
+          "definicion": "Pacientes operados con supresión con dexametasona, cortisol 8 a. m./5 p. m./11 p. m., cortisol en orina de 24 horas, cortisol salival, ACTH y RM de silla turca a los 3 meses de la cirugía.",
+          "numerador": "Pacientes operados con la evaluación completa entre 2 y 4 meses después de la cirugía",
+          "denominador": "Pacientes con cirugía hipofisaria en el periodo",
+          "exclusiones": "—",
+          "poblacion": "Adultos",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica: laboratorio e imágenes",
+          "meta": "≥ 90 % (pocos casos por año)",
+          "responsable": "Endocrinología / Neurocirugía",
+          "base": "Manual del modelo de atención de acromegalia y Cushing, HPTU (2021), sección 5.2 (evaluación posquirúrgica)"
+        },
+        {
+          "id": "cus-des-02",
+          "codigo": "CUS-DES-02",
+          "tipo": "desempeño",
+          "origen": "manual",
+          "resultado": "Estado de la enfermedad al año",
+          "definicion": "Pacientes operados con el estado de la enfermedad establecido (remisión o persistencia) con el panel bioquímico y la RM 6 meses después de la evaluación posquirúrgica.",
+          "numerador": "Pacientes con el estado de la enfermedad documentado entre 8 y 12 meses después de la cirugía",
+          "denominador": "Pacientes con cirugía hipofisaria hace 8 a 20 meses",
+          "exclusiones": "—",
+          "poblacion": "Adultos",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica",
+          "meta": "≥ 90 %",
+          "responsable": "Endocrinología",
+          "base": "Manual del modelo de atención de acromegalia y Cushing, HPTU (2021), sección 5.2 (ruta del primer año)"
+        },
+        {
           "id": "cushing-1",
           "resultado": "Remisión",
-          "definicion": "Cortisol libre urinario o cortisol salival nocturno",
-          "fuente": "",
-          "responsable": "Especialidades médicas",
-          "tipo": "resultado"
+          "definicion": "Pacientes en remisión según cortisol libre urinario o cortisol salival nocturno en el último control.",
+          "fuente": "Laboratorio; historia clínica",
+          "responsable": "Endocrinología",
+          "tipo": "resultado",
+          "codigo": "CUS-RES-01",
+          "origen": "borrador",
+          "numerador": "Pacientes activos en remisión bioquímica",
+          "denominador": "Pacientes activos con evaluación del estado de la enfermedad en los últimos 12 meses",
+          "exclusiones": "Cirugía en los 3 meses previos",
+          "poblacion": "Adultos",
+          "periodicidad": "Semestral",
+          "meta": "Por definir con la línea de base",
+          "base": "Borrador del programa"
         }
       ],
-      "estado": "borrador"
+      "estado": "borrador",
+      "nota_guia": "Fichas tomadas del manual institucional del modelo de atención de acromegalia y Cushing (2021). El manual advierte que, a diferencia de la acromegalia, la evidencia para definir el escalonamiento en Cushing es escasa: los objetivos los fija la junta para cada paciente.",
+      "piloto": true
     },
     {
       "id": "lipodistrofia",
@@ -152,21 +299,93 @@
       "poblacion": "Adultos y niños",
       "guias": [
         {
-          "titulo": "Endocrinología",
+          "titulo": "Modelo de atención: endocrinología pediátrica",
           "url": "https://drive.google.com/file/d/1_10XINxvY9VjskWdjCRxRP69aSavEOoK/view"
         }
       ],
       "indicadores": [
+        {
+          "id": "lip-des-01",
+          "codigo": "LIP-DES-01",
+          "tipo": "desempeño",
+          "origen": "manual",
+          "resultado": "Tamizaje metabólico anual",
+          "definicion": "Glucemia en ayunas, curva de tolerancia o HbA1c, y perfil lipídico con triglicéridos en los últimos 12 meses.",
+          "numerador": "Pacientes con tamizaje de diabetes y perfil lipídico en los últimos 12 meses",
+          "denominador": "Pacientes activos",
+          "exclusiones": "Ingreso al programa en el periodo",
+          "poblacion": "Niños",
+          "periodicidad": "Anual",
+          "fuente": "Laboratorio",
+          "meta": "≥ 90 %",
+          "responsable": "Endocrinología pediátrica",
+          "base": "Modelo de atención a pacientes pediátricos con enfermedades endocrinas huérfanas, HPTU, sección 11 (lipodistrofias)"
+        },
+        {
+          "id": "lip-des-02",
+          "codigo": "LIP-DES-02",
+          "tipo": "desempeño",
+          "origen": "manual",
+          "resultado": "Vigilancia cardiaca anual",
+          "definicion": "Electrocardiograma y ecocardiograma en los últimos 12 meses.",
+          "numerador": "Pacientes con ECG y ecocardiograma en los últimos 12 meses",
+          "denominador": "Pacientes activos",
+          "exclusiones": "Ingreso al programa en el periodo",
+          "poblacion": "Niños",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica: ayudas diagnósticas",
+          "meta": "≥ 85 %",
+          "responsable": "Endocrinología pediátrica / Cardiología",
+          "base": "Modelo de atención a pacientes pediátricos con enfermedades endocrinas huérfanas, HPTU, sección 11 (lipodistrofias)"
+        },
+        {
+          "id": "lip-des-03",
+          "codigo": "LIP-DES-03",
+          "tipo": "desempeño",
+          "origen": "manual",
+          "resultado": "Vigilancia renal y hepática anual",
+          "definicion": "Proteinuria (24 horas o relación proteína/creatinina) y ALT/AST en los últimos 12 meses.",
+          "numerador": "Pacientes con proteinuria y transaminasas en los últimos 12 meses",
+          "denominador": "Pacientes activos",
+          "exclusiones": "Ingreso al programa en el periodo",
+          "poblacion": "Niños",
+          "periodicidad": "Anual",
+          "fuente": "Laboratorio",
+          "meta": "≥ 90 %",
+          "responsable": "Endocrinología pediátrica",
+          "base": "Modelo de atención a pacientes pediátricos con enfermedades endocrinas huérfanas, HPTU, sección 11 (lipodistrofias)"
+        },
+        {
+          "id": "lip-des-04",
+          "codigo": "LIP-DES-04",
+          "tipo": "desempeño",
+          "origen": "manual",
+          "resultado": "Consulta de seguimiento oportuna",
+          "definicion": "Consulta de endocrinología pediátrica cada 2 meses mientras se logra el control y cada 6 meses con la enfermedad controlada.",
+          "numerador": "Pacientes con consulta dentro del intervalo que les corresponde",
+          "denominador": "Pacientes activos",
+          "exclusiones": "—",
+          "poblacion": "Niños",
+          "periodicidad": "Semestral",
+          "fuente": "Agenda e historia clínica",
+          "meta": "≥ 90 %",
+          "responsable": "Endocrinología pediátrica / Gestión",
+          "base": "Modelo de atención a pacientes pediátricos con enfermedades endocrinas huérfanas, HPTU, sección 10.1"
+        },
         {
           "id": "lipodistrofia-1",
           "resultado": "Control metabólico",
           "definicion": "HbA1c y triglicéridos",
           "fuente": "",
           "responsable": "Especialidades médicas",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "LIP-RES-01",
+          "origen": "borrador"
         }
       ],
-      "estado": "borrador"
+      "estado": "borrador",
+      "nota_guia": "Fichas tomadas del modelo institucional de atención a pacientes pediátricos con enfermedades endocrinas huérfanas. El modelo es pediátrico: para adultos no hay documento institucional y las fichas quedan para revisión del equipo.",
+      "piloto": true
     },
     {
       "id": "raquitismo",
@@ -175,7 +394,7 @@
       "poblacion": "Adultos y niños",
       "guias": [
         {
-          "titulo": "Endocrinología",
+          "titulo": "Modelo de atención: endocrinología pediátrica",
           "url": "https://drive.google.com/file/d/1_10XINxvY9VjskWdjCRxRP69aSavEOoK/view"
         }
       ],
@@ -186,7 +405,9 @@
           "definicion": "Fósforo sérico en rango (según LSN)",
           "fuente": "",
           "responsable": "Especialidades médicas",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "XLH-RES-01",
+          "origen": "borrador"
         },
         {
           "id": "raquitismo-2",
@@ -194,10 +415,13 @@
           "definicion": "Caminata de 6 minutos",
           "fuente": "",
           "responsable": "Especialidades médicas",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "XLH-RES-02",
+          "origen": "borrador"
         }
       ],
-      "estado": "borrador"
+      "estado": "borrador",
+      "nota_guia": "El modelo institucional de endocrinología pediátrica no incluye el raquitismo hipofosfatémico ligado al X: por ahora solo están los indicadores del borrador del programa. El equipo puede proponer fichas de adherencia y desempeño."
     },
     {
       "id": "dislipidemias",
@@ -207,18 +431,71 @@
       "poblacion": "Adultos y niños",
       "guias": [
         {
-          "titulo": "Endocrinología",
+          "titulo": "Modelo de atención: endocrinología pediátrica",
           "url": "https://drive.google.com/file/d/1_10XINxvY9VjskWdjCRxRP69aSavEOoK/view"
         }
       ],
       "indicadores": [
+        {
+          "id": "dis-adh-01",
+          "codigo": "DIS-ADH-01",
+          "tipo": "adherencia",
+          "origen": "manual",
+          "resultado": "Evaluación inicial completa",
+          "definicion": "Pacientes nuevos con perfil lipídico (y de los padres), lipoproteína (a), ecocardiograma, Doppler carotídeo-aórtico y valoración por cardiología, nutrición y genética.",
+          "numerador": "Pacientes nuevos con todos los componentes documentados",
+          "denominador": "Pacientes que ingresan al programa en el periodo",
+          "exclusiones": "Angio-TAC coronaria (según edad)",
+          "poblacion": "Niños",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica: laboratorio, imágenes e interconsultas",
+          "meta": "≥ 90 %",
+          "responsable": "Endocrinología pediátrica",
+          "base": "Modelo de atención a pacientes pediátricos con enfermedades endocrinas huérfanas, HPTU, sección 9.5 (hipercolesterolemia familiar homocigota e hiperlipoproteinemia)"
+        },
+        {
+          "id": "dis-des-01",
+          "codigo": "DIS-DES-01",
+          "tipo": "desempeño",
+          "origen": "manual",
+          "resultado": "Control de laboratorio periódico",
+          "definicion": "Perfil lipídico y transaminasas cada 3 meses desde el diagnóstico y cada 6 meses con la enfermedad controlada.",
+          "numerador": "Pacientes con control de laboratorio dentro del intervalo que les corresponde",
+          "denominador": "Pacientes activos",
+          "exclusiones": "Ingreso al programa en el periodo",
+          "poblacion": "Niños",
+          "periodicidad": "Semestral",
+          "fuente": "Laboratorio",
+          "meta": "≥ 90 %",
+          "responsable": "Endocrinología pediátrica",
+          "base": "Modelo de atención a pacientes pediátricos con enfermedades endocrinas huérfanas, HPTU, sección 11 (exámenes de control y alteraciones de los lípidos)"
+        },
+        {
+          "id": "dis-des-02",
+          "codigo": "DIS-DES-02",
+          "tipo": "desempeño",
+          "origen": "manual",
+          "resultado": "Consulta de seguimiento oportuna",
+          "definicion": "Consulta de endocrinología pediátrica cada 2 meses mientras se logra el control y cada 6 meses con la enfermedad controlada.",
+          "numerador": "Pacientes con consulta dentro del intervalo que les corresponde",
+          "denominador": "Pacientes activos",
+          "exclusiones": "—",
+          "poblacion": "Niños",
+          "periodicidad": "Semestral",
+          "fuente": "Agenda e historia clínica",
+          "meta": "≥ 90 %",
+          "responsable": "Endocrinología pediátrica / Gestión",
+          "base": "Modelo de atención a pacientes pediátricos con enfermedades endocrinas huérfanas, HPTU, sección 10.1"
+        },
         {
           "id": "dislipidemias-1",
           "resultado": "Control metabólico",
           "definicion": "Colesterol LDL",
           "fuente": "",
           "responsable": "Especialidades médicas",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "DIS-RES-01",
+          "origen": "borrador"
         },
         {
           "id": "dislipidemias-2",
@@ -226,10 +503,14 @@
           "definicion": "IAM, ACV, AIT, angina",
           "fuente": "",
           "responsable": "Especialidades médicas",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "DIS-RES-02",
+          "origen": "borrador"
         }
       ],
-      "estado": "borrador"
+      "estado": "borrador",
+      "nota_guia": "Fichas tomadas del modelo institucional de atención a pacientes pediátricos con enfermedades endocrinas huérfanas. El modelo es pediátrico: para adultos no hay documento institucional y las fichas quedan para revisión del equipo.",
+      "piloto": true
     },
     {
       "id": "amiloidosis",
@@ -238,18 +519,173 @@
       "poblacion": "Adultos",
       "guias": [
         {
-          "titulo": "Modelo de atención: amiloidosis cardíaca",
+          "titulo": "Modelo de atención: amiloidosis cardíaca (2024)",
           "url": "https://drive.google.com/file/d/1g-RRbfFBViwAaHPzjO7y8VvRYuUq6VT6/view"
         }
       ],
       "indicadores": [
+        {
+          "id": "ami-adh-01",
+          "codigo": "AMI-ADH-01",
+          "tipo": "adherencia",
+          "origen": "manual",
+          "resultado": "Estadificación al diagnóstico",
+          "definicion": "Pacientes con amiloidosis cardiaca por transtiretina con estadio pronóstico del Centro Nacional de Amiloidosis (NT-proBNP y TFG) documentado al diagnóstico.",
+          "numerador": "Pacientes con estadio documentado",
+          "denominador": "Pacientes con diagnóstico nuevo de ATTR en el periodo",
+          "exclusiones": "—",
+          "poblacion": "Adultos",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica",
+          "meta": "≥ 95 %",
+          "responsable": "Cardiología",
+          "base": "Modelo de atención integral a pacientes adultos con amiloidosis cardíaca, HPTU (MS-DMD-180, 2024), estadificación"
+        },
+        {
+          "id": "ami-adh-02",
+          "codigo": "AMI-ADH-02",
+          "tipo": "adherencia",
+          "origen": "manual",
+          "resultado": "Prueba genética en ATTR",
+          "definicion": "Pacientes con ATTR confirmada con prueba genética para diferenciar la forma hereditaria de la silvestre.",
+          "numerador": "Pacientes con ATTR y prueba genética documentada",
+          "denominador": "Pacientes activos con ATTR confirmada",
+          "exclusiones": "Rechazo documentado del paciente",
+          "poblacion": "Adultos",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica; genética",
+          "meta": "≥ 90 %",
+          "responsable": "Cardiología / Genética",
+          "base": "Modelo de atención integral a pacientes adultos con amiloidosis cardíaca, HPTU (MS-DMD-180, 2024), abordaje diagnóstico, paso 8"
+        },
+        {
+          "id": "ami-adh-03",
+          "codigo": "AMI-ADH-03",
+          "tipo": "adherencia",
+          "origen": "manual",
+          "resultado": "Anticoagulación en fibrilación auricular",
+          "definicion": "Pacientes con amiloidosis cardiaca y fibrilación auricular anticoagulados, independientemente del puntaje CHA2DS2-VASc.",
+          "numerador": "Pacientes con FA y anticoagulación vigente",
+          "denominador": "Pacientes activos con FA documentada",
+          "exclusiones": "Contraindicación documentada (sangrado, decisión paliativa)",
+          "poblacion": "Adultos",
+          "periodicidad": "Semestral",
+          "fuente": "Historia clínica; fórmula",
+          "meta": "≥ 90 %",
+          "responsable": "Cardiología",
+          "base": "Modelo de atención integral a pacientes adultos con amiloidosis cardíaca, HPTU (MS-DMD-180, 2024), manejo propuesto"
+        },
+        {
+          "id": "ami-adh-04",
+          "codigo": "AMI-ADH-04",
+          "tipo": "adherencia",
+          "origen": "manual",
+          "resultado": "Sin fármacos que el modelo desaconseja",
+          "definicion": "Pacientes sin betabloqueadores ni calcioantagonistas no dihidropiridínicos de uso rutinario, por la cardiopatía restrictiva.",
+          "numerador": "Pacientes sin estos fármacos en la fórmula vigente",
+          "denominador": "Pacientes activos con amiloidosis cardiaca",
+          "exclusiones": "Indicación específica documentada por cardiología",
+          "poblacion": "Adultos",
+          "periodicidad": "Semestral",
+          "fuente": "Fórmula; historia clínica",
+          "meta": "≥ 90 %",
+          "responsable": "Cardiología",
+          "base": "Modelo de atención integral a pacientes adultos con amiloidosis cardíaca, HPTU (MS-DMD-180, 2024), manejo propuesto"
+        },
+        {
+          "id": "ami-des-01",
+          "codigo": "AMI-DES-01",
+          "tipo": "desempeño",
+          "origen": "manual",
+          "resultado": "Consulta y electrocardiograma periódicos",
+          "definicion": "Evaluación clínica cada 3 a 6 meses con electrocardiograma cada 3 meses.",
+          "numerador": "Pacientes con consulta en los últimos 6 meses y ECG en los últimos 3 meses",
+          "denominador": "Pacientes activos",
+          "exclusiones": "Ingreso al programa en el periodo; cuidado paliativo exclusivo",
+          "poblacion": "Adultos",
+          "periodicidad": "Trimestral",
+          "fuente": "Agenda e historia clínica",
+          "meta": "≥ 85 %",
+          "responsable": "Cardiología / Gestión",
+          "base": "Modelo de atención integral a pacientes adultos con amiloidosis cardíaca, HPTU (MS-DMD-180, 2024), tabla 2"
+        },
+        {
+          "id": "ami-des-02",
+          "codigo": "AMI-DES-02",
+          "tipo": "desempeño",
+          "origen": "manual",
+          "resultado": "Biomarcadores y estadificación periódica",
+          "definicion": "NT-proBNP, troponina y TFG cada 6 meses como máximo, con el estadio pronóstico actualizado.",
+          "numerador": "Pacientes con biomarcadores y TFG en los últimos 6 meses",
+          "denominador": "Pacientes activos",
+          "exclusiones": "Ingreso al programa en el periodo; cuidado paliativo exclusivo",
+          "poblacion": "Adultos",
+          "periodicidad": "Semestral",
+          "fuente": "Laboratorio",
+          "meta": "≥ 90 %",
+          "responsable": "Cardiología",
+          "base": "Modelo de atención integral a pacientes adultos con amiloidosis cardíaca, HPTU (MS-DMD-180, 2024), tabla 2"
+        },
+        {
+          "id": "ami-des-03",
+          "codigo": "AMI-DES-03",
+          "tipo": "desempeño",
+          "origen": "manual",
+          "resultado": "Holter cada 6 meses",
+          "definicion": "Holter de 24 horas en los últimos 6 meses para detectar bradiarritmias y carga de arritmias.",
+          "numerador": "Pacientes con Holter en los últimos 6 meses",
+          "denominador": "Pacientes activos",
+          "exclusiones": "Marcapasos o desfibrilador implantado; cuidado paliativo exclusivo",
+          "poblacion": "Adultos",
+          "periodicidad": "Semestral",
+          "fuente": "Historia clínica: ayudas diagnósticas",
+          "meta": "≥ 85 %",
+          "responsable": "Cardiología",
+          "base": "Modelo de atención integral a pacientes adultos con amiloidosis cardíaca, HPTU (MS-DMD-180, 2024), manejo propuesto y tabla 2"
+        },
+        {
+          "id": "ami-des-04",
+          "codigo": "AMI-DES-04",
+          "tipo": "desempeño",
+          "origen": "manual",
+          "resultado": "Ecocardiograma anual",
+          "definicion": "Ecocardiograma con grosor miocárdico, strain y presiones de llenado en los últimos 12 meses.",
+          "numerador": "Pacientes con ecocardiograma en los últimos 12 meses",
+          "denominador": "Pacientes activos",
+          "exclusiones": "Cuidado paliativo exclusivo",
+          "poblacion": "Adultos",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica: ayudas diagnósticas",
+          "meta": "≥ 90 %",
+          "responsable": "Cardiología",
+          "base": "Modelo de atención integral a pacientes adultos con amiloidosis cardíaca, HPTU (MS-DMD-180, 2024), tabla 2"
+        },
+        {
+          "id": "ami-des-05",
+          "codigo": "AMI-DES-05",
+          "tipo": "desempeño",
+          "origen": "manual",
+          "resultado": "Seguimiento de portadores asintomáticos",
+          "definicion": "Portadores de la mutación en seguimiento con ECG, NT-proBNP, troponina, ecocardiograma y evaluación neurológica y oftalmológica anuales, desde 10 años antes de la edad esperada de inicio.",
+          "numerador": "Portadores con el paquete anual completo",
+          "denominador": "Portadores asintomáticos en seguimiento",
+          "exclusiones": "—",
+          "poblacion": "Adultos",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica",
+          "meta": "≥ 85 %",
+          "responsable": "Cardiología / Genética",
+          "base": "Modelo de atención integral a pacientes adultos con amiloidosis cardíaca, HPTU (MS-DMD-180, 2024), paciente portador de la mutación asintomático"
+        },
         {
           "id": "amiloidosis-2",
           "resultado": "Supervivencia global",
           "definicion": "",
           "fuente": "Fallecidos",
           "responsable": "Especialidades médicas",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "AMI-RES-01",
+          "origen": "borrador"
         },
         {
           "id": "amiloidosis-3",
@@ -257,7 +693,9 @@
           "definicion": "",
           "fuente": "Campo de texto no estructurado, notas de cardiología",
           "responsable": "Especialidades médicas",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "AMI-RES-02",
+          "origen": "borrador"
         },
         {
           "id": "amiloidosis-4",
@@ -265,10 +703,14 @@
           "definicion": "",
           "fuente": "Campo de texto no estructurado, notas de cardiología",
           "responsable": "Especialidades médicas",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "AMI-RES-03",
+          "origen": "borrador"
         }
       ],
-      "estado": "borrador"
+      "estado": "borrador",
+      "nota_guia": "Fichas tomadas del modelo institucional de amiloidosis cardiaca (2024). El modelo propone además como indicadores la hospitalización por cualquier causa y por causa cardiovascular y la mortalidad: la hospitalización ya está en los transversales y la supervivencia en AMI-RES-01.",
+      "piloto": true
     },
     {
       "id": "fibrosis-quistica",
@@ -277,18 +719,139 @@
       "poblacion": "Adultos y niños",
       "guias": [
         {
-          "titulo": "Fibrosis quística",
+          "titulo": "Modelo de atención: fibrosis quística",
           "url": "https://drive.google.com/file/d/1VdzOWKXLeVkfG8FYoo4sc0nqjvKlx6c5/view"
         }
       ],
       "indicadores": [
+        {
+          "id": "fq-adh-01",
+          "codigo": "FQ-ADH-01",
+          "tipo": "adherencia",
+          "origen": "manual",
+          "resultado": "Dornasa alfa en compromiso pulmonar",
+          "definicion": "Pacientes con compromiso pulmonar a quienes se ofreció dornasa alfa, mucolítico de primera opción según el modelo.",
+          "numerador": "Pacientes con compromiso pulmonar con dornasa alfa formulada u ofrecida",
+          "denominador": "Pacientes activos con compromiso pulmonar",
+          "exclusiones": "Intolerancia o rechazo documentados",
+          "poblacion": "Adultos y niños",
+          "periodicidad": "Anual",
+          "fuente": "Fórmula; historia clínica",
+          "meta": "≥ 90 %",
+          "responsable": "Neumología",
+          "base": "Modelo de atención integral a pacientes pediátricos y adultos con fibrosis quística, HPTU, tratamiento (neumología)"
+        },
+        {
+          "id": "fq-adh-02",
+          "codigo": "FQ-ADH-02",
+          "tipo": "adherencia",
+          "origen": "manual",
+          "resultado": "Monitoreo de azitromicina",
+          "definicion": "Pacientes con azitromicina inmunomoduladora con ECG y audiometría antes del inicio y baciloscopia y cultivo de micobacterias cada 6 meses.",
+          "numerador": "Pacientes con el monitoreo completo",
+          "denominador": "Pacientes activos con azitromicina crónica",
+          "exclusiones": "—",
+          "poblacion": "Adultos y niños",
+          "periodicidad": "Semestral",
+          "fuente": "Historia clínica; laboratorio",
+          "meta": "≥ 90 %",
+          "responsable": "Neumología",
+          "base": "Modelo de atención integral a pacientes pediátricos y adultos con fibrosis quística, HPTU, tratamiento (azitromicina)"
+        },
+        {
+          "id": "fq-adh-03",
+          "codigo": "FQ-ADH-03",
+          "tipo": "adherencia",
+          "origen": "manual",
+          "resultado": "Valoración anual por endocrinología",
+          "definicion": "Pacientes de 10 años o más con valoración por endocrinología en los últimos 12 meses (la diabetes afecta a uno de cada dos adultos con FQ).",
+          "numerador": "Pacientes ≥ 10 años con valoración por endocrinología en los últimos 12 meses",
+          "denominador": "Pacientes activos ≥ 10 años",
+          "exclusiones": "—",
+          "poblacion": "Adultos y niños",
+          "periodicidad": "Anual",
+          "fuente": "Agenda e historia clínica",
+          "meta": "≥ 90 %",
+          "responsable": "Endocrinología / Gestión",
+          "base": "Modelo de atención integral a pacientes pediátricos y adultos con fibrosis quística, HPTU, interconsultas"
+        },
+        {
+          "id": "fq-adh-04",
+          "codigo": "FQ-ADH-04",
+          "tipo": "adherencia",
+          "origen": "manual",
+          "resultado": "Referencia oportuna a trasplante",
+          "definicion": "Pacientes con criterio de referencia (VEF1 ≤ 30 % del predicho, oxígeno por hipoxemia, hipercapnia o exacerbaciones frecuentes con antibiótico intravenoso) remitidos al grupo de trasplante.",
+          "numerador": "Pacientes con criterio y remisión documentada",
+          "denominador": "Pacientes activos con algún criterio de referencia",
+          "exclusiones": "Rechazo del paciente; contraindicación documentada",
+          "poblacion": "Adultos y niños",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica",
+          "meta": "≥ 90 %",
+          "responsable": "Neumología",
+          "base": "Modelo de atención integral a pacientes pediátricos y adultos con fibrosis quística, HPTU, referir a grupo de trasplante"
+        },
+        {
+          "id": "fq-des-01",
+          "codigo": "FQ-DES-01",
+          "tipo": "desempeño",
+          "origen": "manual",
+          "resultado": "Espirometría y cultivo en cada visita",
+          "definicion": "Consultas de neumología con espirometría (curva flujo-volumen) y gram y cultivo de esputo.",
+          "numerador": "Consultas de neumología con espirometría y cultivo",
+          "denominador": "Consultas de neumología en el periodo",
+          "exclusiones": "Pacientes que no pueden hacer la prueba (edad, condición)",
+          "poblacion": "Adultos y niños",
+          "periodicidad": "Semestral",
+          "fuente": "Historia clínica; laboratorio; función pulmonar",
+          "meta": "≥ 85 %",
+          "responsable": "Neumología",
+          "base": "Modelo de atención integral a pacientes pediátricos y adultos con fibrosis quística, HPTU, función pulmonar y microbiología"
+        },
+        {
+          "id": "fq-des-02",
+          "codigo": "FQ-DES-02",
+          "tipo": "desempeño",
+          "origen": "manual",
+          "resultado": "Paquete anual de laboratorio",
+          "definicion": "En los últimos 12 meses: glucemia en ayunas y poscarga, 25-hidroxivitamina D, vitaminas A y E, IgE específica para Aspergillus e inmunoglobulinas, y cultivo de micobacterias no tuberculosas.",
+          "numerador": "Pacientes con el paquete anual completo",
+          "denominador": "Pacientes activos",
+          "exclusiones": "Ingreso al programa en el periodo",
+          "poblacion": "Adultos y niños",
+          "periodicidad": "Anual",
+          "fuente": "Laboratorio",
+          "meta": "≥ 85 %",
+          "responsable": "Neumología / Gastroenterología",
+          "base": "Modelo de atención integral a pacientes pediátricos y adultos con fibrosis quística, HPTU, pruebas de laboratorio y microbiología"
+        },
+        {
+          "id": "fq-des-03",
+          "codigo": "FQ-DES-03",
+          "tipo": "desempeño",
+          "origen": "manual",
+          "resultado": "Consulta multidisciplinaria periódica",
+          "definicion": "Consulta de neumología y de gastroenterología o nutrición cada 3 a 6 meses.",
+          "numerador": "Pacientes con consulta de neumología y de gastroenterología o nutrición en los últimos 6 meses",
+          "denominador": "Pacientes activos",
+          "exclusiones": "—",
+          "poblacion": "Adultos y niños",
+          "periodicidad": "Semestral",
+          "fuente": "Agenda e historia clínica",
+          "meta": "≥ 90 %",
+          "responsable": "Gestión",
+          "base": "Modelo de atención integral a pacientes pediátricos y adultos con fibrosis quística, HPTU, calendario de valoraciones en adultos"
+        },
         {
           "id": "fq-1",
           "resultado": "Función pulmonar",
           "definicion": "VEF1 en espirometría",
           "fuente": "Software de espirometrías (biomédica)",
           "responsable": "Pediatría",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "FQ-RES-01",
+          "origen": "borrador"
         },
         {
           "id": "fq-2",
@@ -296,10 +859,14 @@
           "definicion": "Tasa de exacerbaciones pulmonares agudas en pacientes con FQ en tratamiento con elexacaftor/tezacaftor/ivacaftor",
           "fuente": "CMBD egresos de hospitalización, diagnóstico principal o relacionado",
           "responsable": "Pediatría",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "FQ-RES-02",
+          "origen": "borrador"
         }
       ],
-      "estado": "borrador"
+      "estado": "borrador",
+      "nota_guia": "Fichas tomadas del modelo institucional de fibrosis quística, que sigue la guía del Ministerio de Salud (2014), la ECFS (2018) y NICE (2017).",
+      "piloto": true
     },
     {
       "id": "epidermolisis",
@@ -319,7 +886,9 @@
           "definicion": "",
           "fuente": "",
           "responsable": "Especialidades médicas",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "EB-RES-01",
+          "origen": "borrador"
         },
         {
           "id": "eb-2",
@@ -327,7 +896,9 @@
           "definicion": "",
           "fuente": "",
           "responsable": "Especialidades médicas",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "EB-RES-02",
+          "origen": "borrador"
         },
         {
           "id": "eb-3",
@@ -335,7 +906,9 @@
           "definicion": "",
           "fuente": "",
           "responsable": "Especialidades médicas",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "EB-RES-03",
+          "origen": "borrador"
         },
         {
           "id": "eb-4",
@@ -343,10 +916,13 @@
           "definicion": "",
           "fuente": "",
           "responsable": "Especialidades médicas",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "EB-RES-04",
+          "origen": "borrador"
         }
       ],
-      "estado": "borrador"
+      "estado": "borrador",
+      "nota_guia": "El documento de dermatología de la carpeta trae guías de ictiosis, pénfigo, xeroderma pigmentoso y mastocitosis, pero no de epidermólisis bullosa: por ahora solo están los indicadores del borrador del programa."
     },
     {
       "id": "ictiosis",
@@ -355,18 +931,105 @@
       "poblacion": "Adultos y niños",
       "guias": [
         {
-          "titulo": "Dermatología",
+          "titulo": "Modelo de atención: enfermedades dermatológicas (ictiosis)",
           "url": "https://drive.google.com/file/d/1pzmE_gjkLqctoFFR-ewC5meo3pQKIhLt/view"
         }
       ],
       "indicadores": [
+        {
+          "id": "ict-adh-01",
+          "codigo": "ICT-ADH-01",
+          "tipo": "adherencia",
+          "origen": "guia",
+          "resultado": "Ayudas diagnósticas según la guía",
+          "definicion": "Pacientes a quienes se solicitaron las ayudas diagnósticas indicadas por la guía según la sospecha clínica (incluida la prueba molecular cuando el diagnóstico no es evidente). Es el indicador 1 de la guía.",
+          "numerador": "Pacientes con las ayudas diagnósticas indicadas solicitadas",
+          "denominador": "Pacientes con ictiosis evaluados en el periodo",
+          "exclusiones": "—",
+          "poblacion": "Adultos y niños",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica (auditoría PAMEC)",
+          "meta": "≥ 90 %",
+          "responsable": "Dermatología",
+          "base": "Guía de atención a pacientes con ictiosis, HPTU (modelo de enfermedades dermatológicas), indicador 1"
+        },
+        {
+          "id": "ict-adh-02",
+          "codigo": "ICT-ADH-02",
+          "tipo": "adherencia",
+          "origen": "guia",
+          "resultado": "Tratamiento según la guía",
+          "definicion": "Pacientes con el tratamiento indicado por la guía: emolientes en todos, queratolíticos o retinoides según el tipo y la gravedad. Es el indicador 2 de la guía.",
+          "numerador": "Pacientes con tratamiento acorde a la guía",
+          "denominador": "Pacientes con ictiosis atendidos en el periodo",
+          "exclusiones": "—",
+          "poblacion": "Adultos y niños",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica (auditoría PAMEC)",
+          "meta": "≥ 90 %",
+          "responsable": "Dermatología",
+          "base": "Guía de atención a pacientes con ictiosis, HPTU (modelo de enfermedades dermatológicas), indicador 2"
+        },
+        {
+          "id": "ict-adh-03",
+          "codigo": "ICT-ADH-03",
+          "tipo": "adherencia",
+          "origen": "guia",
+          "resultado": "Planificación con retinoides orales",
+          "definicion": "Mujeres en edad fértil con retinoide oral a quienes se ofreció planificación familiar y se hizo prueba de embarazo al inicio.",
+          "numerador": "Mujeres en edad fértil con planificación ofrecida y prueba de embarazo",
+          "denominador": "Mujeres en edad fértil con retinoide oral",
+          "exclusiones": "—",
+          "poblacion": "Adultos y niños",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica",
+          "meta": "100 %",
+          "responsable": "Dermatología",
+          "base": "Guía de atención a pacientes con ictiosis, HPTU (modelo de enfermedades dermatológicas), tratamiento sistémico"
+        },
+        {
+          "id": "ict-des-01",
+          "codigo": "ICT-DES-01",
+          "tipo": "desempeño",
+          "origen": "guia",
+          "resultado": "Monitoreo de retinoides orales",
+          "definicion": "Función hepática y perfil lipídico según el calendario de la guía: cada 3 meses el primer año, dos veces el segundo año y luego anual.",
+          "numerador": "Pacientes con controles dentro del intervalo que les corresponde",
+          "denominador": "Pacientes activos con retinoide oral",
+          "exclusiones": "Inicio del retinoide en los últimos 2 meses",
+          "poblacion": "Adultos y niños",
+          "periodicidad": "Semestral",
+          "fuente": "Laboratorio",
+          "meta": "≥ 90 %",
+          "responsable": "Dermatología",
+          "base": "Guía de atención a pacientes con ictiosis, HPTU (modelo de enfermedades dermatológicas), seguimiento de la terapia con retinoides orales"
+        },
+        {
+          "id": "ict-des-02",
+          "codigo": "ICT-DES-02",
+          "tipo": "desempeño",
+          "origen": "guia",
+          "resultado": "Vitamina D y crecimiento",
+          "definicion": "Vitamina D medida al menos una vez al año y, en niños, parámetros de crecimiento registrados.",
+          "numerador": "Pacientes con vitamina D en los últimos 12 meses (y crecimiento en niños)",
+          "denominador": "Pacientes activos",
+          "exclusiones": "—",
+          "poblacion": "Adultos y niños",
+          "periodicidad": "Anual",
+          "fuente": "Laboratorio; historia clínica",
+          "meta": "≥ 85 %",
+          "responsable": "Dermatología / Pediatría",
+          "base": "Guía de atención a pacientes con ictiosis, HPTU (modelo de enfermedades dermatológicas), complicaciones metabólicas"
+        },
         {
           "id": "ictiosis-1",
           "resultado": "Reducción del grosor de las escamas y del enrojecimiento",
           "definicion": "",
           "fuente": "",
           "responsable": "Especialidades médicas",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "ICT-RES-01",
+          "origen": "borrador"
         },
         {
           "id": "ictiosis-2",
@@ -374,10 +1037,14 @@
           "definicion": "",
           "fuente": "",
           "responsable": "Especialidades médicas",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "ICT-RES-02",
+          "origen": "borrador"
         }
       ],
-      "estado": "borrador"
+      "estado": "borrador",
+      "nota_guia": "Fichas tomadas de la guía institucional de ictiosis, que trae sus propios indicadores de adhesión (ayudas diagnósticas y tratamiento).",
+      "piloto": true
     },
     {
       "id": "crohn",
@@ -386,7 +1053,7 @@
       "poblacion": "Adultos y niños",
       "guias": [
         {
-          "titulo": "Crohn",
+          "titulo": "Modelo de atención: enfermedad de Crohn adultos (2024)",
           "url": "https://drive.google.com/file/d/1wsiuTuwmQ7MKymsqxJd_xr0Yvim44nn3/view"
         },
         {
@@ -396,12 +1063,150 @@
       ],
       "indicadores": [
         {
+          "id": "cro-adh-01",
+          "codigo": "CRO-ADH-01",
+          "tipo": "adherencia",
+          "origen": "manual",
+          "resultado": "Clasificación y actividad documentadas",
+          "definicion": "Pacientes con clasificación de Montreal e índice de actividad (CDAI o Harvey-Bradshaw) registrados en la consulta inicial del programa.",
+          "numerador": "Pacientes con Montreal e índice de actividad documentados",
+          "denominador": "Pacientes que ingresan al programa en el periodo",
+          "exclusiones": "—",
+          "poblacion": "Adultos",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica",
+          "meta": "≥ 95 %",
+          "responsable": "Gastroenterología",
+          "base": "Modelo de atención integral a pacientes adultos con enfermedad de Crohn, HPTU (MS-DMD-180, 2024), consulta inicial"
+        },
+        {
+          "id": "cro-adh-02",
+          "codigo": "CRO-ADH-02",
+          "tipo": "adherencia",
+          "origen": "manual",
+          "resultado": "Vacunación completa",
+          "definicion": "Pacientes con esquema completo de influenza, hepatitis B y neumococo. Es un indicador del modelo.",
+          "numerador": "Pacientes con las tres vacunas documentadas",
+          "denominador": "Pacientes activos",
+          "exclusiones": "Contraindicación documentada",
+          "poblacion": "Adultos",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica; carné de vacunación",
+          "meta": "≥ 80 %",
+          "responsable": "Gastroenterología / Enfermería",
+          "base": "Modelo de atención integral a pacientes adultos con enfermedad de Crohn, HPTU (MS-DMD-180, 2024), indicadores de calidad"
+        },
+        {
+          "id": "cro-adh-03",
+          "codigo": "CRO-ADH-03",
+          "tipo": "adherencia",
+          "origen": "manual",
+          "resultado": "Tabaquismo abordado",
+          "definicion": "Pacientes fumadores con derivación a la clínica de tabaquismo. El modelo mide además el porcentaje que continúa fumando.",
+          "numerador": "Fumadores con derivación documentada",
+          "denominador": "Pacientes activos fumadores",
+          "exclusiones": "Rechazo documentado del paciente",
+          "poblacion": "Adultos",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica",
+          "meta": "≥ 90 %",
+          "responsable": "Gastroenterología / Toxicología",
+          "base": "Modelo de atención integral a pacientes adultos con enfermedad de Crohn, HPTU (MS-DMD-180, 2024), consulta inicial e indicadores de calidad"
+        },
+        {
+          "id": "cro-adh-04",
+          "codigo": "CRO-ADH-04",
+          "tipo": "adherencia",
+          "origen": "manual",
+          "resultado": "Esteroides por más de 3 meses",
+          "definicion": "Pacientes con esteroides sistémicos por más de 3 meses continuos (menor es mejor). Es un indicador del modelo.",
+          "numerador": "Pacientes con esteroides sistémicos > 3 meses en el periodo",
+          "denominador": "Pacientes activos",
+          "exclusiones": "—",
+          "poblacion": "Adultos",
+          "periodicidad": "Semestral",
+          "fuente": "Fórmula; historia clínica",
+          "meta": "≤ 10 % (por validar)",
+          "responsable": "Gastroenterología",
+          "base": "Modelo de atención integral a pacientes adultos con enfermedad de Crohn, HPTU (MS-DMD-180, 2024), indicadores de calidad"
+        },
+        {
+          "id": "cro-adh-05",
+          "codigo": "CRO-ADH-05",
+          "tipo": "adherencia",
+          "origen": "manual",
+          "resultado": "Valoración por nutrición clínica",
+          "definicion": "Pacientes nuevos con valoración por nutrición clínica.",
+          "numerador": "Pacientes nuevos valorados por nutrición",
+          "denominador": "Pacientes que ingresan al programa en el periodo",
+          "exclusiones": "—",
+          "poblacion": "Adultos",
+          "periodicidad": "Anual",
+          "fuente": "Agenda e historia clínica",
+          "meta": "≥ 90 %",
+          "responsable": "Nutrición / Gestión",
+          "base": "Modelo de atención integral a pacientes adultos con enfermedad de Crohn, HPTU (MS-DMD-180, 2024), consulta inicial"
+        },
+        {
+          "id": "cro-des-01",
+          "codigo": "CRO-DES-01",
+          "tipo": "desempeño",
+          "origen": "manual",
+          "resultado": "Consulta y laboratorio periódicos",
+          "definicion": "Consulta de gastroenterología cada 3 a 6 meses y hemograma, PCR, función hepática y calprotectina cada 6 meses.",
+          "numerador": "Pacientes con consulta y laboratorio en los últimos 6 meses",
+          "denominador": "Pacientes activos",
+          "exclusiones": "Ingreso al programa en el periodo",
+          "poblacion": "Adultos",
+          "periodicidad": "Semestral",
+          "fuente": "Agenda; laboratorio",
+          "meta": "≥ 90 %",
+          "responsable": "Gastroenterología / Gestión",
+          "base": "Modelo de atención integral a pacientes adultos con enfermedad de Crohn, HPTU (MS-DMD-180, 2024), flujograma"
+        },
+        {
+          "id": "cro-des-02",
+          "codigo": "CRO-DES-02",
+          "tipo": "desempeño",
+          "origen": "manual",
+          "resultado": "Colonoscopia de seguimiento",
+          "definicion": "Colonoscopia en los últimos 24 meses (cada 1 a 2 años según evolución).",
+          "numerador": "Pacientes con colonoscopia en los últimos 24 meses",
+          "denominador": "Pacientes activos con al menos 2 años en el programa",
+          "exclusiones": "Compromiso exclusivo de intestino delgado o digestivo superior con seguimiento por imagen",
+          "poblacion": "Adultos",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica: endoscopia",
+          "meta": "≥ 85 %",
+          "responsable": "Gastroenterología",
+          "base": "Modelo de atención integral a pacientes adultos con enfermedad de Crohn, HPTU (MS-DMD-180, 2024), flujograma"
+        },
+        {
+          "id": "cro-des-03",
+          "codigo": "CRO-DES-03",
+          "tipo": "desempeño",
+          "origen": "manual",
+          "resultado": "Ileocolonoscopia posoperatoria",
+          "definicion": "Pacientes operados con ileocolonoscopia entre 6 y 12 meses después de la cirugía para evaluar recurrencia (Rutgeerts).",
+          "numerador": "Pacientes operados con ileocolonoscopia entre 6 y 12 meses",
+          "denominador": "Pacientes con resección intestinal hace 12 a 24 meses",
+          "exclusiones": "Estoma sin acceso endoscópico",
+          "poblacion": "Adultos",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica: endoscopia",
+          "meta": "≥ 90 %",
+          "responsable": "Gastroenterología / Coloproctología",
+          "base": "Modelo de atención integral a pacientes adultos con enfermedad de Crohn, HPTU (MS-DMD-180, 2024), algoritmo 3 (EC posquirúrgica)"
+        },
+        {
           "id": "crohn-1",
           "resultado": "Cirugías programadas frente a emergentes",
           "definicion": "Probabilidad en el tiempo, en función del tiempo en el programa",
           "fuente": "",
           "responsable": "Especialidades médicas",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "CRO-RES-01",
+          "origen": "borrador"
         },
         {
           "id": "crohn-2",
@@ -409,7 +1214,9 @@
           "definicion": "Ausencia de úlceras (SES-CD)",
           "fuente": "Reporte de ayudas diagnósticas",
           "responsable": "Especialidades médicas",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "CRO-RES-02",
+          "origen": "borrador"
         },
         {
           "id": "crohn-3",
@@ -417,7 +1224,9 @@
           "definicion": "PRO2 (desenlaces reportados por el paciente: diarrea y dolor abdominal)",
           "fuente": "",
           "responsable": "Especialidades médicas",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "CRO-RES-03",
+          "origen": "borrador"
         },
         {
           "id": "crohn-4",
@@ -425,7 +1234,9 @@
           "definicion": "Calprotectina (valor por definir)",
           "fuente": "",
           "responsable": "Especialidades médicas",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "CRO-RES-04",
+          "origen": "borrador"
         },
         {
           "id": "crohn-5",
@@ -433,7 +1244,9 @@
           "definicion": "Órdenes de prednisolona: ciclos y tiempo",
           "fuente": "",
           "responsable": "Especialidades médicas",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "CRO-RES-05",
+          "origen": "borrador"
         },
         {
           "id": "crohn-6",
@@ -441,10 +1254,14 @@
           "definicion": "",
           "fuente": "Base de datos en Drive (Original Mx)",
           "responsable": "Especialidades médicas",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "CRO-RES-06",
+          "origen": "borrador"
         }
       ],
-      "estado": "borrador"
+      "estado": "borrador",
+      "nota_guia": "Fichas tomadas del modelo institucional de enfermedad de Crohn en adultos (2024), que incluye su propia lista de indicadores de calidad. La terapia biológica (CRO-RES-06) y los esteroides prolongados (CRO-ADH-04) vienen de esa lista.",
+      "piloto": true
     },
     {
       "id": "falla-intestinal",
@@ -453,18 +1270,105 @@
       "poblacion": "Adultos y niños",
       "guias": [
         {
-          "titulo": "Falla intestinal",
+          "titulo": "Modelo de atención: falla intestinal",
           "url": "https://drive.google.com/file/d/1LJcNMErHnDhPMEqNhUqCz6-AWzXb5mdy/view"
         }
       ],
       "indicadores": [
+        {
+          "id": "fi-adh-01",
+          "codigo": "FI-ADH-01",
+          "tipo": "adherencia",
+          "origen": "manual",
+          "resultado": "Densitometría en mayores de 10 años",
+          "definicion": "Pacientes de 10 años o más con densitometría ósea documentada.",
+          "numerador": "Pacientes ≥ 10 años con densitometría documentada",
+          "denominador": "Pacientes activos ≥ 10 años",
+          "exclusiones": "—",
+          "poblacion": "Adultos y niños",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica: ayudas diagnósticas",
+          "meta": "≥ 85 %",
+          "responsable": "Soporte nutricional",
+          "base": "Modelo de atención a pacientes pediátricos y adultos con falla intestinal, HPTU, ayudas diagnósticas"
+        },
+        {
+          "id": "fi-des-01",
+          "codigo": "FI-DES-01",
+          "tipo": "desempeño",
+          "origen": "manual",
+          "resultado": "Consulta conjunta periódica",
+          "definicion": "Adultos: consulta conjunta de cirugía general y nutrición clínica mensual. Niños: gastroenterología y nutrición quincenal los primeros 3 meses con nutrición parenteral, luego mensual; sin parenteral, mensual a trimestral.",
+          "numerador": "Pacientes con consulta dentro del intervalo que les corresponde",
+          "denominador": "Pacientes activos en seguimiento ambulatorio",
+          "exclusiones": "—",
+          "poblacion": "Adultos y niños",
+          "periodicidad": "Trimestral",
+          "fuente": "Agenda e historia clínica",
+          "meta": "≥ 90 %",
+          "responsable": "Soporte nutricional / Gestión",
+          "base": "Modelo de atención a pacientes pediátricos y adultos con falla intestinal, HPTU, interconsultas integrales y seguimiento ambulatorio"
+        },
+        {
+          "id": "fi-des-02",
+          "codigo": "FI-DES-02",
+          "tipo": "desempeño",
+          "origen": "manual",
+          "resultado": "Laboratorio de control",
+          "definicion": "Función hepática y renal, albúmina, transferrina, hemograma, ionograma, fósforo, magnesio, ácido fólico y triglicéridos: mensual con nutrición parenteral y cada 6 meses sin ella.",
+          "numerador": "Pacientes con laboratorio dentro del intervalo que les corresponde",
+          "denominador": "Pacientes activos en seguimiento ambulatorio",
+          "exclusiones": "—",
+          "poblacion": "Adultos y niños",
+          "periodicidad": "Trimestral",
+          "fuente": "Laboratorio",
+          "meta": "≥ 90 %",
+          "responsable": "Soporte nutricional",
+          "base": "Modelo de atención a pacientes pediátricos y adultos con falla intestinal, HPTU, exámenes de control ambulatorio"
+        },
+        {
+          "id": "fi-des-03",
+          "codigo": "FI-DES-03",
+          "tipo": "desempeño",
+          "origen": "manual",
+          "resultado": "Electrolitos a los 15 días del egreso",
+          "definicion": "Ionograma, magnesio y fósforo 15 días después del egreso hospitalario para ajustar la nutrición parenteral.",
+          "numerador": "Egresos con electrolitos entre 10 y 20 días después",
+          "denominador": "Egresos hospitalarios de pacientes con nutrición parenteral",
+          "exclusiones": "Reingreso antes de 15 días",
+          "poblacion": "Adultos y niños",
+          "periodicidad": "Trimestral",
+          "fuente": "Laboratorio; registros de egreso",
+          "meta": "≥ 90 %",
+          "responsable": "Soporte nutricional",
+          "base": "Modelo de atención a pacientes pediátricos y adultos con falla intestinal, HPTU, seguimiento ambulatorio"
+        },
+        {
+          "id": "fi-des-04",
+          "codigo": "FI-DES-04",
+          "tipo": "desempeño",
+          "origen": "manual",
+          "resultado": "Vitaminas anuales",
+          "definicion": "Vitaminas A, E, D y B12 medidas en los últimos 12 meses.",
+          "numerador": "Pacientes con niveles de vitaminas en los últimos 12 meses",
+          "denominador": "Pacientes activos",
+          "exclusiones": "Ingreso al programa en el periodo",
+          "poblacion": "Adultos y niños",
+          "periodicidad": "Anual",
+          "fuente": "Laboratorio",
+          "meta": "≥ 85 %",
+          "responsable": "Soporte nutricional",
+          "base": "Modelo de atención a pacientes pediátricos y adultos con falla intestinal, HPTU, exámenes de control ambulatorio"
+        },
         {
           "id": "fi-1",
           "resultado": "Rehabilitación nutricional",
           "definicion": "El paciente no depende de soporte nutricional: IMC > 20, albúmina > 3,5, transferrina 180, sin alteraciones electrolíticas",
           "fuente": "Clínicos y paraclínicos",
           "responsable": "Especialidades médicas",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "FI-RES-01",
+          "origen": "borrador"
         },
         {
           "id": "fi-2",
@@ -472,7 +1376,9 @@
           "definicion": "Cierre quirúrgico o con manejo médico en los pacientes con fístulas",
           "fuente": "Revisión de historia clínica anual o semestral",
           "responsable": "Especialidades médicas",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "FI-RES-02",
+          "origen": "borrador"
         },
         {
           "id": "fi-3",
@@ -480,10 +1386,14 @@
           "definicion": "Sin NPT o NPT parcial en el tiempo",
           "fuente": "Historia clínica: duración en días de la NPT",
           "responsable": "Especialidades médicas",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "FI-RES-03",
+          "origen": "borrador"
         }
       ],
-      "estado": "borrador"
+      "estado": "borrador",
+      "nota_guia": "Fichas tomadas del modelo institucional de falla intestinal para recuperación nutricional (adultos y niños).",
+      "piloto": true
     },
     {
       "id": "ame",
@@ -501,6 +1411,142 @@
         }
       ],
       "indicadores": [
+        {
+          "id": "ame-adh-01",
+          "codigo": "AME-ADH-01",
+          "tipo": "adherencia",
+          "origen": "guia",
+          "resultado": "Confirmación molecular con número de copias de SMN2",
+          "definicion": "MLPA de SMN1 (deleción o mutación) y número de copias de SMN2 documentados en la historia clínica.",
+          "numerador": "Pacientes con confirmación molecular y número de copias de SMN2 documentados",
+          "denominador": "Pacientes activos con diagnóstico de AME",
+          "exclusiones": "—",
+          "poblacion": "Niños y adultos",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica: genética",
+          "meta": "100 %",
+          "responsable": "Neuropediatría / Neurología",
+          "base": "Guía institucional GA-DPE-145 v3 (2021), Atención a pacientes con atrofia muscular espinal, sección 5.3.1"
+        },
+        {
+          "id": "ame-adh-02",
+          "codigo": "AME-ADH-02",
+          "tipo": "adherencia",
+          "origen": "guia",
+          "resultado": "Laboratorios antes de cada aplicación de nusinersen",
+          "definicion": "Hemograma, coagulación (INR, TP, TTP), función hepática, función renal y proteinuria previos a cada dosis.",
+          "numerador": "Aplicaciones con los cinco grupos de laboratorio previos",
+          "denominador": "Aplicaciones de nusinersen en el periodo",
+          "exclusiones": "—",
+          "poblacion": "Pacientes con nusinersen",
+          "periodicidad": "Semestral",
+          "fuente": "Historia clínica: laboratorio y nota de aplicación",
+          "meta": "≥ 95 %",
+          "responsable": "Neuropediatría",
+          "base": "Guía institucional GA-DPE-145 v3 (2021), Atención a pacientes con atrofia muscular espinal, sección 5.4.1.1"
+        },
+        {
+          "id": "ame-adh-06",
+          "codigo": "AME-ADH-03",
+          "tipo": "adherencia",
+          "origen": "guia",
+          "resultado": "Esquema de vacunación completo",
+          "definicion": "Esquema de inmunización completo para la edad documentado en la historia clínica.",
+          "numerador": "Pacientes con esquema completo documentado",
+          "denominador": "Pacientes activos",
+          "exclusiones": "Contraindicación documentada",
+          "poblacion": "Niños",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica / carné de vacunación",
+          "meta": "≥ 95 %",
+          "responsable": "Neuropediatría",
+          "base": "Guía institucional GA-DPE-145 v3 (2021), Atención a pacientes con atrofia muscular espinal, sección 5.4"
+        },
+        {
+          "id": "ame-adh-07",
+          "codigo": "AME-ADH-07",
+          "tipo": "adherencia",
+          "origen": "manual",
+          "resultado": "Caso discutido en staff",
+          "definicion": "Pacientes cuyo caso se discutió en el staff semanal de errores innatos del metabolismo, con acta y plan de manejo (el modelo indica que todos los pacientes se comentan en el grupo).",
+          "numerador": "Pacientes con discusión en staff documentada en acta",
+          "denominador": "Pacientes activos",
+          "exclusiones": "—",
+          "poblacion": "Adultos y niños",
+          "periodicidad": "Anual",
+          "fuente": "Actas del staff; historia clínica",
+          "meta": "100 %",
+          "responsable": "Genética / Neurología",
+          "base": "Modelo de atención integral a pacientes con enfermedades neurometabólicas, HPTU (MS-DMD-180, 2024), criterios de staff de decisión"
+        },
+        {
+          "id": "ame-adh-03",
+          "codigo": "AME-DES-01",
+          "tipo": "desempeño",
+          "origen": "guia",
+          "resultado": "Aplicación oportuna de nusinersen",
+          "definicion": "Dosis de mantenimiento aplicada cada 4 meses, dentro de una ventana de tolerancia sobre la fecha prevista.",
+          "numerador": "Dosis de mantenimiento aplicadas dentro de la ventana (fecha prevista ± 14 días, por validar)",
+          "denominador": "Dosis de mantenimiento previstas en el periodo",
+          "exclusiones": "Suspensión por decisión clínica documentada",
+          "poblacion": "Pacientes con nusinersen",
+          "periodicidad": "Semestral",
+          "fuente": "Notas de aplicación y registro de dispensación",
+          "meta": "≥ 90 %",
+          "responsable": "Neuropediatría / Gestión",
+          "base": "Guía institucional GA-DPE-145 v3 (2021), Atención a pacientes con atrofia muscular espinal, sección 5.4.1.1"
+        },
+        {
+          "id": "ame-adh-04",
+          "codigo": "AME-DES-02",
+          "tipo": "desempeño",
+          "origen": "guia",
+          "resultado": "Escala motora según cronograma",
+          "definicion": "Escala motora estandarizada según tipo y edad (HINE-2, CHOP-INTEND o HFMSE) registrada en cada aplicación o al menos cada 4 meses, con evaluación de respuesta anual.",
+          "numerador": "Pacientes con escala motora registrada en cada periodo de 4 meses",
+          "denominador": "Pacientes en terapia modificadora",
+          "exclusiones": "—",
+          "poblacion": "Niños y adultos en terapia modificadora",
+          "periodicidad": "Semestral",
+          "fuente": "Base de AME del programa; notas de neurología y fisiatría",
+          "meta": "≥ 90 %",
+          "responsable": "Neuropediatría / Fisiatría",
+          "base": "Guía institucional GA-DPE-145 v3 (2021), Atención a pacientes con atrofia muscular espinal, sección 5.4.1 y anexos 5.5"
+        },
+        {
+          "id": "ame-adh-05",
+          "codigo": "AME-DES-03",
+          "tipo": "desempeño",
+          "origen": "guia",
+          "resultado": "Monitoreo respiratorio en AME tipos 1 y 2",
+          "definicion": "Oximetría y capnografía nocturnas (EtCO₂ o transcutánea) o polisomnografía en los últimos 12 meses.",
+          "numerador": "Pacientes tipo 1 o 2 con monitoreo respiratorio nocturno en los últimos 12 meses",
+          "denominador": "Pacientes activos con AME tipo 1 o 2",
+          "exclusiones": "—",
+          "poblacion": "Niños y adultos tipos 1 y 2",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica: neumología y laboratorio de sueño",
+          "meta": "≥ 80 %",
+          "responsable": "Neumología pediátrica",
+          "base": "Guía institucional GA-DPE-145 v3 (2021), Atención a pacientes con atrofia muscular espinal, sección 5.4.3.1"
+        },
+        {
+          "id": "ame-des-04",
+          "codigo": "AME-DES-04",
+          "tipo": "desempeño",
+          "origen": "manual",
+          "resultado": "Seguimiento neuromuscular periódico",
+          "definicion": "Consulta de neurología y de neumología al menos cada 6 meses.",
+          "numerador": "Pacientes con consulta de neurología y de neumología en los últimos 6 meses",
+          "denominador": "Pacientes activos",
+          "exclusiones": "—",
+          "poblacion": "Adultos y niños",
+          "periodicidad": "Semestral",
+          "fuente": "Agenda e historia clínica",
+          "meta": "≥ 85 % (intervalo por validar con el equipo)",
+          "responsable": "Neurología / Neumología / Gestión",
+          "base": "Modelo de atención integral a pacientes con enfermedades neurometabólicas, HPTU (MS-DMD-180, 2024), enfermedades neuromusculares (tabla de seguimiento)"
+        },
         {
           "id": "ame-1",
           "codigo": "AME-RES-01",
@@ -537,7 +1583,8 @@
         }
       ],
       "estado": "borrador",
-      "piloto": false
+      "piloto": true,
+      "nota_guia": "Fichas tomadas de la guía institucional de AME (GA-DPE-145, pediátrica) y del modelo de enfermedades neurometabólicas (2024). Las que venían de referencias internacionales siguen archivadas para los expertos."
     },
     {
       "id": "duchenne",
@@ -546,18 +1593,44 @@
       "poblacion": "Adultos y niños",
       "guias": [
         {
-          "titulo": "Neurometabólicas 2024",
+          "titulo": "Modelo de atención: enfermedades neurometabólicas (2024)",
           "url": "https://drive.google.com/file/d/16hOTLk7Rlgp6JtAg1i45aXX-NxzAc7Pi/view"
         }
       ],
       "indicadores": [
         {
-          "id": "duchenne-1",
-          "resultado": "Estabilización en escalas motoras",
-          "definicion": "",
-          "fuente": "",
-          "responsable": "Pediatría",
-          "tipo": "resultado"
+          "id": "dmd-adh-01",
+          "codigo": "DMD-ADH-01",
+          "tipo": "adherencia",
+          "origen": "manual",
+          "resultado": "Confirmación molecular",
+          "definicion": "Pacientes con estudio molecular confirmatorio documentado.",
+          "numerador": "Pacientes con estudio molecular documentado",
+          "denominador": "Pacientes activos",
+          "exclusiones": "—",
+          "poblacion": "Adultos y niños",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica; laboratorio",
+          "meta": "100 %",
+          "responsable": "Genética / Neurología",
+          "base": "Modelo de atención integral a pacientes con enfermedades neurometabólicas, HPTU (MS-DMD-180, 2024), enfermedades neuromusculares"
+        },
+        {
+          "id": "dmd-adh-02",
+          "codigo": "DMD-ADH-02",
+          "tipo": "adherencia",
+          "origen": "manual",
+          "resultado": "Caso discutido en staff",
+          "definicion": "Pacientes cuyo caso se discutió en el staff semanal de errores innatos del metabolismo, con acta y plan de manejo (el modelo indica que todos los pacientes se comentan en el grupo).",
+          "numerador": "Pacientes con discusión en staff documentada en acta",
+          "denominador": "Pacientes activos",
+          "exclusiones": "—",
+          "poblacion": "Adultos y niños",
+          "periodicidad": "Anual",
+          "fuente": "Actas del staff; historia clínica",
+          "meta": "100 %",
+          "responsable": "Genética / Neurología",
+          "base": "Modelo de atención integral a pacientes con enfermedades neurometabólicas, HPTU (MS-DMD-180, 2024), criterios de staff de decisión"
         },
         {
           "id": "duchenne-4",
@@ -565,10 +1638,41 @@
           "definicion": "",
           "fuente": "",
           "responsable": "Pediatría",
-          "tipo": "resultado"
+          "tipo": "adherencia",
+          "codigo": "DMD-ADH-03",
+          "origen": "borrador"
+        },
+        {
+          "id": "dmd-des-01",
+          "codigo": "DMD-DES-01",
+          "tipo": "desempeño",
+          "origen": "manual",
+          "resultado": "Seguimiento neuromuscular periódico",
+          "definicion": "Consulta de neurología y de neumología al menos cada 6 meses.",
+          "numerador": "Pacientes con consulta de neurología y de neumología en los últimos 6 meses",
+          "denominador": "Pacientes activos",
+          "exclusiones": "—",
+          "poblacion": "Adultos y niños",
+          "periodicidad": "Semestral",
+          "fuente": "Agenda e historia clínica",
+          "meta": "≥ 85 % (intervalo por validar con el equipo)",
+          "responsable": "Neurología / Neumología / Gestión",
+          "base": "Modelo de atención integral a pacientes con enfermedades neurometabólicas, HPTU (MS-DMD-180, 2024), enfermedades neuromusculares (tabla de seguimiento)"
+        },
+        {
+          "id": "duchenne-1",
+          "resultado": "Estabilización en escalas motoras",
+          "definicion": "",
+          "fuente": "",
+          "responsable": "Pediatría",
+          "tipo": "resultado",
+          "codigo": "DMD-RES-01",
+          "origen": "borrador"
         }
       ],
-      "estado": "borrador"
+      "estado": "borrador",
+      "nota_guia": "Fichas tomadas del modelo institucional de enfermedades neurometabólicas (2024), grupo de enfermedades neuromusculares, y del borrador del programa. Las tablas de seguimiento del documento son difíciles de leer: conviene confirmar los intervalos con el equipo.",
+      "piloto": true
     },
     {
       "id": "mucopolisacaridosis",
@@ -577,21 +1681,76 @@
       "poblacion": "Adultos y niños",
       "guias": [
         {
-          "titulo": "Neurometabólicas 2024",
+          "titulo": "Modelo de atención: enfermedades neurometabólicas (2024)",
           "url": "https://drive.google.com/file/d/16hOTLk7Rlgp6JtAg1i45aXX-NxzAc7Pi/view"
         }
       ],
       "indicadores": [
+        {
+          "id": "mps-adh-01",
+          "codigo": "MPS-ADH-01",
+          "tipo": "adherencia",
+          "origen": "manual",
+          "resultado": "Confirmación enzimática y molecular",
+          "definicion": "Pacientes con estudio enzimático y estudio molecular documentados (una vez en la vida).",
+          "numerador": "Pacientes con ambos estudios documentados",
+          "denominador": "Pacientes activos",
+          "exclusiones": "—",
+          "poblacion": "Adultos y niños",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica; laboratorio",
+          "meta": "100 %",
+          "responsable": "Genética",
+          "base": "Modelo de atención integral a pacientes con enfermedades neurometabólicas, HPTU (MS-DMD-180, 2024), enfermedades neurodegenerativas (lisosomales)"
+        },
+        {
+          "id": "mps-adh-02",
+          "codigo": "MPS-ADH-02",
+          "tipo": "adherencia",
+          "origen": "manual",
+          "resultado": "Caso discutido en staff",
+          "definicion": "Pacientes cuyo caso se discutió en el staff semanal de errores innatos del metabolismo, con acta y plan de manejo (el modelo indica que todos los pacientes se comentan en el grupo).",
+          "numerador": "Pacientes con discusión en staff documentada en acta",
+          "denominador": "Pacientes activos",
+          "exclusiones": "—",
+          "poblacion": "Adultos y niños",
+          "periodicidad": "Anual",
+          "fuente": "Actas del staff; historia clínica",
+          "meta": "100 %",
+          "responsable": "Genética / Neurología",
+          "base": "Modelo de atención integral a pacientes con enfermedades neurometabólicas, HPTU (MS-DMD-180, 2024), criterios de staff de decisión"
+        },
+        {
+          "id": "mps-des-01",
+          "codigo": "MPS-DES-01",
+          "tipo": "desempeño",
+          "origen": "manual",
+          "resultado": "Consulta de neurología periódica",
+          "definicion": "Consulta de neurología cada 3 meses (o según la condición) después del primer año de vida.",
+          "numerador": "Pacientes con consulta de neurología en los últimos 3 meses",
+          "denominador": "Pacientes activos",
+          "exclusiones": "—",
+          "poblacion": "Adultos y niños",
+          "periodicidad": "Trimestral",
+          "fuente": "Agenda e historia clínica",
+          "meta": "≥ 85 % (intervalo por validar con el equipo)",
+          "responsable": "Neurología / Gestión",
+          "base": "Modelo de atención integral a pacientes con enfermedades neurometabólicas, HPTU (MS-DMD-180, 2024), enfermedades neurodegenerativas (tabla de seguimiento)"
+        },
         {
           "id": "mps-1",
           "resultado": "Estabilización o ganancia en el test de caminata",
           "definicion": "",
           "fuente": "Test de caminata de 6 minutos",
           "responsable": "Pediatría",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "MPS-RES-01",
+          "origen": "borrador"
         }
       ],
-      "estado": "borrador"
+      "estado": "borrador",
+      "nota_guia": "Fichas tomadas del modelo institucional de enfermedades neurometabólicas (2024), grupo de enfermedades neurodegenerativas y lisosomales. Las tablas de seguimiento del documento son difíciles de leer: conviene confirmar los intervalos con el equipo.",
+      "piloto": true
     },
     {
       "id": "metabolismo-intermediario",
@@ -601,26 +1760,130 @@
       "poblacion": "Adultos y niños",
       "guias": [
         {
+          "titulo": "Modelo de atención: enfermedades neurometabólicas (2024)",
+          "url": "https://drive.google.com/file/d/16hOTLk7Rlgp6JtAg1i45aXX-NxzAc7Pi/view"
+        },
+        {
           "titulo": "Guía de atención: homocistinuria",
           "url": "https://docs.google.com/document/d/1FBNeRkNBBMag10UFMf3FmlZoIkz1MaWOg4smIlrjfyg/edit"
         },
         {
           "titulo": "Guía de atención: hiperglicinemia no cetósica",
           "url": "https://docs.google.com/document/d/1zgS6Ouj-DroGoQDidVXsuX7e8z7Z87bUY5LfoJQE9DU/edit"
-        },
-        {
-          "titulo": "Neurometabólicas 2024",
-          "url": "https://drive.google.com/file/d/16hOTLk7Rlgp6JtAg1i45aXX-NxzAc7Pi/view"
         }
       ],
       "indicadores": [
+        {
+          "id": "emi-adh-01",
+          "codigo": "EMI-ADH-01",
+          "tipo": "adherencia",
+          "origen": "manual",
+          "resultado": "Caso discutido en staff",
+          "definicion": "Pacientes cuyo caso se discutió en el staff semanal de errores innatos del metabolismo, con acta y plan de manejo (el modelo indica que todos los pacientes se comentan en el grupo).",
+          "numerador": "Pacientes con discusión en staff documentada en acta",
+          "denominador": "Pacientes activos",
+          "exclusiones": "—",
+          "poblacion": "Adultos y niños",
+          "periodicidad": "Anual",
+          "fuente": "Actas del staff; historia clínica",
+          "meta": "100 %",
+          "responsable": "Genética / Neurología",
+          "base": "Modelo de atención integral a pacientes con enfermedades neurometabólicas, HPTU (MS-DMD-180, 2024), criterios de staff de decisión"
+        },
+        {
+          "id": "emi-adh-02",
+          "codigo": "EMI-ADH-02",
+          "tipo": "adherencia",
+          "origen": "guia",
+          "resultado": "Homocistinuria: monitoreo con betaína",
+          "definicion": "Pacientes con homocistinuria en tratamiento con betaína con homocisteína y metionina plasmáticas medidas en el periodo.",
+          "numerador": "Pacientes con homocisteína y metionina medidas",
+          "denominador": "Pacientes activos con homocistinuria y betaína",
+          "exclusiones": "—",
+          "poblacion": "Adultos y niños",
+          "periodicidad": "Semestral",
+          "fuente": "Laboratorio",
+          "meta": "100 %",
+          "responsable": "Genética / Nutrición",
+          "base": "Guía de atención: homocistinuria, HPTU (GA-DPE-126, 2022), sección 5"
+        },
+        {
+          "id": "emi-adh-03",
+          "codigo": "EMI-ADH-03",
+          "tipo": "adherencia",
+          "origen": "guia",
+          "resultado": "Homocistinuria: respuesta a piridoxina",
+          "definicion": "Pacientes con homocistinuria con la respuesta a vitamina B6 (respondedor o no respondedor) documentada, y vitamina B12 vigilada si reciben piridoxina.",
+          "numerador": "Pacientes con clasificación documentada",
+          "denominador": "Pacientes activos con homocistinuria",
+          "exclusiones": "—",
+          "poblacion": "Adultos y niños",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica; laboratorio",
+          "meta": "≥ 95 %",
+          "responsable": "Genética",
+          "base": "Guía de atención: homocistinuria, HPTU (GA-DPE-126, 2022), sección 5.7.1"
+        },
+        {
+          "id": "emi-adh-04",
+          "codigo": "EMI-ADH-04",
+          "tipo": "adherencia",
+          "origen": "guia",
+          "resultado": "Hiperglicinemia: EEG y resonancia según la guía",
+          "definicion": "Pacientes con hiperglicinemia no cetósica con electroencefalograma y RM de cráneo con espectroscopia según la indicación de la guía. Son los dos indicadores de la guía.",
+          "numerador": "Pacientes con EEG y RM con espectroscopia según indicación",
+          "denominador": "Pacientes con hiperglicinemia no cetósica atendidos en el periodo",
+          "exclusiones": "—",
+          "poblacion": "Niños",
+          "periodicidad": "Anual",
+          "fuente": "Historia clínica (auditoría PAMEC)",
+          "meta": "≥ 90 %",
+          "responsable": "Neurología pediátrica / Genética",
+          "base": "Guía de atención: hiperglicinemia no cetósica, HPTU (GA-DPE-128, 2023), indicadores"
+        },
+        {
+          "id": "emi-adh-05",
+          "codigo": "EMI-ADH-05",
+          "tipo": "adherencia",
+          "origen": "guia",
+          "resultado": "Hiperglicinemia: sin ácido valproico",
+          "definicion": "Pacientes con hiperglicinemia no cetósica sin ácido valproico, que aumenta la glicina y empeora las convulsiones.",
+          "numerador": "Pacientes sin ácido valproico en la fórmula",
+          "denominador": "Pacientes activos con hiperglicinemia no cetósica",
+          "exclusiones": "—",
+          "poblacion": "Niños",
+          "periodicidad": "Semestral",
+          "fuente": "Fórmula",
+          "meta": "100 %",
+          "responsable": "Neurología pediátrica",
+          "base": "Guía de atención: hiperglicinemia no cetósica, HPTU (GA-DPE-128, 2023), contenido"
+        },
+        {
+          "id": "emi-des-01",
+          "codigo": "EMI-DES-01",
+          "tipo": "desempeño",
+          "origen": "manual",
+          "resultado": "Control metabólico periódico",
+          "definicion": "Hemograma, función hepática y renal, amonio, gases, cuerpos cetónicos, aminoácidos y ácidos orgánicos cada 3 meses en el primer año de vida y luego cada 6 meses.",
+          "numerador": "Pacientes con control dentro del intervalo que les corresponde",
+          "denominador": "Pacientes activos con enfermedad metabólica",
+          "exclusiones": "Ingreso al programa en el periodo",
+          "poblacion": "Adultos y niños",
+          "periodicidad": "Semestral",
+          "fuente": "Laboratorio",
+          "meta": "≥ 90 %",
+          "responsable": "Genética / Hepatología",
+          "base": "Modelo de atención integral a pacientes con enfermedades neurometabólicas, HPTU (MS-DMD-180, 2024), enfermedades metabólicas (exámenes de control)"
+        },
         {
           "id": "emi-1",
           "resultado": "Adherencia a la dieta (fórmulas especiales)",
           "definicion": "",
           "fuente": "",
           "responsable": "Pediatría",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "EMI-RES-01",
+          "origen": "borrador"
         },
         {
           "id": "emi-2",
@@ -628,7 +1891,9 @@
           "definicion": "Aminoácidos",
           "fuente": "",
           "responsable": "Pediatría",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "EMI-RES-02",
+          "origen": "borrador"
         },
         {
           "id": "emi-3",
@@ -636,10 +1901,14 @@
           "definicion": "Fenilcetonuria: epilepsia, autismo, discapacidad. Homocistinuria: trombosis cerebral, luxación del cristalino. Hiperglicinemia: control de crisis",
           "fuente": "",
           "responsable": "Pediatría",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "EMI-RES-03",
+          "origen": "borrador"
         }
       ],
-      "estado": "borrador"
+      "estado": "borrador",
+      "nota_guia": "Fichas tomadas del modelo institucional de enfermedades neurometabólicas (2024) y de las guías institucionales de homocistinuria y de hiperglicinemia no cetósica.",
+      "piloto": true
     },
     {
       "id": "neurofibromatosis",
@@ -660,7 +1929,9 @@
           "definicion": "",
           "fuente": "",
           "responsable": "Pediatría",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "NF-RES-01",
+          "origen": "borrador"
         },
         {
           "id": "nf-2",
@@ -668,10 +1939,13 @@
           "definicion": "",
           "fuente": "",
           "responsable": "Pediatría",
-          "tipo": "resultado"
+          "tipo": "resultado",
+          "codigo": "NF-RES-02",
+          "origen": "borrador"
         }
       ],
-      "estado": "borrador"
+      "estado": "borrador",
+      "nota_guia": "El modelo de enfermedades neurometabólicas no incluye la neurofibromatosis: por ahora solo están los indicadores del borrador del programa."
     }
   ],
   "transversales": {
