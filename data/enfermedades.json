@@ -1,5 +1,5 @@
 {
-  "version": "0.4",
+  "version": "0.5",
   "fecha": "2026-11-09",
   "fuente": "Hoja «Indicadores» del libro INDICADORES DE ENFERMEDADES HUÉRFANAS (borrador de medicina interna)",
   "enfermedades": [
@@ -12,14 +12,6 @@
         {
           "titulo": "Manual modelo de atención acromegalia y Cushing (2021)",
           "url": "https://drive.google.com/file/d/1Qs0Vq0Utca8I9fZQ1YJBoIRhIfHHt8cb/view"
-        },
-        {
-          "titulo": "Endocrine Society 2014",
-          "url": "https://doi.org/10.1210/jc.2014-2700"
-        },
-        {
-          "titulo": "Consenso de comorbilidades 2020",
-          "url": "https://doi.org/10.1210/clinem/dgz096"
         }
       ],
       "indicadores": [
@@ -27,7 +19,7 @@
           "id": "acr-adh-01",
           "codigo": "ACR-ADH-01",
           "tipo": "adherencia",
-          "origen": "guia",
+          "origen": "manual",
           "resultado": "Plan terapéutico documentado",
           "definicion": "Pacientes en tratamiento médico con objetivos terapéuticos, plan de seguimiento y criterios de escalonamiento, cambio o suspensión documentados.",
           "numerador": "Pacientes en tratamiento médico con los tres elementos del plan documentados",
@@ -44,7 +36,7 @@
           "id": "acr-adh-02",
           "codigo": "ACR-ADH-02",
           "tipo": "adherencia",
-          "origen": "guia",
+          "origen": "manual",
           "resultado": "Escalonamiento discutido en junta",
           "definicion": "Pacientes con enfermedad no controlada cuyo cambio o escalonamiento de tratamiento fue discutido en la junta de neuroendocrinología en los 3 meses siguientes.",
           "numerador": "Pacientes no controlados con discusión en junta en ≤ 3 meses",
@@ -58,44 +50,10 @@
           "base": "Manual del modelo de atención de acromegalia y Cushing, HPTU (2021), sección 4"
         },
         {
-          "id": "acr-adh-03",
-          "codigo": "ACR-ADH-03",
-          "tipo": "adherencia",
-          "origen": "guia",
-          "resultado": "Tamizaje anual de comorbilidades",
-          "definicion": "En los últimos 12 meses: presión arterial, HbA1c o glucemia y perfil lipídico registrados; y evaluación de apnea del sueño documentada al menos una vez.",
-          "numerador": "Pacientes activos con los cuatro componentes documentados",
-          "denominador": "Pacientes activos con al menos una consulta en los últimos 12 meses",
-          "exclusiones": "—",
-          "poblacion": "Adultos",
-          "periodicidad": "Anual",
-          "fuente": "Historia clínica: signos vitales, laboratorio, notas",
-          "meta": "≥ 80 %",
-          "responsable": "Endocrinología",
-          "base": "Manual del modelo de atención de acromegalia y Cushing, HPTU (2021), objetivo 2.1 (comorbilidades); Endocrine Society 2014 (Katznelson et al., JCEM 2014;99:3933–51), recomendaciones 2.1–2.2; Consenso de comorbilidades (Giustina et al., JCEM 2020;105:e937–46)"
-        },
-        {
-          "id": "acr-adh-04",
-          "codigo": "ACR-ADH-04",
-          "tipo": "adherencia",
-          "origen": "guia-int",
-          "resultado": "Colonoscopia documentada",
-          "definicion": "Al menos una colonoscopia documentada desde el diagnóstico; repetición según hallazgos.",
-          "numerador": "Pacientes activos con colonoscopia documentada",
-          "denominador": "Pacientes activos",
-          "exclusiones": "Contraindicación documentada",
-          "poblacion": "Adultos",
-          "periodicidad": "Anual",
-          "fuente": "Historia clínica: procedimientos",
-          "meta": "≥ 80 %",
-          "responsable": "Endocrinología",
-          "base": "Endocrine Society 2014 (Katznelson et al., JCEM 2014;99:3933–51), recomendación 2.3"
-        },
-        {
           "id": "acr-des-01",
           "codigo": "ACR-DES-01",
           "tipo": "desempeño",
-          "origen": "guia",
+          "origen": "manual",
           "resultado": "Control bioquímico periódico",
           "definicion": "IGF-1 medida dentro del intervalo que corresponde al estado del paciente: en tratamiento médico o enfermedad activa, cada 6 meses; en remisión, cada 12 meses (intervalos por confirmar con la ruta del manual).",
           "numerador": "Pacientes con IGF-1 medida dentro del intervalo que les corresponde",
@@ -112,7 +70,7 @@
           "id": "acr-des-02",
           "codigo": "ACR-DES-02",
           "tipo": "desempeño",
-          "origen": "guia",
+          "origen": "manual",
           "resultado": "Resonancia de seguimiento",
           "definicion": "Resonancia de silla turca dentro del intervalo que corresponde al estado del paciente: tumor residual o tratamiento médico, cada 12 meses; remisión estable, según la ruta del manual (intervalos por confirmar).",
           "numerador": "Pacientes con resonancia dentro del intervalo que les corresponde",
@@ -124,23 +82,6 @@
           "meta": "≥ 85 %",
           "responsable": "Endocrinología / Neurocirugía",
           "base": "Manual del modelo de atención de acromegalia y Cushing, HPTU (2021), sección 5.1 (rutas de atención)"
-        },
-        {
-          "id": "acr-des-03",
-          "codigo": "ACR-DES-03",
-          "tipo": "desempeño",
-          "origen": "guia-int",
-          "resultado": "IGF-1 con el mismo ensayo",
-          "definicion": "Controles de IGF-1 del periodo procesados en el laboratorio de referencia del programa, para que sean comparables en el tiempo.",
-          "numerador": "Controles de IGF-1 hechos en el laboratorio de referencia",
-          "denominador": "Controles de IGF-1 del periodo",
-          "exclusiones": "—",
-          "poblacion": "Adultos",
-          "periodicidad": "Anual",
-          "fuente": "Laboratorio",
-          "meta": "≥ 90 %",
-          "responsable": "Gestión del programa",
-          "base": "Endocrine Society 2014 (Katznelson et al., JCEM 2014;99:3933–51), recomendación 3.3"
         },
         {
           "id": "acromegalia-1",
@@ -178,7 +119,7 @@
         }
       ],
       "estado": "borrador",
-      "nota_guia": "Base: manual institucional del modelo de atención de acromegalia y Cushing (2021) y Endocrine Society 2014. La cohorte está madura y casi sin cirugías, por eso los indicadores miden el seguimiento periódico y no el posoperatorio. Los intervalos de IGF-1 y resonancia están pendientes de confirmar con las rutas de atención del manual (sección 5.1).",
+      "nota_guia": "Indicadores tomados del manual institucional del modelo de atención de acromegalia y Cushing (2021) y del borrador del programa. Los intervalos de IGF-1 y resonancia están pendientes de confirmar con las rutas de atención del manual (sección 5.1).",
       "piloto": true
     },
     {
@@ -561,108 +502,6 @@
       ],
       "indicadores": [
         {
-          "id": "ame-adh-01",
-          "codigo": "AME-ADH-01",
-          "tipo": "adherencia",
-          "origen": "guia",
-          "resultado": "Confirmación molecular con número de copias de SMN2",
-          "definicion": "MLPA de SMN1 (deleción o mutación) y número de copias de SMN2 documentados en la historia clínica.",
-          "numerador": "Pacientes con confirmación molecular y número de copias de SMN2 documentados",
-          "denominador": "Pacientes activos con diagnóstico de AME",
-          "exclusiones": "—",
-          "poblacion": "Niños y adultos",
-          "periodicidad": "Anual",
-          "fuente": "Historia clínica: genética",
-          "meta": "100 %",
-          "responsable": "Neuropediatría / Neurología",
-          "base": "Guía institucional GA-DPE-145 v3 (2021), Atención a pacientes con atrofia muscular espinal, sección 5.3.1"
-        },
-        {
-          "id": "ame-adh-02",
-          "codigo": "AME-ADH-02",
-          "tipo": "adherencia",
-          "origen": "guia",
-          "resultado": "Laboratorios antes de cada aplicación de nusinersen",
-          "definicion": "Hemograma, coagulación (INR, TP, TTP), función hepática, función renal y proteinuria previos a cada dosis.",
-          "numerador": "Aplicaciones con los cinco grupos de laboratorio previos",
-          "denominador": "Aplicaciones de nusinersen en el periodo",
-          "exclusiones": "—",
-          "poblacion": "Pacientes con nusinersen",
-          "periodicidad": "Semestral",
-          "fuente": "Historia clínica: laboratorio y nota de aplicación",
-          "meta": "≥ 95 %",
-          "responsable": "Neuropediatría",
-          "base": "Guía institucional GA-DPE-145 v3 (2021), Atención a pacientes con atrofia muscular espinal, sección 5.4.1.1"
-        },
-        {
-          "id": "ame-adh-06",
-          "codigo": "AME-ADH-03",
-          "tipo": "adherencia",
-          "origen": "guia",
-          "resultado": "Esquema de vacunación completo",
-          "definicion": "Esquema de inmunización completo para la edad documentado en la historia clínica.",
-          "numerador": "Pacientes con esquema completo documentado",
-          "denominador": "Pacientes activos",
-          "exclusiones": "Contraindicación documentada",
-          "poblacion": "Niños",
-          "periodicidad": "Anual",
-          "fuente": "Historia clínica / carné de vacunación",
-          "meta": "≥ 95 %",
-          "responsable": "Neuropediatría",
-          "base": "Guía institucional GA-DPE-145 v3 (2021), Atención a pacientes con atrofia muscular espinal, sección 5.4"
-        },
-        {
-          "id": "ame-adh-03",
-          "codigo": "AME-DES-01",
-          "tipo": "desempeño",
-          "origen": "guia",
-          "resultado": "Aplicación oportuna de nusinersen",
-          "definicion": "Dosis de mantenimiento aplicada cada 4 meses, dentro de una ventana de tolerancia sobre la fecha prevista.",
-          "numerador": "Dosis de mantenimiento aplicadas dentro de la ventana (fecha prevista ± 14 días, por validar)",
-          "denominador": "Dosis de mantenimiento previstas en el periodo",
-          "exclusiones": "Suspensión por decisión clínica documentada",
-          "poblacion": "Pacientes con nusinersen",
-          "periodicidad": "Semestral",
-          "fuente": "Notas de aplicación y registro de dispensación",
-          "meta": "≥ 90 %",
-          "responsable": "Neuropediatría / Gestión",
-          "base": "Guía institucional GA-DPE-145 v3 (2021), Atención a pacientes con atrofia muscular espinal, sección 5.4.1.1"
-        },
-        {
-          "id": "ame-adh-04",
-          "codigo": "AME-DES-02",
-          "tipo": "desempeño",
-          "origen": "guia",
-          "resultado": "Escala motora según cronograma",
-          "definicion": "Escala motora estandarizada según tipo y edad (HINE-2, CHOP-INTEND o HFMSE) registrada en cada aplicación o al menos cada 4 meses, con evaluación de respuesta anual.",
-          "numerador": "Pacientes con escala motora registrada en cada periodo de 4 meses",
-          "denominador": "Pacientes en terapia modificadora",
-          "exclusiones": "—",
-          "poblacion": "Niños y adultos en terapia modificadora",
-          "periodicidad": "Semestral",
-          "fuente": "Base de AME del programa; notas de neurología y fisiatría",
-          "meta": "≥ 90 %",
-          "responsable": "Neuropediatría / Fisiatría",
-          "base": "Guía institucional GA-DPE-145 v3 (2021), Atención a pacientes con atrofia muscular espinal, sección 5.4.1 y anexos 5.5"
-        },
-        {
-          "id": "ame-adh-05",
-          "codigo": "AME-DES-03",
-          "tipo": "desempeño",
-          "origen": "guia",
-          "resultado": "Monitoreo respiratorio en AME tipos 1 y 2",
-          "definicion": "Oximetría y capnografía nocturnas (EtCO₂ o transcutánea) o polisomnografía en los últimos 12 meses.",
-          "numerador": "Pacientes tipo 1 o 2 con monitoreo respiratorio nocturno en los últimos 12 meses",
-          "denominador": "Pacientes activos con AME tipo 1 o 2",
-          "exclusiones": "—",
-          "poblacion": "Niños y adultos tipos 1 y 2",
-          "periodicidad": "Anual",
-          "fuente": "Historia clínica: neumología y laboratorio de sueño",
-          "meta": "≥ 80 %",
-          "responsable": "Neumología pediátrica",
-          "base": "Guía institucional GA-DPE-145 v3 (2021), Atención a pacientes con atrofia muscular espinal, sección 5.4.3.1"
-        },
-        {
           "id": "ame-1",
           "codigo": "AME-RES-01",
           "tipo": "resultado",
@@ -680,25 +519,8 @@
           "base": "Borrador del programa; umbrales de los ensayos de nusinersen (por validar)"
         },
         {
-          "id": "ame-des-02",
-          "codigo": "AME-RES-02",
-          "tipo": "resultado",
-          "origen": "referencia",
-          "resultado": "Libre de ventilación permanente",
-          "definicion": "Sin traqueostomía ni ventilación ≥ 16 horas al día por más de 21 días seguidos.",
-          "numerador": "Pacientes libres de ventilación permanente al cierre del periodo",
-          "denominador": "Pacientes activos con AME",
-          "exclusiones": "—",
-          "poblacion": "Niños y adultos",
-          "periodicidad": "Anual",
-          "fuente": "Historia clínica: neumología",
-          "meta": "Por definir",
-          "responsable": "Neumología / Neuropediatría",
-          "base": "Definición usada en los ensayos de nusinersen (por validar)"
-        },
-        {
           "id": "ame-4",
-          "codigo": "AME-RES-03",
+          "codigo": "AME-RES-02",
           "tipo": "resultado",
           "origen": "borrador",
           "resultado": "Necesidad nueva de traqueostomía o gastrostomía",
@@ -715,8 +537,7 @@
         }
       ],
       "estado": "borrador",
-      "nota_guia": "La guía institucional aplica a población pediátrica. Para los adultos con AME se proponen las mismas fichas con base en los estándares internacionales de cuidado (referencias de la propia guía); el equipo debe validar si aplican.",
-      "piloto": true
+      "piloto": false
     },
     {
       "id": "duchenne",
