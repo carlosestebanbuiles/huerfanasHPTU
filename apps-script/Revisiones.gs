@@ -116,3 +116,84 @@ function doGet(e) {
   out.total = Object.keys(envios).length;
   return respuesta_(out);
 }
+
+/**
+ * Crea (o rehace) la pestaña «Monitoreo»: resumen de las revisiones por enfermedad,
+ * por indicador y lista de indicadores nuevos propuestos. Todo son fórmulas sobre la
+ * pestaña «Revisiones», así que se actualiza sola con cada envío.
+ * Ejecutar una vez desde el editor: seleccionar crearMonitoreo y pulsar Ejecutar.
+ * Excluye las enfermedades que empiezan por PRUEBA.
+ */
+function crearMonitoreo() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  obtenerHoja_();
+  const vieja = ss.getSheetByName('Monitoreo');
+  if (vieja) ss.deleteSheet(vieja);
+  const m = ss.insertSheet('Monitoreo', 0);
+  const R = "'" + PESTANA + "'!";
+  const col = function (n) { const l = String.fromCharCode(65 + COLUMNAS.indexOf(n)); return R + l + '2:' + l; };
+  const ENF = col('Enfermedad'), ENV = col('Enviado'), REV = col('Revisor'), EQ = col('Equipo'),
+    IND = col('Indicador'), TIPO = col('Tipo'), DEC = col('Decisión'), TXT = col('Resultado en salud'),
+    COM = col('Comentario'), GEN = col('Comentario general'), COD = col('Código'),
+    TIND = col('Tipo de indicador'), REC = col('Recibido');
+  const NOPRUEBA = 'NOT(REGEXMATCH(' + ENF + ',"(?i)^PRUEBA"))';
+  const fila = function (expr) { return '=BYROW(A6:A40,LAMBDA(e,IF(e="",,' + expr + ')))'; };
+
+  m.getRange('A1').setValue('Monitoreo de las revisiones de indicadores').setFontSize(14).setFontWeight('bold');
+  m.getRange('A2').setValue('Se actualiza con cada envío del portal. No incluye las enfermedades que empiezan por «PRUEBA».').setFontColor('#625E78');
+
+  // 1. Por enfermedad (A4:L40)
+  m.getRange('A4').setValue('Por enfermedad');
+  m.getRange('A5:L5').setValues([['Enfermedad', 'Envíos', 'Revisores', 'Revisores de gestión', 'Revisores asistenciales',
+    'Indicadores revisados', 'De acuerdo', 'Ajustar', 'Eliminar', 'Indicadores nuevos', 'Comentarios generales', 'Último envío']]);
+  m.getRange('A6').setFormula('=IFERROR(SORT(UNIQUE(FILTER(' + ENF + ',' + ENF + '<>"",' + NOPRUEBA + '))),"Sin revisiones todavía")');
+  m.getRange('B6').setFormula(fila('COUNTUNIQUEIFS(' + ENV + ',' + ENF + ',e)'));
+  m.getRange('C6').setFormula(fila('COUNTUNIQUEIFS(' + REV + ',' + ENF + ',e)'));
+  m.getRange('D6').setFormula(fila('COUNTUNIQUEIFS(' + REV + ',' + ENF + ',e,' + EQ + ',"Gestión")'));
+  m.getRange('E6').setFormula(fila('COUNTUNIQUEIFS(' + REV + ',' + ENF + ',e,' + EQ + ',"Asistencial")'));
+  m.getRange('F6').setFormula(fila('COUNTUNIQUEIFS(' + IND + ',' + ENF + ',e,' + TIPO + ',"existente")'));
+  m.getRange('G6').setFormula(fila('COUNTIFS(' + ENF + ',e,' + DEC + ',"acuerdo")'));
+  m.getRange('H6').setFormula(fila('COUNTIFS(' + ENF + ',e,' + DEC + ',"ajustar")'));
+  m.getRange('I6').setFormula(fila('COUNTIFS(' + ENF + ',e,' + DEC + ',"eliminar")'));
+  m.getRange('J6').setFormula(fila('COUNTIFS(' + ENF + ',e,' + TIPO + ',"nuevo")'));
+  m.getRange('K6').setFormula(fila('COUNTUNIQUEIFS(' + GEN + ',' + ENF + ',e,' + GEN + ',"<>")'));
+  m.getRange('L6').setFormula(fila('MAXIFS(' + REC + ',' + ENF + ',e)'));
+  m.getRange('L6:L40').setNumberFormat('yyyy-mm-dd hh:mm');
+
+  // 2. Indicadores nuevos propuestos (N4:T)
+  m.getRange('N4').setValue('Indicadores nuevos propuestos');
+  m.getRange('N5:T5').setValues([['Recibido', 'Enfermedad', 'Revisor', 'Equipo', 'Indicador propuesto', 'Tipo de indicador', 'Justificación']]);
+  m.getRange('N6').setFormula('=IFERROR(SORT(FILTER({' + [REC, ENF, REV, EQ, TXT, TIND, COM].join(',') + '},' +
+    TIPO + '="nuevo",' + NOPRUEBA + '),1,FALSE),"Sin propuestas todavía")');
+  m.getRange('N6:N').setNumberFormat('yyyy-mm-dd hh:mm');
+
+  // 3. Por indicador (A44:J)
+  m.getRange('A43').setValue('Por indicador');
+  m.getRange('A44:J44').setValues([['Enfermedad', 'Código', 'Id', 'Indicador (texto del primer envío)', 'Revisiones',
+    'De acuerdo', 'Ajustar', 'Eliminar', '% de acuerdo', 'Con comentario']]);
+  m.getRange('A45').setFormula('=IFERROR(SORT(UNIQUE(FILTER({' + ENF + ',' + COD + ',' + IND + '},' + TIPO + '="existente",' +
+    NOPRUEBA + ')),1,TRUE,2,TRUE),"Sin revisiones todavía")');
+  const porInd = function (expr) { return '=BYROW(C45:C,LAMBDA(i,IF(i="",,' + expr + ')))'; };
+  m.getRange('D45').setFormula(porInd('INDEX(FILTER(' + TXT + ',' + IND + '=i),1)'));
+  m.getRange('E45').setFormula(porInd('COUNTIFS(' + IND + ',i,' + TIPO + ',"existente")'));
+  m.getRange('F45').setFormula(porInd('COUNTIFS(' + IND + ',i,' + DEC + ',"acuerdo")'));
+  m.getRange('G45').setFormula(porInd('COUNTIFS(' + IND + ',i,' + DEC + ',"ajustar")'));
+  m.getRange('H45').setFormula(porInd('COUNTIFS(' + IND + ',i,' + DEC + ',"eliminar")'));
+  m.getRange('I45').setFormula('=BYROW(E45:F,LAMBDA(r,IF(INDEX(r,1)="",,IF(INDEX(r,1)=0,0,INDEX(r,2)/INDEX(r,1)))))');
+  m.getRange('J45').setFormula(porInd('COUNTIFS(' + IND + ',i,' + COM + ',"<>")'));
+  m.getRange('I45:I').setNumberFormat('0%');
+
+  // Formato
+  [m.getRange('A4'), m.getRange('N4'), m.getRange('A43')].forEach(function (r) { r.setFontWeight('bold').setFontSize(12).setFontColor('#A8287A'); });
+  [m.getRange('A5:L5'), m.getRange('N5:T5'), m.getRange('A44:J44')].forEach(function (r) {
+    r.setFontWeight('bold').setBackground('#F3EEF7').setWrap(true).setVerticalAlignment('middle');
+  });
+  m.getRange('A:Z').setFontFamily('Arial');
+  m.setColumnWidth(1, 200); m.setColumnWidths(2, 11, 95);
+  m.setColumnWidth(4, 260); m.setColumnWidth(13, 24);
+  m.setColumnWidths(14, 4, 120); m.setColumnWidth(18, 260); m.setColumnWidth(19, 150); m.setColumnWidth(20, 260);
+  m.getRange('R6:T').setWrap(true);
+  m.setFrozenRows(5);
+  m.protect().setDescription('Monitoreo: fórmulas automáticas').setWarningOnly(true);
+  ss.setActiveSheet(m);
+}
